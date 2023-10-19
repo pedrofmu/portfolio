@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-16">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro FM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body lang="es">
+    <header id="top_nav">
+        <div class="button_slide slide_left" id="about_btn">ABOUT</div>
+        <div class="button_slide slide_left" id="proyectos_btn">PROYECTS</div>
+        <div class="button_slide slide_left" id="contact_btn">CONTACT</div>
+    </header>
+    <canvas id="background_effect" width="2144" height="414"></canvas>
+    <section class="recepcion">
+        <h1 id="recepcion_nombre">Hi, I am Pedro Fernández</h1>
+        <h4 id="recepcion_presentacion">
+            Freelance programmer with experience developing cross-platform applications and
+            videogames
+        </h4>
+    </section>
+
+    <section class="about" id="about_part">
+        <h2>ABOUT</h2>
+        <div id="about_information">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis
+                lorem sit amet turpis sagittis posuere ac in erat. Suspendisse risus
+                sapien, sollicitudin ut sapien sit amet, feugiat viverra elit.
+                Maecenas lobortis varius diam. Vivamus quis eleifend dolor.
+                Suspendisse dapibus massa eget eleifend consectetur. Cras tristique
+                est vel erat tristique dignissim. Etiam eu lobortis odio. Fusce dui
+                purus, molestie ac mattis eget, finibus eget lorem. Vestibulum a
+                sagittis sapien. Maecenas pretium diam eget urna rutrum, non posuere
+                neque semper. Sed ut dolor ac lectus hendrerit placerat id id ex.
+            </p>
+            <img src="resources/profile_foto.jpg" alt="">
+        </div>
+        <h5>SKILLS</h5>
+        <div id="show_skills">
+            <div class="skill">
+                <img src="resources/wpfICON.png" alt="">
+            </div>
+            <div class="skill">
+                <img src="resources/cppICON.png" alt="">
+            </div>
+            <div class="skill">
+                <img src="resources/unityICON.png" alt="">
+            </div>
+            <div class="skill">
+                <img src="resources/CsharpIcon.png" alt="">
+            </div>
+            <div class="skill">
+                <img src="resources/openGLICON.png" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section class="proyects" id="proyectos_part">
+        <h2>Proyects</h2>
+        <div class="proyects_container">
+            <div class="proyect_card">
+                <div id="proyect_image">
+                    <img src="resources/placeholder.png" alt="">
+                </div>
+                <div id="proyect_text">
+                    <h4>Proyecto 1</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis
+                        lorem sit amet turpis sagittis posuere ac in erat. Suspendisse risus
+                        sapien, sollicitudin ut sapien sit amet, feugiat viverra elit.
+                        Maecenas lobortis varius diam. Vivamus quis eleifend dolor.
+                        Suspendisse dapibus massa eget eleifend consectetur.
+                    </p>
+                </div>
+            </div>
+            <div class="proyect_card">
+                <div id="proyect_text">
+                    <h4>Proyecto 1</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis
+                        lorem sit amet turpis sagittis posuere ac in erat. Suspendisse risus
+                        sapien, sollicitudin ut sapien sit amet, feugiat viverra elit.
+                        Maecenas lobortis varius diam. Vivamus quis eleifend dolor.
+                        Suspendisse dapibus massa eget eleifend consectetur.
+                    </p>
+                </div>
+                <div id="proyect_image">
+                    <img src="resources/placeholder.png" alt="">
+                </div>
+            </div>
+            <div class="proyect_card">
+                <div id="proyect_image">
+                    <img src="resources/placeholder.png" alt="">
+                </div>
+                <div id="proyect_text">
+                    <h4>Proyecto 1</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis
+                        lorem sit amet turpis sagittis posuere ac in erat. Suspendisse risus
+                        sapien, sollicitudin ut sapien sit amet, feugiat viverra elit.
+                        Maecenas lobortis varius diam. Vivamus quis eleifend dolor.
+                        Suspendisse dapibus massa eget eleifend consectetur.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contacto" id="contact_part">
+        <h2>CONTACT</h2>
+        <form  action="https://formsubmit.co/pokiki8770@elixirsd.com" method="POST" id="formulario"">
+            <div class="formulario_grupo">
+                <label for="Name" class="formularo_label">Your name</label>
+                <div class="formulario_input">
+                    <input type="text" id="Name" name="Name" required>
+                </div>
+            </div>
+
+            <div class="formulario_grupo">
+                <label for="Email" class="formularo_label">Your email address</label>
+                <div class="formulario_input">
+                    <input type="email" id="Email" name="Email"required>
+                </div>
+            </div>
+
+            <div class="formulario_grupo">
+                <label for="Message" class="formularo_label">Your message</label>
+                <div class="formulario_input">
+                    <textarea id="Message" name="Message" rows="10" maxlength="5000" required></textarea>
+                </div>
+            </div>
+
+
+                <button type="submit" id="formulario_boton">Send Message</button>
+            </div>
+        </form>
+    </section>
+
+    <script src="code/animation.js"></script>
+    <script src="code/buttonsActions.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="code/sendMessage.js"></script>
+</body>
+
+</html>
