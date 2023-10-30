@@ -248,6 +248,7 @@ body {
 @media (max-width: 900px) {
     #proyect_text{
         width: fit-content;
+        margin-left: 25px;
     }
     #proyect_text p{
         display: none;
@@ -255,6 +256,13 @@ body {
 
     .proyect_card{
         display: flex;
+        gap: 0%;
+        margin: 10%;
+        margin-top: 125px;
+    }
+
+    .proyect_card img{
+        height:  100px;
     }
 }
 
@@ -323,5 +331,3 @@ textarea {
 #formulario_boton:hover {
     background-color: #010203; 
 }
-
-
