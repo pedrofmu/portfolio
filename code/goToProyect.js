@@ -3,7 +3,7 @@ document.getElementById("proyect_1").addEventListener("click", function(){
 });
 
 document.getElementById("proyect_2").addEventListener("click", function(){
-    window.open("https://github.com/pedrofmu/2dEngine");
+    window.open("https://github.com/pedrofmu/TetrisOpenGL");
 });
 
 document.getElementById("proyect_3").addEventListener("click", function(){

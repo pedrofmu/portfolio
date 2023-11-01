@@ -2,7 +2,7 @@ document.getElementById("about_btn").addEventListener("click", function (){
     var destino = document.getElementById("about_part");
 
      // Calcula la posición de desplazamiento en vh
-     var vhValue = 8; // Cambia este valor según tus preferencias
+     var vhValue = 7; // Cambia este valor según tus preferencias
 
      // Convierte vh a píxeles (1 vh es el 1% de la altura de la ventana)
      var offset = (vhValue * window.innerHeight) / 100;
