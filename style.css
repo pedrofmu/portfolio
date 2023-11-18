@@ -106,6 +106,7 @@ body {
 .about {
     height: 60vh;
     top: 0px;
+    padding-bottom: 5vh;
 }
 
 .about h2{
@@ -161,6 +162,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 100px;
 }
 
 .skill{
@@ -196,7 +198,7 @@ body {
 */
 
 .proyects h2{
-    margin-top: 50vh;
+    margin-top: 20vh;
     text-align: center;
     color: #94512e;
     font-size: 6vh;
