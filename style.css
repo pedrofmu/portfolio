@@ -6,10 +6,10 @@
 --accent: #c46e40;
 */
 
-@import url('https://fonts.googleapis.com/css?family=Molle:700|Molle:400');
+@import url('https://fonts.googleapis.com/css?family=Poppins:700|Poppins:400');
 
 body {
-    font-family: 'Molle';
+    font-family: 'Poppins';
     font-weight: 400;
     margin: 0px;
     padding: 0px;
@@ -196,7 +196,7 @@ body {
 */
 
 .proyects h2{
-    margin-top: 40vh;
+    margin-top: 50vh;
     text-align: center;
     color: #94512e;
     font-size: 6vh;
