@@ -11,8 +11,6 @@
 body {
     font-family: 'Poppins';
     font-weight: 400;
-    margin: 0px;
-    padding: 0px;
     background-color: #0c1e27;
 }
 
@@ -37,7 +35,6 @@ body {
     top: 0;
     z-index: 10;
     backdrop-filter: blur(5px);
-    /* background-color: rgba(232, 242, 248, 0.01); */
 }
 
 .button_slide {
@@ -104,9 +101,7 @@ body {
 */
 
 .about {
-    height: 60vh;
     top: 0px;
-    padding-bottom: 5vh;
 }
 
 .about h2{
@@ -159,10 +154,9 @@ body {
 }
 
 #show_skills{
-    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 100px;
+    display: flex;
 }
 
 .skill{
@@ -171,9 +165,9 @@ body {
     background-color: #081318;
     border: 1px solid #94512e;
     border-radius: 10%;
-    display: flex;
     align-items: center;
     justify-content: center;
+    display: flex;
     margin: 1%;
 }
 
@@ -198,12 +192,11 @@ body {
 */
 
 .proyects h2{
-    margin-top: 20vh;
+    margin-top: 10vh;
     text-align: center;
     color: #94512e;
     font-size: 6vh;
 }
-
 
 .proyect_card{
     margin-top: 10vh;
