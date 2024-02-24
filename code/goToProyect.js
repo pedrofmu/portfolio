@@ -7,5 +7,5 @@ document.getElementById("proyect_2").addEventListener("click", function(){
 });
 
 document.getElementById("proyect_3").addEventListener("click", function(){
-    window.open("https://fm-games.itch.io/project-orbits");
+    window.open("https://github.com/pedrofmu/falacia_del_dia");
 });
