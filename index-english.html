@@ -12,24 +12,24 @@
 
 <body lang="es">
   <header id="top_nav">
-    <div class="button_slide slide_left" id="about_btn">SOBRE MÍ</div>
-    <div class="button_slide slide_left" id="proyectos_btn">PROYECTOS</div>
-    <div class="button_slide slide_left" id="contact_btn">CONTACTO</div>
+    <div class="button_slide slide_left" id="about_btn">ABOUT</div>
+    <div class="button_slide slide_left" id="proyectos_btn">PROJECTS</div>
+    <div class="button_slide slide_left" id="contact_btn">CONTACT</div>
   </header>
   <canvas id="background_effect" width="2144" height="414"></canvas>
   <section class="recepcion">
-    <h1 id="recepcion_nombre">Hola, soy Pedro Fernández</h1>
-    <h4 id="recepcion_presentacion"> Programador apasionado por enfrentar nuevas y desafiantes experiencias. </h4>
+    <h1 id="recepcion_nombre">Hi, I am Pedro Fernández</h1>
+    <h4 id="recepcion_presentacion"> Programmer passionate about facing new and challenging experiences. </h4>
   </section>
 
   <section class="about" id="about_part">
-    <h2>SOBRE MÍ</h2>
+    <h2>ABOUT</h2>
     <div id="about_information">
       <p>
-        Soy un estudiante de informática. Tengo una pasión por crear diferentes piezas de software que las personas puedan disfrutar, para ello utilizo lenguajes de programación como C o javascript.
+        I am a computer science student. I have a passion for creating different pieces of software that people can enjoy, for that I use programming languages such as C or javascript.
         <br><br>
-        Tengo experiencia en el servicio de programación Freelancer en la plataforma Fiverr, donde he tenido
-        numerosos clientes satisfechos con mis servicios.
+        I have experience in the Freelancer programming service on the Fiverr platform, where I have had
+        numerous satisfied customers with my services.
       </p>
       <div id="about_rigth">
         <img src="resources/profile_foto.jpg" alt="">
@@ -42,9 +42,9 @@
       </div>
     </div>
     <div id="download_cv">
-      <a class="button_slide slide_left" href="resources/curriculum-vitae.pdf" download>DESCARGAR CV</a>
+      <a class="button_slide slide_left" href="resources/curriculum-vitae.pdf" download>DOWNLOAD CV</a>
     </div>
-    <h5>HABILIDADES</h5>
+    <h5>SKILLS</h5>
     <div id="show_skills">
 
       <div class="skill">
@@ -66,27 +66,27 @@
   </section>
 
   <section class="proyects" id="proyectos_part">
-    <h2>Proyectos</h2>
+    <h2>Projects</h2>
     <div class="proyects_container">
       <div class="proyect_card">
         <div id="proyect_image">
           <img src="resources/accountingApp.png" alt="" id="proyect_1">
         </div>
         <div id="proyect_text">
-          <h4>Aplicación de Contabilidad</h4>
-          <p>Es una aplicación creada para gestionar las facturas de una empresa, puedes crear facturas y exportarlas
-            como pdf. También tiene un libro de registro que puedes exportar como xlsx.
+          <h4>Accounting app</h4>
+          <p>It is an application created to manage the invoices of a company, you can create invoices and export them
+            as pdf. It also has a log book that you can export as xlsx.
             <br><br>
-            Para hacer esta aplicación utilicé JavaScript y Electron. También guarda todos los datos en bases de datos SQLite.
+            To make this application I used java script and electron. It also saves all the data in sqlite bases.
           </p>
         </div>
       </div>
       <div class="proyect_card">
         <div id="proyect_text">
           <h4>Tetris OpenGL</h4>
-          <p>Este proyecto es una recreación del famoso juego de tetris.
+          <p>This project is a recreation of the famous tetris game.
             <br><br>
-            Está hecho usando únicamente el lenguaje de programación C++ y la biblioteca OpenGL.
+            It is made using only the C++ programming language and the OpenGl library.
           </p>
         </div>
         <div id="proyect_image">
@@ -98,41 +98,41 @@
           <img src="resources/falaciaDelDia.png" alt="" id="proyect_3">
         </div>
         <div id="proyect_text">
-          <h4>Falacia del Día</h4>
-          <p>Esta aplicación web muestra una falacia diferente cada día. Con cada falacia se muestra la definición de la falacia
-            y una ejemplificación.
+          <h4>Falacia del dia</h4>
+          <p>This web application shows a different fallacy every day. With each fallacy the definition of the fallacy
+            and an exemplification is shown.
             <br><br>
-            Está hecho con JS y html para el lado del cliente y TS y Express para el lado del servidor.
+            It is made with JS and html for the client side and TS and express for the server side.
           </p>
         </div>
       </div>
     </div>
   </section>
   <section class="contacto" id="contact_part">
-    <h2>CONTACTO</h2>
+    <h2>CONTACT</h2>
     <form name="contact" method="POST" id="formulario" netlify>
       <div class=" formulario_grupo">
-        <label for="Name" class="formularo_label">Tu nombre</label>
+        <label for="Name" class="formularo_label">Your name</label>
         <div class="formulario_input">
           <input type="text" id="Name" name="Name" required>
         </div>
       </div>
 
       <div class="formulario_grupo">
-        <label for="Email" class="formularo_label">Tu dirección de correo electrónico</label>
+        <label for="Email" class="formularo_label">Your email address</label>
         <div class="formulario_input">
           <input type="email" id="Email" name="Email" required>
         </div>
       </div>
 
       <div class="formulario_grupo">
-        <label for="Message" class="formularo_label">Tu mensaje</label>
+        <label for="Message" class="formularo_label">Your message</label>
         <div class="formulario_input">
           <textarea id="Message" name="Message" rows="10" maxlength="5000" required></textarea>
         </div>
       </div>
 
-      <button type="submit" id="formulario_boton">Enviar Mensaje</button>
+      <button type="submit" id="formulario_boton">Send Message</button>
       </div>
     </form>
   </section>
@@ -143,3 +143,4 @@
 </body>
 
 </html>
+
