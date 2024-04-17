@@ -1,4 +1,0 @@
-user.name=pedrofmu
-user.email=pedrofm@pedrofm.dev
-credential.https://github.com.helper=
-credential.https://github.com.helper=!/usr/bin/gh auth git-credential
