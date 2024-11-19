@@ -3,140 +3,130 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedro FM</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro FM</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body lang="es">
-  <header id="top_nav">
-    <div class="button_slide slide_left" id="about_btn">SOBRE MÍ</div>
-    <div class="button_slide slide_left" id="proyectos_btn">PROYECTOS</div>
-    <div class="button_slide slide_left" id="contact_btn">CONTACTO</div>
-  </header>
-  <canvas id="background_effect" width="2144" height="414"></canvas>
-  <section class="recepcion">
-    <h1 id="recepcion_nombre">Hola, soy Pedro Fernández</h1>
-    <h4 id="recepcion_presentacion"> Programador apasionado por enfrentar nuevas y desafiantes experiencias. </h4>
-  </section>
+    <header id="top_nav">
+        <div class="button_slide slide_left" id="about_btn">SOBRE MÍ</div>
+        <div class="button_slide slide_left" id="proyectos_btn">PROYECTOS</div>
+        <div class="button_slide slide_left" id="title_btn">TITULOS</div>
+    </header>
+    <canvas id="background_effect" width="2144" height="414"></canvas>
+    <section class="recepcion">
+        <h1 id="recepcion_nombre">Hola, soy Pedro Fernández</h1>
+        <h4 id="recepcion_presentacion"> Estudiante de Informática, especializado en backend con C, TypeScript, Node.js
+            y AWS </h4>
+    </section>
 
-  <section class="about" id="about_part">
-    <h2>SOBRE MÍ</h2>
-    <div id="about_information">
-      <p>
-        Soy estudiante de informática. Me apasiona crear diferentes piezas de software que las personas puedan
-        disfrutar, para ello utilizo lenguajes de programación como C o javascript.
-      </p>
-      <div id="about_rigth">
-        <img src="resources/profile_foto.jpg" alt="">
-        <div id="social_media">
-          <a href="https://github.com/pedrofmu" target="_blank"><img src="resources/githubICON.png" alt=""></a>
-          <a href="mailto:contacto@pedrofm.dev" target="_blank"> <img src="resources/mailICON.png" alt=""></a>
+    <section class="about" id="about_part">
+        <h2>SOBRE MÍ</h2>
+        <div id="about_information">
+            <p>
+                Soy estudiante de Informática de España, especializado en desarrollo backend, con experiencia en
+                lenguajes y tecnologías como C, TypeScript, Deno, Node.js y JavaScript. Además, cuento con títulos de
+                AWS y utilizo esta plataforma para diseñar y gestionar infraestructuras de red. <br><br>Mi objetivo es
+                comenzar a aplicar y expandir mis conocimientos en el mundo laboral, contribuyendo a proyectos
+                desafiantes y adquiriendo experiencia en el ámbito profesional para seguir creciendo como programador y
+                arquitecto de soluciones
+            </p>
+            <div id="about_rigth">
+                <img src="resources/profile_foto.jpg" alt="">
+                <div id="social_media">
+                    <a href="https://github.com/pedrofmu" target="_blank"><img src="resources/github-square.svg"
+                            alt=""></a>
+                    <a href="mailto:contacto@pedrofm.dev" target="_blank"> <img src="resources/email-open.svg"
+                            alt=""></a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div id="download_cv">
-      <a class="button_slide slide_left" href="resources/curriculum-vitae.pdf" download>DESCARGAR CV</a>
-    </div>
-    <h5>HABILIDADES</h5>
-    <div id="show_skills">
+        <div id="download_cv">
+            <a class="button_slide slide_left" href="resources/curriculum-vitae.pdf" download>DESCARGAR CV</a>
+        </div>
+        <h5>HABILIDADES</h5>
+        <div id="show_skills">
 
-      <div class="skill">
-        <img src="resources/cICON.png" alt="">
-      </div>
-      <div class="skill">
-        <img src="resources/cppICON.png" alt="">
-      </div>
-      <div class="skill">
-        <img src="resources/pythonICON.png" alt="">
-      </div>
-      <div class="skill">
-        <img src="resources/jsICON.png" alt="">
-      </div>
-      <div class="skill">
-        <img src="resources/sqlICON.png" alt="">
-      </div>
-    </div>
-  </section>
+            <div class="skill">
+                <img src="resources/cICON.png" alt="">
+            </div>
+            <div class="skill">
+                <img src="resources/nodeICON.png" alt="">
+            </div>
+            <div class="skill">
+                <img src="resources/tsICON.png" alt="">
+            </div>
+            <div class="skill">
+                <img src="resources/jsICON.png" alt="">
+            </div>
+            <div class="skill">
+                <img src="resources/sqlICON.png" alt="">
+            </div>
+        </div>
+    </section>
 
-  <section class="proyects" id="proyectos_part">
-    <h2>Proyectos</h2>
-    <div class="proyects_container">
-      <div class="proyect_card">
-        <div id="proyect_image">
-          <img src="resources/accountingApp.png" alt="" id="proyect_1">
+    <section class="proyects" id="proyectos_part">
+        <h2>Proyectos</h2>
+        <div class="proyects_container">
+            <div class="proyect_card">
+                <div id="proyect_image">
+                    <img src="resources/dosCardGame.png" alt="" id="proyect_1">
+                </div>
+                <div id="proyect_text">
+                    <a target="_blank" href="https://github.com/pedrofmu/dos-card-game">Juego de cartas DOS</a>
+                    <p>Esta web comenzo como un proyecto de clase, por ello usa apache y tiene caracterisiticas como el
+                        formulario de contacto, pero se convirtio
+                        en un juego online de cartas basado en el UNO donde te puedes unir a diferentes salas y jugar
+                        con tus amigos.
+                        <br><br>
+                        Para la parte del backend use deno con typescript y los archivos estaticos con Javascript HTML y
+                        CSS estandar.
+                    </p>
+                </div>
+            </div>
+            <div class="proyect_card">
+                <div id="proyect_text">
+                    <a target="_blank" href="https://github.com/pedrofmu/https-server">Servidor HTTPS</a>
+                    <p> Este programa es un servidor https hecho utilizando únicamente OpenSSL y C.
+                        <br><br>
+                        El servidor soporta las peticiones GET y PUT.
+                    </p>
+                </div>
+                <div id="proyect_image">
+                    <img src="resources/httpsServer.png" alt="" id="proyect_2">
+                </div>
+            </div>
+            <div class="proyect_card">
+                <div id="proyect_image">
+                    <img src="resources/accountingApp.png" alt="" id="proyect_3">
+                </div>
+                <div id="proyect_text">
+                    <a target="_blank" href="https://github.com/pedrofmu/facturacion_facil">Aplicación de
+                        Contabilidad</a>
+                    <p>Es una aplicación creada para gestionar las facturas de una empresa, puedes crear facturas y
+                        exportarlas
+                        como pdf. Tiene un libro de registro que puedes exportar como xlsx.
+                        <br><br>
+                        Para hacer esta aplicación utilicé JavaScript y Electron. Guarda todos los datos en bases de
+                        datos
+                        SQLite.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div id="proyect_text">
-          <h4>Aplicación de Contabilidad</h4>
-          <p>Es una aplicación creada para gestionar las facturas de una empresa, puedes crear facturas y exportarlas
-            como pdf. Tiene un libro de registro que puedes exportar como xlsx.
-            <br><br>
-            Para hacer esta aplicación utilicé JavaScript y Electron. Guarda todos los datos en bases de datos
-            SQLite.
-          </p>
-        </div>
-      </div>
-      <div class="proyect_card">
-        <div id="proyect_text">
-          <h4>Tetris OpenGL</h4>
-          <p>Este proyecto es una recreación del famoso juego de tetris.
-            <br><br>
-            Está hecho usando únicamente el lenguaje de programación C++ y la biblioteca OpenGL.
-          </p>
-        </div>
-        <div id="proyect_image">
-          <img src="resources/tetrisOpenGL.png" alt="" id="proyect_2">
-        </div>
-      </div>
-      <div class="proyect_card">
-        <div id="proyect_image">
-          <img src="resources/falaciaDelDia.png" alt="" id="proyect_3">
-        </div>
-        <div id="proyect_text">
-          <h4>Falacia del Día</h4>
-          <p>Esta aplicación web muestra una falacia diferente cada día. Con cada falacia se muestra la definición de la
-            falacia y una ejemplificación.
-            <br><br>
-            Está hecho con JS y html para el lado del cliente y TS y Express para el lado del servidor.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="contacto" id="contact_part">
-    <h2>CONTACTO</h2>
-    <form name="contact" method="POST" id="formulario" netlify>
-      <div class=" formulario_grupo">
-        <label for="Name" class="formularo_label">Tu nombre</label>
-        <div class="formulario_input">
-          <input type="text" id="Name" name="Name" required>
-        </div>
-      </div>
+    </section>
+    <section class="titles" id="titles_part">
+        <h2>TITULOS</h2>
+        <a target="_blank" href="https://www.credly.com/go/C7C2lNVt"> <img
+                src="resources/AWS_Academy_Graduate___AWS_Academy_Cloud_Architecting_Badge20241111-27-7mxuli.png">
+        </a>
+    </section>
 
-      <div class="formulario_grupo">
-        <label for="Email" class="formularo_label">Tu dirección de correo electrónico</label>
-        <div class="formulario_input">
-          <input type="email" id="Email" name="Email" required>
-        </div>
-      </div>
-
-      <div class="formulario_grupo">
-        <label for="Message" class="formularo_label">Tu mensaje</label>
-        <div class="formulario_input">
-          <textarea id="Message" name="Message" rows="10" maxlength="5000" required></textarea>
-        </div>
-      </div>
-
-      <button type="submit" id="formulario_boton">Enviar Mensaje</button>
-      </div>
-    </form>
-  </section>
-
-  <script src="code/animation.js"></script>
-  <script src="code/buttonsActions.js"></script>
-  <script src="code/goToProyect.js"></script>
+    <script src="code/animation.js"></script>
+    <script src="code/buttonsActions.js"></script>
 </body>
 
 </html>

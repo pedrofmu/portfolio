@@ -24,7 +24,7 @@ document.getElementById("proyectos_btn").addEventListener("click", function (){
      window.scrollTo({ top: destino.offsetTop - offset, behavior: "smooth" });
 }); 
 
-document.getElementById("contact_btn").addEventListener("click", function (){
+document.getElementById("title_btn").addEventListener("click", function (){
     var destino = document.getElementById("contact_part");
 
      // Realiza el desplazamiento suave hacia la posición calculada
