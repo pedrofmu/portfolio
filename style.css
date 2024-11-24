@@ -63,6 +63,12 @@ body {
     text-align: center;
 }
 
+@media (max-width: 900px) {
+    #top_nav {
+        display: none;
+    }
+}
+
 
 /*
 ----------Presentacion----------
@@ -73,6 +79,12 @@ body {
     margin-top: 0px;
     height: 55vh;
     position: relative;
+}
+
+@media (max-width: 800px) {
+    .recepcion {
+        margin-bottom: 100px;
+    }
 }
 
 #background_effect {
@@ -126,7 +138,7 @@ body {
 }
 
 #about_information img {
-    height: 30vh;
+    height: 35vh;
     border-radius: 15px;
 }
 
@@ -271,7 +283,7 @@ body {
 }
 
 /*
-----------Contacto---------
+----------Titulos---------
 */
 
 .titles {
@@ -296,4 +308,10 @@ body {
     border: solid;
     border-width: 1px;
     border-color: #94512e;
+}
+
+@media (max-width: 800px) {
+    .titles img {
+        width: 50%;
+    }
 }
