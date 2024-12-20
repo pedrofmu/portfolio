@@ -307,7 +307,16 @@ body {
     margin-bottom: 2.5rem;
 }
 
-.titles img {
+.display_titles_div {
+    margin-top: 25px;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 75px;
+}
+
+.display_titles_div img {
     width: 500px;
     border-radius: 10px;
     border: solid;
@@ -315,8 +324,14 @@ body {
     border-color: #94512e;
 }
 
-@media (max-width: 800px) {
-    .titles img {
+
+@media (max-width: 900px) {
+    .display_titles_div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .display_titles_div img {
         width: 50%;
     }
 }
