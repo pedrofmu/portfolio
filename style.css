@@ -14,6 +14,10 @@ body {
     background-color: #0c1e27;
 }
 
+p {
+    text-align: justify;
+}
+
 
 ::-webkit-scrollbar {
     display: none;
