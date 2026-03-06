@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio B2B - Pedro FM
 
-## Getting Started
+Recreacion en Next.js App Router + TypeScript + Tailwind CSS del diseno del archivo `web-renderizada.pdf`, con enfoque de conversion B2B para servicios empresariales.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router)
+- TypeScript (strict)
+- Tailwind CSS
+- Framer Motion
+- ESLint + Prettier
+
+## Ejecutar en local
+
+### Con npm
+
+```bash
+npm install
+npm run dev
+```
+
+### Con pnpm
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Abrir `http://localhost:3000`.
+
+## Scripts utiles
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
+npm run lint
+npm run format
+npm run format:check
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Decisiones tecnicas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Fidelidad visual**: layout de una sola pagina, jerarquia tipografica, bloques en orden identico, bordes y decoracion roja tipo hand-drawn.
+- **Fuentes**:
+  - Aproximacion de `TT Firs Neue` -> `Space Grotesk` (display y titulos).
+  - `Courier Prime` para textos de apoyo y cuerpo (coincide con el PDF).
+  - Aproximacion de `Arsenica Antiqua` -> `Alegreya SC` para la firma superior.
+- **Design tokens**: definidos en `tailwind.config.ts` para `bg`, `text`, `accent`, `border` y `button`.
+- **Animaciones**: scroll reveal y hover discretos con Framer Motion, respetando `prefers-reduced-motion`.
+- **A11y/SEO**: estructura semantica (`header`, `main`, `section`, `footer`), `alt` descriptivos, metadata OG en `src/app/layout.tsx`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Estructura
 
-## Learn More
+```text
+src/
+  app/
+    layout.tsx
+    page.tsx
+    globals.css
+  components/
+    about.tsx
+    case-studies.tsx
+    contact-cta.tsx
+    cta-button.tsx
+    doodles.tsx
+    hero.tsx
+    motion-reveal.tsx
+    navbar.tsx
+    section-heading.tsx
+  lib/
+    data.ts
+    utils.ts
+public/assets/
+  caso-agenda-b2b.jpg
+  caso-solodb.png
+  caso-iris.jpg
+  pedro-fernandez.jpg
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Como actualizar assets o copy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Assets**: reemplaza archivos dentro de `public/assets/` respetando nombre y proporcion recomendada.
+2. **Textos**: actualiza `src/lib/data.ts`.
+3. **Estilo/tokens**: cambia `tailwind.config.ts` y, si hace falta, `src/app/globals.css`.
+4. **Composicion por seccion**: edita componentes en `src/components/`.

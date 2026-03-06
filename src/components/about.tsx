@@ -1,0 +1,176 @@
+"use client";
+
+import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+import { MotionReveal } from "@/components/motion-reveal";
+import { SectionHeading } from "@/components/section-heading";
+import { about } from "@/lib/data";
+import type { ReactNode } from "react";
+
+function GithubIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-8 w-8" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12 2a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48v-1.68c-2.77.61-3.35-1.18-3.35-1.18-.45-1.15-1.1-1.45-1.1-1.45-.9-.62.07-.6.07-.6 1 .07 1.52 1.02 1.52 1.02.88 1.52 2.3 1.08 2.86.83.1-.64.34-1.08.62-1.33-2.21-.25-4.54-1.1-4.54-4.9 0-1.08.39-1.97 1.02-2.66-.1-.25-.44-1.28.1-2.68 0 0 .83-.26 2.73 1.01a9.3 9.3 0 0 1 4.96 0c1.9-1.27 2.73-1.01 2.73-1.01.54 1.4.2 2.43.1 2.68.63.69 1.02 1.58 1.02 2.66 0 3.81-2.33 4.65-4.55 4.9.36.31.68.92.68 1.86v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2"
+      />
+    </svg>
+  );
+}
+
+function LinkedinIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-8 w-8" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M4.98 3.5a2.5 2.5 0 1 0 0 5.01 2.5 2.5 0 0 0 0-5.01M3 8.98h3.97V21H3zM9.36 8.98h3.8v1.64h.05c.53-1 1.82-2.06 3.74-2.06 4 0 4.74 2.63 4.74 6.05V21h-3.96v-5.7c0-1.36-.03-3.1-1.9-3.1-1.9 0-2.2 1.47-2.2 3V21H9.37z"
+      />
+    </svg>
+  );
+}
+
+/**
+ * Render a paragraph with <strong> for text between ** markers
+ * and underline + bold for text between __ markers.
+ */
+function RichParagraph({ text }: { text: string }) {
+  const parts: ReactNode[] = [];
+  // Match **bold** and __underline-bold__
+  const regex = /\*\*(.+?)\*\*|__(.+?)__/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    if (match[1] !== undefined) {
+      parts.push(<strong key={match.index}>{match[1]}</strong>);
+    } else if (match[2] !== undefined) {
+      parts.push(
+        <strong key={match.index} className="underline">
+          {match[2]}
+        </strong>,
+      );
+    }
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return <p>{parts}</p>;
+}
+
+export function About() {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <section
+      id="quien-soy"
+      className="mx-auto mt-30 max-w-6xl px-6 sm:mt-40"
+      aria-labelledby="quien-title"
+    >
+      <MotionReveal>
+        <SectionHeading
+          id="quien-title"
+          title="QUIEN SOY"
+          className="text-center"
+          decoration={
+            <Image
+              src="/border-decorations/about-decorative-motiv.svg"
+              alt=""
+              aria-hidden="true"
+              width={1061}
+              height={1111}
+              className="h-9 w-12"
+            />
+          }
+        />
+      </MotionReveal>
+
+      <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.7fr]">
+        {/* ─── Left card: photo + name + socials ─── */}
+        <MotionReveal delay={0.05}>
+          <motion.article
+            whileHover={prefersReducedMotion ? undefined : { y: -3 }}
+            transition={{ duration: 0.2 }}
+            className="relative px-5 pt-3 pb-8"
+          >
+            <Image
+              src="/border-decorations/about-picture-border.svg"
+              alt=""
+              aria-hidden="true"
+              fill
+              sizes="(min-width: 1024px) 32rem, 100vw"
+              className="pointer-events-none absolute inset-0 z-0 h-full w-full object-fill"
+            />
+
+            <div className="relative z-10">
+              <div className="mt-8 overflow-hidden rounded-[0.5rem]">
+                <Image
+                  src={about.photo}
+                  alt={about.photoAlt}
+                  width={500}
+                  height={500}
+                  className="h-auto w-full object-cover"
+                />
+              </div>
+
+              <h3 className="font-display text-text mt-4 text-center text-[2.2rem] leading-[0.9] font-medium tracking-[-0.04em]">
+                Pedro Fernández
+                <span className="block">Muñoz</span>
+              </h3>
+
+              <div className="text-text mt-4 flex items-center justify-center gap-3">
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Perfil de GitHub"
+                  className="border-border hover:text-accent rounded-full border transition-colors"
+                >
+                  <GithubIcon />
+                </a>
+                <a
+                  href="https://www.linkedin.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Perfil de LinkedIn"
+                  className="hover:text-accent rounded-sm transition-colors"
+                >
+                  <LinkedinIcon />
+                </a>
+              </div>
+            </div>
+          </motion.article>
+        </MotionReveal>
+
+        {/* ─── Right card: bio text ─── */}
+        <MotionReveal delay={0.1}>
+          <motion.article
+            whileHover={prefersReducedMotion ? undefined : { y: -3 }}
+            transition={{ duration: 0.2 }}
+            className="relative px-6 pt-3 pb-8 sm:px-8"
+          >
+            <Image
+              src="/border-decorations/about-text-border.svg"
+              alt=""
+              aria-hidden="true"
+              fill
+              sizes="(min-width: 1024px) 48rem, 100vw"
+              className="pointer-events-none absolute inset-0 z-0 h-full w-full object-fill"
+            />
+
+            <div className="text-text relative z-10 mt-8 space-y-5 pb-2 text-[1.06rem] leading-[1.34] tracking-[-0.01em] sm:text-[1.15rem]">
+              {about.paragraphs.map((paragraph) => (
+                <RichParagraph key={paragraph} text={paragraph} />
+              ))}
+            </div>
+          </motion.article>
+        </MotionReveal>
+      </div>
+    </section>
+  );
+}
