@@ -1,0 +1,29 @@
+# Pedro FM - Portfolio B2B
+
+> Portfolio profesional de Pedro Fernandez Munoz para empresas que necesitan sistemas internos, integraciones y automatizacion con IA.
+
+Este sitio esta orientado a decision-makers B2B y equipos operativos.
+Idioma principal del contenido: espanol (es-ES).
+Posicionamiento geografico prioritario para consultas locales: Espana -> Comunidad Valenciana (Valencia) -> Alicante -> Alcoy.
+
+## Sitio principal
+
+- [Inicio](https://pedrofm.dev/): Pagina principal con propuesta de valor y resumen de servicios.
+- [Soluciones](https://pedrofm.dev/#soluciones): Programas internos, herramientas con IA y automatizaciones de procesos.
+- [Casos de exito](https://pedrofm.dev/#casos): Proyectos reales y resultados de implementaciones.
+- [Quien soy](https://pedrofm.dev/#quien-soy): Perfil profesional, stack tecnico y enfoque de trabajo.
+- [Contacto](https://pedrofm.dev/#contacto): Canal directo para iniciar una conversacion comercial.
+
+## Recursos
+
+- [Certificados](https://pedrofm.dev/certificados): Ruta reservada para certificaciones profesionales (actualmente en construccion).
+- [Proyectos](https://pedrofm.dev/proyectos): Ruta reservada para catalogo ampliado de proyectos (actualmente en construccion).
+
+## Contacto
+
+- [Email](mailto:hola@pedrofm.dev): Correo principal para consultas y propuestas.
+
+## Optional
+
+- [GitHub](https://github.com/pedrofmu): Repositorios y codigo publico.
+- [LinkedIn](https://www.linkedin.com/in/pedro-fern%C3%A1ndez-mu%C3%B1oz-4148a9287/): Perfil profesional y trayectoria.
