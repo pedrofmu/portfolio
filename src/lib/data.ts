@@ -11,6 +11,7 @@ export type CaseStudy = {
   description: string;
   image: string;
   imageAlt: string;
+  link: string;
 };
 
 export const hero = {
@@ -51,6 +52,7 @@ export const caseStudies: CaseStudy[] = [
       "Esta aplicacion conecto empresas con intereses compatibles para organizar reuniones utiles durante la I Jornada Profesional Biocultura Madrid 2024.",
     image: "/assets/caso-agenda-b2b.jpg",
     imageAlt: "Captura de hoja de calculo del generador de agenda B2B",
+    link: "https://github.com/pedrofmu/match-jornada-profesional",
   },
   {
     title: "SoloDb",
@@ -59,6 +61,7 @@ export const caseStudies: CaseStudy[] = [
       "SoloDB ayuda a equipos de investigacion a guardar sus experimentos y resultados de forma ordenada, para que cualquiera pueda entenderlos y repetirlos.",
     image: "/assets/caso-solodb.webp",
     imageAlt: "Diagrama de simplicidad usado en la plataforma SoloDb",
+    link: "https://solodb.net/",
   },
   {
     title: "Iris",
@@ -67,6 +70,7 @@ export const caseStudies: CaseStudy[] = [
       "Iris es una herramienta que recibe y organiza los archivos que suben las personas usuarias a SoloDB, para que todo llegue bien y sin complicaciones.",
     image: "/assets/caso-iris.jpg",
     imageAlt: "Diagrama de flujo y estados de la herramienta Iris",
+    link: "https://pedrofm.dev/project-demo/iris-docs.pdf",
   },
 ];
 

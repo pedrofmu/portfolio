@@ -1,8 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
-import { MotionReveal } from "@/components/motion-reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { solutions } from "@/lib/data";
 
@@ -43,50 +39,39 @@ function SolutionIcon({ type }: { type: "speech" | "smile" | "plant" }) {
 }
 
 export function Solutions() {
-  const prefersReducedMotion = useReducedMotion();
-
   return (
     <section
       id="soluciones"
-      className="mx-auto mt-28 max-w-6xl px-6 sm:mt-36"
+      className="mx-auto min-h-[44rem] max-w-[77rem] px-6 pt-16 pb-20 sm:px-8 lg:min-h-[48rem] lg:pt-20 lg:pb-24"
       aria-labelledby="soluciones-title"
     >
-      <MotionReveal>
-        <SectionHeading
-          id="soluciones-title"
-          title="SOLUCIONES"
-          className="text-center"
-        />
-      </MotionReveal>
+      <SectionHeading
+        id="soluciones-title"
+        title="SOLUCIONES"
+        className="text-center"
+      />
 
       <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {solutions.map((solution, index) => (
-          <MotionReveal key={solution.title} delay={index * 0.08}>
-            <motion.article
-              whileHover={
-                prefersReducedMotion
-                  ? undefined
-                  : { y: -4, boxShadow: "0 12px 24px rgba(0,0,0,0.08)" }
-              }
-              transition={{ duration: 0.24, ease: "easeOut" }}
-              className="border-border flex min-h-[25rem] flex-col border px-6 pt-8 pb-6 text-center"
-            >
-              <SolutionIcon type={solution.icon} />
-              <h3 className="font-display text-text text-[2.2rem] leading-[0.9] font-medium tracking-[-0.03em] uppercase">
-                {solution.title.split("\n").map((line) => (
-                  <span key={`${solution.title}-${line}`} className="block">
-                    {line}
-                  </span>
-                ))}
-              </h3>
-              <p className="text-text mt-5 text-[1.06rem] leading-[1.28] tracking-[-0.01em]">
-                {solution.description}
-              </p>
-              <p className="font-display text-accent mt-auto pt-6 text-[1.25rem] leading-[0.95] font-bold tracking-[-0.02em] uppercase">
-                {solution.outcome}
-              </p>
-            </motion.article>
-          </MotionReveal>
+        {solutions.map((solution) => (
+          <article
+            key={solution.title}
+            className="border-border flex min-h-[25rem] flex-col border px-6 pt-8 pb-6 text-center"
+          >
+            <SolutionIcon type={solution.icon} />
+            <h3 className="font-display text-text text-[2.2rem] leading-[0.9] font-medium tracking-[-0.03em] uppercase">
+              {solution.title.split("\n").map((line) => (
+                <span key={`${solution.title}-${line}`} className="block">
+                  {line}
+                </span>
+              ))}
+            </h3>
+            <p className="text-text mt-5 text-[1.06rem] leading-[1.28] tracking-[-0.01em]">
+              {solution.description}
+            </p>
+            <p className="font-display text-accent mt-auto pt-6 text-[1.25rem] leading-[0.95] font-bold tracking-[-0.02em] uppercase">
+              {solution.outcome}
+            </p>
+          </article>
         ))}
       </div>
     </section>

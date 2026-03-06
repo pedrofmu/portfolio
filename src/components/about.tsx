@@ -1,8 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
-import { MotionReveal } from "@/components/motion-reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { about } from "@/lib/data";
 import type { ReactNode } from "react";
@@ -35,7 +31,6 @@ function LinkedinIcon() {
  */
 function RichParagraph({ text }: { text: string }) {
   const parts: ReactNode[] = [];
-  // Match **bold** and __underline-bold__
   const regex = /\*\*(.+?)\*\*|__(.+?)__/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
@@ -44,6 +39,7 @@ function RichParagraph({ text }: { text: string }) {
     if (match.index > lastIndex) {
       parts.push(text.slice(lastIndex, match.index));
     }
+
     if (match[1] !== undefined) {
       parts.push(<strong key={match.index}>{match[1]}</strong>);
     } else if (match[2] !== undefined) {
@@ -53,6 +49,7 @@ function RichParagraph({ text }: { text: string }) {
         </strong>,
       );
     }
+
     lastIndex = regex.lastIndex;
   }
 
@@ -60,72 +57,59 @@ function RichParagraph({ text }: { text: string }) {
     parts.push(text.slice(lastIndex));
   }
 
-  return <p>{parts}</p>;
+  return <p className="m-0">{parts}</p>;
 }
 
 export function About() {
-  const prefersReducedMotion = useReducedMotion();
-
   return (
     <section
       id="quien-soy"
-      className="mx-auto mt-30 max-w-6xl px-6 sm:mt-40"
+      className="mx-auto min-h-[40rem] max-w-[77rem] pb-14 sm:px-8 lg:min-h-[44rem] lg:pt-14 lg:pb-16"
       aria-labelledby="quien-title"
     >
-      <MotionReveal>
-        <SectionHeading
-          id="quien-title"
-          title="QUIEN SOY"
-          className="text-center"
-          decoration={
-            <Image
-              src="/border-decorations/about-decorative-motiv.svg"
-              alt=""
-              aria-hidden="true"
-              width={1061}
-              height={1111}
-              className="h-9 w-12"
-            />
-          }
-        />
-      </MotionReveal>
+      <SectionHeading
+        id="quien-title"
+        title="QUIEN SOY"
+        className="text-center mt-15"
+        decoration={
+          <Image
+            src="/border-decorations/about-decorative-motiv.svg"
+            alt=""
+            aria-hidden="true"
+            width={1061}
+            height={1111}
+            className="h-10 w-12"
+          />
+        }
+      />
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.7fr]">
-        {/* ─── Left card: photo + name + socials ─── */}
-        <MotionReveal delay={0.05}>
-          <motion.article
-            whileHover={prefersReducedMotion ? undefined : { y: -3 }}
-            transition={{ duration: 0.2 }}
-            className="relative px-5 pt-3 pb-8"
-          >
-            <Image
-              src="/border-decorations/about-picture-border.svg"
-              alt=""
-              aria-hidden="true"
-              fill
-              sizes="(min-width: 1024px) 32rem, 100vw"
-              className="pointer-events-none absolute inset-0 z-0 h-full w-full object-fill"
-            />
+      <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.7fr] lg:items-center">
+        <article className="relative mx-auto aspect-[760/1030] w-full max-w-[27rem] lg:h-full">
+          <Image
+            src="/border-decorations/about-picture-border.svg"
+            alt=""
+            aria-hidden="true"
+            fill
+            className="pointer-events-none object-contain select-none"
+          />
 
-            <div className="relative z-10">
-              <div className="mt-8 overflow-hidden rounded-[0.5rem]">
-                <Image
-                  src={about.photo}
-                  alt={about.photoAlt}
-                  width={500}
-                  height={500}
-                  className="h-auto w-full object-cover"
-                />
-              </div>
-
-              <h3 className="font-display text-text mt-4 text-center text-[2.2rem] leading-[0.9] font-medium tracking-[-0.04em]">
+          <div className="absolute top-[11.5%] right-[4.5%] bottom-[6.5%] left-[4.5%] flex flex-col overflow-hidden">
+            <div className="flex min-h-0 flex-1 flex-col items-center justify-center px-4 pt-0 pb-2">
+              <Image
+                src={about.photo}
+                alt={about.photoAlt}
+                width={300}
+                height={300}
+                className="mb-5"
+              />
+              <h3 className="font-display text-text text-center text-[clamp(1.4rem,5.5cqi,2.5rem)] leading-[0.9] font-medium tracking-[-0.04em]">
                 Pedro Fernández
                 <span className="block">Muñoz</span>
               </h3>
 
-              <div className="text-text mt-4 flex items-center justify-center gap-3">
+              <div className="text-text mt-4 flex shrink-0 items-center justify-center gap-3">
                 <a
-                  href="https://github.com"
+                  href="https://github.com/pedrofmu"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Perfil de GitHub"
@@ -134,7 +118,7 @@ export function About() {
                   <GithubIcon />
                 </a>
                 <a
-                  href="https://www.linkedin.com"
+                  href="https://www.linkedin.com/in/pedro-fern%C3%A1ndez-mu%C3%B1oz-4148a9287/"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Perfil de LinkedIn"
@@ -144,32 +128,26 @@ export function About() {
                 </a>
               </div>
             </div>
-          </motion.article>
-        </MotionReveal>
+          </div>
+        </article>
 
-        {/* ─── Right card: bio text ─── */}
-        <MotionReveal delay={0.1}>
-          <motion.article
-            whileHover={prefersReducedMotion ? undefined : { y: -3 }}
-            transition={{ duration: 0.2 }}
-            className="relative px-6 pt-3 pb-8 sm:px-8"
-          >
-            <Image
-              src="/border-decorations/about-text-border.svg"
-              alt=""
-              aria-hidden="true"
-              fill
-              sizes="(min-width: 1024px) 48rem, 100vw"
-              className="pointer-events-none absolute inset-0 z-0 h-full w-full object-fill"
-            />
+        <article className="relative mx-auto aspect-[1200/1074] w-full max-w-[44rem] lg:h-full">
+          <Image
+            src="/border-decorations/about-text-border.svg"
+            alt=""
+            aria-hidden="true"
+            fill
+            className="pointer-events-none object-contain select-none"
+          />
 
-            <div className="text-text relative z-10 mt-8 space-y-5 pb-2 text-[1.06rem] leading-[1.34] tracking-[-0.01em] sm:text-[1.15rem]">
+          <div className="absolute top-[14%] right-[7%] bottom-[10%] left-[7%] overflow-auto">
+            <div className="text-text space-y-5 text-[1.06rem] leading-[1.45] tracking-[-0.01em] sm:text-[1.15rem]">
               {about.paragraphs.map((paragraph) => (
                 <RichParagraph key={paragraph} text={paragraph} />
               ))}
             </div>
-          </motion.article>
-        </MotionReveal>
+          </div>
+        </article>
       </div>
     </section>
   );
