@@ -26,9 +26,9 @@ export function CaseStudies() {
         }
       />
 
-      <div className="mt-12 grid gap-8 md:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
         {caseStudies.map((item) => (
-          <article key={item.title} className="flex h-full flex-col">
+          <article key={item.title} className="flex h-full flex-col mt-5">
             <div className="border-border overflow-hidden rounded-[2.2rem] border">
               <Image
                 src={item.image}

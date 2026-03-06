@@ -23,7 +23,7 @@ export function SectionHeading({
         {title}
       </h2>
       {decoration ? (
-        <div className="text-accent pointer-events-none absolute -top-2 -right-28">
+        <div className="text-accent pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 sm:-top-2 sm:-right-28 sm:left-auto sm:translate-x-0">
           {decoration}
         </div>
       ) : null}

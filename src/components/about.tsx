@@ -70,20 +70,10 @@ export function About() {
       <SectionHeading
         id="quien-title"
         title="QUIEN SOY"
-        className="text-center mt-15"
-        decoration={
-          <Image
-            src="/border-decorations/about-decorative-motiv.svg"
-            alt=""
-            aria-hidden="true"
-            width={1061}
-            height={1111}
-            className="h-10 w-12"
-          />
-        }
+        className="mt-15 text-center"
       />
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.7fr] lg:items-center">
+      <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.7fr] lg:items-center">
         <article className="relative mx-auto aspect-[760/1030] w-full max-w-[27rem] lg:h-full">
           <Image
             src="/border-decorations/about-picture-border.svg"
@@ -102,7 +92,7 @@ export function About() {
                 height={300}
                 className="mb-5"
               />
-              <h3 className="font-display text-text text-center text-[clamp(1.4rem,5.5cqi,2.5rem)] leading-[0.9] font-medium tracking-[-0.04em]">
+              <h3 className="font-display text-text text-center text-[clamp(1.4rem,5.5cqi,2.5rem)] leading-[1] font-medium">
                 Pedro Fernández
                 <span className="block">Muñoz</span>
               </h3>

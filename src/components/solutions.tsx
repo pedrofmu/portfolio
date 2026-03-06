@@ -8,19 +8,19 @@ function SolutionIcon({ type }: { type: "speech" | "smile" | "plant" }) {
       src: "/border-decorations/services-internal-programs-decorative-motiv.svg",
       width: 1489,
       height: 965,
-      className: "mx-auto mb-5 h-14 w-20",
+      className: "mx-auto mb-5 h-20 w-30",
     },
     smile: {
       src: "/border-decorations/services-ai-decorative-motiv.svg",
       width: 927,
       height: 931,
-      className: "mx-auto mb-5 h-16 w-16",
+      className: "mx-auto mb-5 h-20 w-30",
     },
     plant: {
       src: "/border-decorations/services-automations-decorative-motiv.svg",
       width: 759,
       height: 1107,
-      className: "mx-auto mb-5 h-16 w-11",
+      className: "mx-auto mb-5 h-20 w-30",
     },
   } as const;
 
@@ -42,7 +42,7 @@ export function Solutions() {
   return (
     <section
       id="soluciones"
-      className="mx-auto min-h-[44rem] max-w-[77rem] px-6 pt-16 pb-20 sm:px-8 lg:min-h-[48rem] lg:pt-20 lg:pb-24"
+      className="mx-auto min-h-[44rem] max-w-[77rem] px-6 pt-16 pb-20 sm:px-8 lg:min-h-[48rem]"
       aria-labelledby="soluciones-title"
     >
       <SectionHeading
@@ -51,14 +51,14 @@ export function Solutions() {
         className="text-center"
       />
 
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
         {solutions.map((solution) => (
           <article
             key={solution.title}
             className="border-border flex min-h-[25rem] flex-col border px-6 pt-8 pb-6 text-center"
           >
             <SolutionIcon type={solution.icon} />
-            <h3 className="font-display text-text text-[2.2rem] leading-[0.9] font-medium tracking-[-0.03em] uppercase">
+            <h3 className="font-display text-text text-[clamp(1.8rem,8.5vw,2.2rem)] leading-[0.9] font-medium tracking-[-0.03em] uppercase">
               {solution.title.split("\n").map((line) => (
                 <span key={`${solution.title}-${line}`} className="block">
                   {line}
