@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CtaButton } from "@/components/cta-button";
+import { PopInOnView } from "@/components/pop-in-on-view";
 import { SectionHeading } from "@/components/section-heading";
 import { caseStudies } from "@/lib/data";
 
@@ -15,20 +16,22 @@ export function CaseStudies() {
         title="CASOS DE EXITO"
         className="text-center"
         decoration={
-          <Image
-            src="/border-decorations/cases-decorative-motiv.svg"
-            alt=""
-            aria-hidden="true"
-            width={1453}
-            height={207}
-            className="h-6 w-32"
-          />
+          <PopInOnView>
+            <Image
+              src="/border-decorations/cases-decorative-motiv.svg"
+              alt=""
+              aria-hidden="true"
+              width={1453}
+              height={207}
+              className="h-6 w-32"
+            />
+          </PopInOnView>
         }
       />
 
       <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
         {caseStudies.map((item) => (
-          <article key={item.title} className="flex h-full flex-col mt-5">
+          <article key={item.title} className="mt-5 flex h-full flex-col">
             <div className="border-border overflow-hidden rounded-[2.2rem] border">
               <Image
                 src={item.image}

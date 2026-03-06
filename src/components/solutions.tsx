@@ -1,8 +1,15 @@
 import Image from "next/image";
 import { SectionHeading } from "@/components/section-heading";
+import { PopInOnView } from "@/components/pop-in-on-view";
 import { solutions } from "@/lib/data";
 
-function SolutionIcon({ type }: { type: "speech" | "smile" | "plant" }) {
+function SolutionIcon({
+  type,
+  delay,
+}: {
+  type: "speech" | "smile" | "plant";
+  delay: number;
+}) {
   const iconByType = {
     speech: {
       src: "/border-decorations/services-internal-programs-decorative-motiv.svg",
@@ -27,14 +34,16 @@ function SolutionIcon({ type }: { type: "speech" | "smile" | "plant" }) {
   const icon = iconByType[type];
 
   return (
-    <Image
-      src={icon.src}
-      alt=""
-      aria-hidden="true"
-      width={icon.width}
-      height={icon.height}
-      className={icon.className}
-    />
+    <PopInOnView delay={delay}>
+      <Image
+        src={icon.src}
+        alt=""
+        aria-hidden="true"
+        width={icon.width}
+        height={icon.height}
+        className={icon.className}
+      />
+    </PopInOnView>
   );
 }
 
@@ -52,12 +61,12 @@ export function Solutions() {
       />
 
       <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-        {solutions.map((solution) => (
+        {solutions.map((solution, index) => (
           <article
             key={solution.title}
             className="border-border flex min-h-[25rem] flex-col border px-6 pt-8 pb-6 text-center"
           >
-            <SolutionIcon type={solution.icon} />
+            <SolutionIcon type={solution.icon} delay={index * 0.4} />
             <h3 className="font-display text-text text-[clamp(1.8rem,8.5vw,2.2rem)] leading-[0.9] font-medium tracking-[-0.03em] uppercase">
               {solution.title.split("\n").map((line) => (
                 <span key={`${solution.title}-${line}`} className="block">

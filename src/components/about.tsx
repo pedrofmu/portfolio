@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PanOnView } from "@/components/pan-on-view";
 import { SectionHeading } from "@/components/section-heading";
 import { about } from "@/lib/data";
 import type { ReactNode } from "react";
@@ -74,7 +75,10 @@ export function About() {
       />
 
       <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.7fr] lg:items-center">
-        <article className="relative mx-auto aspect-[760/1030] w-full max-w-[27rem] lg:h-full">
+        <PanOnView
+          direction="left"
+          className="relative mx-auto aspect-[760/1030] w-full max-w-[27rem] lg:h-full"
+        >
           <Image
             src="/border-decorations/about-picture-border.svg"
             alt=""
@@ -119,9 +123,12 @@ export function About() {
               </div>
             </div>
           </div>
-        </article>
+        </PanOnView>
 
-        <article className="relative mx-auto aspect-[1200/1074] w-full max-w-[44rem] lg:h-full">
+        <PanOnView
+          direction="right"
+          className="relative mx-auto aspect-[1200/1074] w-full max-w-[44rem] lg:h-full"
+        >
           <Image
             src="/border-decorations/about-text-border.svg"
             alt=""
@@ -137,7 +144,7 @@ export function About() {
               ))}
             </div>
           </div>
-        </article>
+        </PanOnView>
       </div>
     </section>
   );

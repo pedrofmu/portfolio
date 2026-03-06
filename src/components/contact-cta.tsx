@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CtaButton } from "@/components/cta-button";
+import { PopInOnView } from "@/components/pop-in-on-view";
 import { contact } from "@/lib/data";
 
 export function ContactCta() {
@@ -9,14 +10,16 @@ export function ContactCta() {
       className="mx-auto min-h-[38rem] max-w-[77rem] px-6 pt-16 pb-24 text-center sm:px-8 lg:min-h-[42rem] lg:pt-25 lg:pb-28"
       aria-labelledby="contact-title"
     >
-      <Image
-        src="/border-decorations/cta-decorative-motiv.svg"
-        alt=""
-        aria-hidden="true"
-        width={900}
-        height={1500}
-        className="mx-auto h-24 w-20 mb-7"
-      />
+      <PopInOnView>
+        <Image
+          src="/border-decorations/cta-decorative-motiv.svg"
+          alt=""
+          aria-hidden="true"
+          width={900}
+          height={1500}
+          className="mx-auto mb-7 h-24 w-20"
+        />
+      </PopInOnView>
 
       <h2
         id="contact-title"
