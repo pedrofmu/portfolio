@@ -80,10 +80,10 @@ export const about = {
   photo: "/assets/pedro-fernandez.jpg",
   photoAlt: "Retrato de Pedro Fernandez Munoz",
   paragraphs: [
-    "Soy **Pedro Fernández Muñoz**, desarrollador especializado en sistemas internos, integraciones y automatización de procesos empresariales.",
-    "Tengo el titulo de **Administración de sistemas** y certificaciones de **Amazon web services**. Puedes ver todos mis certificados __aquí__.",
-    "Para ayudarte en tu negocio utilizo herramientas como: NextJS, React, Laravel, Go, PHP, Typescript y NodeJS.",
-    "Ademas tengo experiencia desplegando la infraestructura tanto en sistemas en la nube con AWS como en local con linux y windows server.",
+    "Soy **Pedro Fernández Muñoz** y ayudo a empresas a mejorar su operativa con sistemas internos, integraciones y automatización de procesos.",
+    "Tengo el título de **Administración de Sistemas** y certificaciones de **Amazon Web Services (AWS)**. Puedes ver todos mis certificados __aquí__.",
+    "Desarrollo soluciones a medida con NextJS, React, Laravel, Go, PHP, TypeScript y Node.js, siempre enfocadas en resultados reales para el negocio.",
+    "También diseño y despliego infraestructuras fiables, tanto en la nube con AWS como en servidores locales con Linux y Windows Server.",
   ],
 };
 

@@ -66,7 +66,7 @@ export function Solutions() {
             key={solution.title}
             className="border-border flex min-h-[25rem] flex-col border px-6 pt-8 pb-6 text-center"
           >
-            <SolutionIcon type={solution.icon} delay={index * 0.4} />
+            <SolutionIcon type={solution.icon} delay={index * 0.2} />
             <h3 className="font-display text-text text-[clamp(1.8rem,8.5vw,2.2rem)] leading-[0.9] font-medium tracking-[-0.03em] uppercase">
               {solution.title.split("\n").map((line) => (
                 <span key={`${solution.title}-${line}`} className="block">

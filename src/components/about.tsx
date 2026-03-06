@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { PanOnView } from "@/components/pan-on-view";
 import { SectionHeading } from "@/components/section-heading";
 import { about } from "@/lib/data";
@@ -44,11 +45,29 @@ function RichParagraph({ text }: { text: string }) {
     if (match[1] !== undefined) {
       parts.push(<strong key={match.index}>{match[1]}</strong>);
     } else if (match[2] !== undefined) {
-      parts.push(
-        <strong key={match.index} className="underline">
-          {match[2]}
-        </strong>,
-      );
+      const underlinedText = match[2];
+      const normalizedUnderlinedText = underlinedText.toLowerCase();
+
+      if (
+        normalizedUnderlinedText === "aqui" ||
+        normalizedUnderlinedText === "aquí"
+      ) {
+        parts.push(
+          <Link
+            key={match.index}
+            href="/certificados"
+            className="hover:text-accent font-bold underline decoration-2 underline-offset-2 transition-colors"
+          >
+            {underlinedText}
+          </Link>,
+        );
+      } else {
+        parts.push(
+          <strong key={match.index} className="underline">
+            {underlinedText}
+          </strong>,
+        );
+      }
     }
 
     lastIndex = regex.lastIndex;
@@ -58,7 +77,12 @@ function RichParagraph({ text }: { text: string }) {
     parts.push(text.slice(lastIndex));
   }
 
-  return <p className="m-0">{parts}</p>;
+  return (
+    <p className="m-0 whitespace-pre-line">
+      {parts}
+      {"\n\n"}
+    </p>
+  );
 }
 
 export function About() {
