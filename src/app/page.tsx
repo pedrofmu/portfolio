@@ -9,7 +9,7 @@ import { Solutions } from "@/components/solutions";
 const siteUrl = "https://pedrofm.dev";
 
 export const metadata: Metadata = {
-  title: "Sistemas internos y automatizacion para empresas",
+  title: "Pedro FM - Sistemas internos y automatizacion para empresas",
   description:
     "Desarrollo de sistemas internos, herramientas con IA e integraciones para empresas en Espana, Comunidad Valenciana, Alicante y Alcoy.",
   alternates: {

@@ -21,8 +21,7 @@ const signatureFont = Alegreya_SC({
 });
 
 const siteUrl = "https://pedrofm.dev";
-const defaultTitle =
-  "Pedro FM | Sistemas internos y automatizacion para empresas";
+const defaultTitle = "Pedro FM";
 const defaultDescription =
   "Portfolio B2B de Pedro Fernandez Munoz para desarrollo de sistemas internos, integraciones y automatizacion con IA en Espana, Comunidad Valenciana, Alicante y Alcoy.";
 
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: defaultTitle,
-    template: "%s | Pedro FM",
+    template: "Pedro FM | %s",
   },
   description: defaultDescription,
   applicationName: "Pedro FM - Portfolio B2B",
@@ -103,6 +102,7 @@ export default function RootLayout({
   return (
     <html lang="es-ES">
       <body
+        suppressHydrationWarning
         className={`${displayFont.variable} ${bodyFont.variable} ${signatureFont.variable} antialiased`}
       >
         {children}
