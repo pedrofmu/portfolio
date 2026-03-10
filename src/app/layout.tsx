@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Alegreya_SC, Courier_Prime, Space_Grotesk } from "next/font/google";
+import { siteConfig } from "@/lib/seo";
 import "./globals.css";
 
 const displayFont = Space_Grotesk({
@@ -20,67 +21,51 @@ const signatureFont = Alegreya_SC({
   weight: ["700"],
 });
 
-const siteUrl = "https://pedrofm.dev";
-const defaultTitle =
-  "Pedro FM | Sistemas internos y automatizacion para empresas";
-const defaultDescription =
-  "Portfolio B2B de Pedro Fernandez Munoz para desarrollo de sistemas internos, integraciones y automatizacion con IA en Espana, Comunidad Valenciana, Alicante y Alcoy.";
+const defaultTitle = "Pedro FM | Sistemas internos e IA para empresas";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: defaultTitle,
-    template: "%s | Pedro FM",
+    template: `%s | ${siteConfig.name}`,
   },
-  description: defaultDescription,
-  applicationName: "Pedro FM - Portfolio B2B",
-  keywords: [
-    "desarrollo de software para empresas",
-    "automatizacion de procesos",
-    "integraciones empresariales",
-    "sistemas internos",
-    "desarrollo web b2b",
-    "inteligencia artificial para negocios",
-    "espana",
-    "comunidad valenciana",
-    "valencia",
-    "alicante",
-    "alcoy",
-  ],
+  description: siteConfig.description,
+  applicationName: `${siteConfig.name} - Portfolio B2B`,
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [...siteConfig.keywords],
   authors: [
     {
-      name: "Pedro Fernandez Munoz",
-      url: siteUrl,
+      name: siteConfig.author,
+      url: siteConfig.url,
     },
   ],
-  creator: "Pedro Fernandez Munoz",
-  publisher: "Pedro Fernandez Munoz",
+  creator: siteConfig.author,
+  publisher: siteConfig.author,
   category: "technology",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   other: {
     "geo.region": "ES-VC",
     "geo.placename": "Alcoy, Alicante, Comunidad Valenciana, Spain",
   },
   openGraph: {
     title: defaultTitle,
-    description: defaultDescription,
-    url: siteUrl,
-    siteName: "Pedro FM",
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     type: "website",
-    locale: "es_ES",
-    images: [
-      {
-        url: "/assets/pedro-fernandez.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Pedro Fernandez Munoz, desarrollo de sistemas internos para empresas",
-      },
-    ],
+    locale: siteConfig.locale,
   },
   twitter: {
     card: "summary_large_image",
     title: defaultTitle,
-    description: defaultDescription,
-    images: ["/assets/pedro-fernandez.jpg"],
+    description: siteConfig.description,
   },
   robots: {
     index: true,
@@ -101,7 +86,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es-ES">
+    <html lang={siteConfig.language}>
       <body
         className={`${displayFont.variable} ${bodyFont.variable} ${signatureFont.variable} antialiased`}
       >
