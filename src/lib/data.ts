@@ -46,15 +46,6 @@ export const solutions: Solution[] = [
 
 export const caseStudies: CaseStudy[] = [
   {
-    title: "Generador de agenda B2B",
-    client: "Con: Yolanda Munoz del Aguila",
-    description:
-      "Esta aplicacion conecto empresas con intereses compatibles para organizar reuniones utiles durante la I Jornada Profesional Biocultura Madrid 2024.",
-    image: "/assets/caso-agenda-b2b.jpg",
-    imageAlt: "Captura de hoja de calculo del generador de agenda B2B",
-    link: "https://github.com/pedrofmu/match-jornada-profesional",
-  },
-  {
     title: "SoloDb",
     client: "Con: JieldBV",
     description:
@@ -71,6 +62,15 @@ export const caseStudies: CaseStudy[] = [
     image: "/assets/caso-iris.jpg",
     imageAlt: "Diagrama de flujo y estados de la herramienta Iris",
     link: "/casos/iris",
+  },
+  {
+    title: "Generador de agenda B2B",
+    client: "Con: Yolanda Munoz del Aguila",
+    description:
+      "Esta aplicacion conecto empresas con intereses compatibles para organizar reuniones utiles durante la I Jornada Profesional Biocultura Madrid 2024.",
+    image: "/assets/caso-agenda-b2b.jpg",
+    imageAlt: "Captura de hoja de calculo del generador de agenda B2B",
+    link: "https://github.com/pedrofmu/match-jornada-profesional",
   },
 ];
 
