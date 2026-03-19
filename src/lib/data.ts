@@ -70,7 +70,7 @@ export const caseStudies: CaseStudy[] = [
       "Iris es una herramienta que recibe y organiza los archivos que suben las personas usuarias a SoloDB, para que todo llegue bien y sin complicaciones.",
     image: "/assets/caso-iris.jpg",
     imageAlt: "Diagrama de flujo y estados de la herramienta Iris",
-    link: "https://pedrofm.dev/project-demo/iris-docs.pdf",
+    link: "/casos/iris",
   },
 ];
 
