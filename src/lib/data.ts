@@ -16,7 +16,7 @@ export type CaseStudy = {
 
 export const hero = {
   name: "Pedro FM",
-  title: "OPTIMIZA, AUTOMATIZA\nY AGILIZA TU EMPRESA",
+  title: "OPTIMIZA, AUTOMATIZA\nY DIGITALIZA TU NEGOCIO",
   subtitle: "Integra las nuevas tecnologias\nen los procesos de tu negocio",
 };
 
@@ -90,7 +90,7 @@ export const about = {
 export const contact = {
   title: "ENTREMOS EN\nCONTACTO",
   description:
-    "Optimiza, automatiza y agiliza tu negocio enviando un correo a:\nhola@pedrofm.dev",
+    "Optimiza, automatiza y agiliza tu negocio enviando un correo a:",
   cta: "ENVIAR EMAIL",
   href: "mailto:hola@pedrofm.dev",
 };

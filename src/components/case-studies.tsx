@@ -62,10 +62,6 @@ export function CaseStudies() {
           </article>
         ))}
       </div>
-
-      <div className="mt-8 text-center">
-        <CtaButton href="/proyectos">MAS PROYECTOS</CtaButton>
-      </div>
     </section>
   );
 }

@@ -32,12 +32,15 @@ export function ContactCta() {
         ))}
       </h2>
 
-      <p className="text-text mx-auto mt-8 max-w-2xl text-[1.15rem] sm:text-[1.24rem]">
+      <p className="text-text mx-auto mt-8 max-w-2xl text-[1.15rem] sm:text-[1rem]">
         {contact.description.split("\n").map((line) => (
           <span key={line} className="block">
             {line}
           </span>
         ))}
+        <span className="font-bold block">
+            hola@pedrofm.dev
+        </span>
       </p>
 
       <div className="mt-12">

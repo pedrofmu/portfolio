@@ -1,0 +1,228 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>IRIS-README.md - Grip</title>
+    <link rel="icon" href="/__/grip/static/favicon.ico">
+    <link rel="stylesheet" href="/__/grip/asset/light-74231a1f3bbb.css">
+    <link rel="stylesheet" href="/__/grip/asset/dark-8a995f0bacd4.css">
+    <link rel="stylesheet" href="/__/grip/asset/light_high_contrast-83beb16e0ecf.css">
+    <link rel="stylesheet" href="/__/grip/asset/light_colorblind-f91b0f603451.css">
+    <link rel="stylesheet" href="/__/grip/asset/light_colorblind_high_contrast-5aebfa54b215.css">
+    <link rel="stylesheet" href="/__/grip/asset/light_tritanopia-6e122dab64fc.css">
+    <link rel="stylesheet" href="/__/grip/asset/light_tritanopia_high_contrast-b32664e28b79.css">
+    <link rel="stylesheet" href="/__/grip/asset/dark_high_contrast-9ac301c3ebe5.css">
+    <link rel="stylesheet" href="/__/grip/asset/dark_colorblind-cd826e8636dc.css">
+    <link rel="stylesheet" href="/__/grip/asset/dark_colorblind_high_contrast-131d53fe187c.css">
+    <link rel="stylesheet" href="/__/grip/asset/dark_tritanopia-18119e682df0.css">
+    <link rel="stylesheet" href="/__/grip/asset/dark_tritanopia_high_contrast-63c0358957ba.css">
+    <link rel="stylesheet" href="/__/grip/asset/dark_dimmed-f37fb7684b1f.css">
+    <link rel="stylesheet" href="/__/grip/asset/dark_dimmed_high_contrast-8f371c75debd.css">
+    <link rel="stylesheet" href="/__/grip/asset/primer-primitives-225433424a87.css">
+    <link rel="stylesheet" href="/__/grip/asset/primer-cba26849680f.css">
+    <link rel="stylesheet" href="/__/grip/asset/global-d579beef0491.css">
+    <link rel="stylesheet" href="/__/grip/asset/github-864568fbf430.css">
+    <link rel="stylesheet" href="/__/grip/asset/repository-4fce88777fa8.css">
+    <link rel="stylesheet" href="/__/grip/asset/code-3853118a3cf5.css">
+    <link rel="stylesheet" href="/__/grip/asset/primer-react.05990da7b38026080f99.module.css">
+    <link rel="stylesheet" href="/__/grip/asset/notifications-subscriptions-menu.e5e6e593370c808590a5.module.css">
+    <link rel="stylesheet" href="/__/grip/asset/keyboard-shortcuts-dialog.1aa183523505d66bb990.module.css">
+    <link rel="stylesheet" href="/__/grip/asset/repos-overview.c466ed52c33ace186642.module.css">
+    <link rel="stylesheet" href="/__/grip/static/octicons/octicons.css">
+    <style>
+        /* Page tweaks */
+        .preview-page {
+            margin-top: 64px;
+            margin-bottom: 21px;
+        }
+        /* User-content tweaks */
+        .timeline-comment-wrapper > .timeline-comment:after,
+        .timeline-comment-wrapper > .timeline-comment:before {
+            content: none;
+        }
+        /* User-content overrides */
+        .discussion-timeline.wide {
+            width: 920px;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div id="preview-page" class="preview-page" data-autorefresh-url="/__/grip/refresh/">
+        <main id="js-repo-pjax-container">
+            <div class="clearfix new-discussion-timeline container-xl px-3 px-md-4 px-lg-5">
+                <div class="repository-content">
+                    <div class="clearfix">
+                        <div class="Layout Layout--flowRow-until-md Layout--sidebarPosition-end Layout--sidebarPosition-flowRow-end">
+                            <div class="Layout-main">
+
+
+
+                                <div id="readme" class="Box md Box--responsive">
+
+                                    <div class="Box-header d-flex border-bottom-0 flex-items-center flex-justify-between color-bg-default rounded-top-2">
+                                        <div class="d-flex flex-items-center">
+                                            <h2 class="Box-title">
+                                                IRIS-README.md
+                                            </h2>
+                                        </div>
+                                    </div>
+
+                                    <div class="Box-body px-5 pb-5">
+                                        <article id="grip-content" class="markdown-body entry-content container-lg">
+                                            <div class="markdown-heading"><h1 class="heading-element">Iris</h1><a id="user-content-iris" class="anchor" aria-label="Permalink: Iris" href="#iris"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+                                            <p>Iris helps labs send files to SoloDB safely and consistently. It takes uploads from lab systems, keeps them in a temporary holding area, and lets a workstation confirm what should be stored.</p>
+                                            <div class="markdown-heading"><h2 class="heading-element">Overview</h2><a id="user-content-overview" class="anchor" aria-label="Permalink: Overview" href="#overview"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+                                            <p>Iris middleware for uploads from a lab client to SoloDB with a solodb-workstation or other client as intermediary.
+                                                The lab initiates uploads and sends file data. Iris stores the data temporarily, streams
+                                                upload events over SSE to the workstation, and uploads approved files to SoloDB.</p>
+                                            <p>The flow, entity fields, and state transitions are illustrated below.</p>
+                                            <p><a target="_blank" rel="noopener noreferrer" href="./diagram.png"><img src="./diagram.png" alt="Iris flow diagram" style="max-width: 100%;"></a></p>
+                                            <div class="markdown-heading"><h2 class="heading-element">API</h2><a id="user-content-api" class="anchor" aria-label="Permalink: API" href="#api"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+                                            <p>[CENSORED]</p>
+                                            <div class="markdown-heading"><h2 class="heading-element">Entities</h2><a id="user-content-entities" class="anchor" aria-label="Permalink: Entities" href="#entities"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+                                            <div class="markdown-heading"><h3 class="heading-element">FileUploadEvent</h3><a id="user-content-fileuploadevent" class="anchor" aria-label="Permalink: FileUploadEvent" href="#fileuploadevent"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+                                            <ul>
+                                                <li>
+                                                    <code>uid</code>: string identifier for the event.</li>
+                                                <li>
+                                                    <code>state</code>: enum state for the event lifecycle.</li>
+                                                <li>
+                                                    <code>content</code>: map of <code>filename</code> to <code>data</code> (data points to a path).</li>
+                                                <li>
+                                                    <code>start</code>: timestamp when the upload started.</li>
+                                                <li>
+                                                    <code>completedState</code>: string for logging purposes.</li>
+                                                <li>
+                                                    <code>TTL</code>: uint seconds before the event is automatically rejected.</li>
+                                                <li>
+                                                    <code>autoApprove</code>: boolean to automatically approve uploads to SoloDB.</li>
+                                            </ul>
+                                            <div class="markdown-heading"><h2 class="heading-element">State (FSM)</h2><a id="user-content-state-fsm" class="anchor" aria-label="Permalink: State (FSM)" href="#state-fsm"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+                                            <p><code>FileUploadEvent</code> follows this finite state machine:</p>
+                                            <ul>
+                                                <li>
+                                                    <code>started</code> --<code>START_UPLOAD</code>--&gt; <code>uploading</code>
+                                                </li>
+                                                <li>
+                                                    <code>started</code> --<code>REJECT</code>--&gt; <code>rejected</code>
+                                                </li>
+                                                <li>
+                                                    <code>started</code> --<code>FAIL</code>--&gt; <code>error</code>
+                                                </li>
+                                                <li>
+                                                    <code>uploading</code> --<code>FINISH_UPLOAD</code>--&gt; <code>awaiting_approval</code>
+                                                </li>
+                                                <li>
+                                                    <code>uploading</code> --<code>REJECT</code>--&gt; <code>rejected</code>
+                                                </li>
+                                                <li>
+                                                    <code>uploading</code> --<code>START_UPLOAD</code>--&gt; <code>uploading</code>
+                                                </li>
+                                                <li>
+                                                    <code>uploading</code> --<code>FAIL</code>--&gt; <code>error</code>
+                                                </li>
+                                                <li>
+                                                    <code>awaiting_approval</code> --<code>APPROVE</code>--&gt; <code>syncing</code>
+                                                </li>
+                                                <li>
+                                                    <code>awaiting_approval</code> --<code>REJECT</code>--&gt; <code>rejected</code>
+                                                </li>
+                                                <li>
+                                                    <code>awaiting_approval</code> --<code>FAIL</code>--&gt; <code>error</code>
+                                                </li>
+                                                <li>
+                                                    <code>syncing</code> --<code>SUCCESS</code>--&gt; <code>completed</code>
+                                                </li>
+                                                <li>
+                                                    <code>syncing</code> --<code>FAIL</code>--&gt; <code>error</code>
+                                                </li>
+                                            </ul>
+                                            <div class="markdown-heading"><h2 class="heading-element">Flow</h2><a id="user-content-flow" class="anchor" aria-label="Permalink: Flow" href="#flow"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+                                            <ol>
+                                                <li>The lab starts an upload and Iris returns a <code>FileUploadEvent</code> UID.</li>
+                                                <li>The lab uploads file data and Iris stores it temporarily.</li>
+                                                <li>Iris streams upload events and the workstation listens for updates.</li>
+                                                <li>Iris indicates that data is being uploaded and the workstation checks the event status.</li>
+                                                <li>The workstation approves the event.</li>
+                                                <li>Iris uploads the file to SoloDB and storage completes.</li>
+                                            </ol>
+
+                                        </article>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div><script>
+    function showCanonicalImages() {
+        var images = document.getElementsByTagName('img');
+        if (!images) {
+            return;
+        }
+        for (var index = 0; index < images.length; index++) {
+            var image = images[index];
+            if (image.getAttribute('data-canonical-src') && image.src !== image.getAttribute('data-canonical-src')) {
+                image.src = image.getAttribute('data-canonical-src');
+            }
+        }
+    }
+
+    function scrollToHash() {
+        if (location.hash && !document.querySelector(':target')) {
+            var element = document.getElementById('user-content-' + location.hash.slice(1));
+            if (element) {
+                element.scrollIntoView();
+            }
+        }
+    }
+
+    function autorefreshContent(eventSourceUrl) {
+        var initialTitle = document.title;
+        var contentElement = document.getElementById('grip-content');
+        var source = new EventSource(eventSourceUrl);
+        var isRendering = false;
+
+        source.onmessage = function(ev) {
+            var msg = JSON.parse(ev.data);
+            if (msg.updating) {
+                isRendering = true;
+                document.title = '(Rendering) ' + document.title;
+            } else {
+                isRendering = false;
+                document.title = initialTitle;
+                contentElement.innerHTML = msg.content;
+                showCanonicalImages();
+            }
+        }
+
+        source.onerror = function(e) {
+            if (e.readyState === EventSource.CLOSED && isRendering) {
+                isRendering = false;
+                document.title = initialTitle;
+            }
+        }
+    }
+
+    window.onhashchange = function() {
+        scrollToHash();
+    }
+
+    window.onload = function() {
+        scrollToHash();
+    }
+
+    showCanonicalImages();
+
+    var autorefreshUrl = document.getElementById('preview-page').getAttribute('data-autorefresh-url');
+    if (autorefreshUrl) {
+        autorefreshContent(autorefreshUrl);
+    }
+</script>
+
+<!----><!----><!----> <!----></body></html>
