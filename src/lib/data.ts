@@ -46,32 +46,32 @@ export const solutions: Solution[] = [
 
 export const caseStudies: CaseStudy[] = [
   {
-    title: "SoloDb",
+    title: "SoloDB (Iris)",
     client: "Con: JieldBV",
     description:
-      "SoloDB ayuda a equipos de investigacion a guardar sus experimentos y resultados de forma ordenada, para que cualquiera pueda entenderlos y repetirlos.",
-    image: "/assets/caso-solodb.webp",
-    imageAlt: "Diagrama de simplicidad usado en la plataforma SoloDb",
+    "Herramienta que recibe y organiza automáticamente los archivos subidos por los usuarios a SoloDB. Menos errores, cero fricción.",
+    image: "/assets/caso-iris.jpg",
+    imageAlt: "Interfaz de SoloDB mostrando la organización de experimentos",
     link: "https://solodb.net/",
   },
-  {
-    title: "Iris",
-    client: "Con: JieldBV",
-    description:
-      "Iris es una herramienta que recibe y organiza los archivos que suben las personas usuarias a SoloDB, para que todo llegue bien y sin complicaciones.",
-    image: "/assets/caso-iris.jpg",
-    imageAlt: "Diagrama de flujo y estados de la herramienta Iris",
-    link: "/casos/iris",
-  },
-  {
-    title: "Generador de agenda B2B",
-    client: "Con: Yolanda Munoz del Aguila",
-    description:
-      "Esta aplicacion conecto empresas con intereses compatibles para organizar reuniones utiles durante la I Jornada Profesional Biocultura Madrid 2024.",
-    image: "/assets/caso-agenda-b2b.jpg",
-    imageAlt: "Captura de hoja de calculo del generador de agenda B2B",
-    link: "https://github.com/pedrofmu/match-jornada-profesional",
-  },
+{
+  title: "Chatbot APCoatings",
+  client: "Con: ABAD PINTURAS S.L.",
+  description:
+  "Chatbot de IA que transforma contenido técnico en respuestas claras y convierte visitas en leads cualificados para el equipo comercial.",
+  image: "/assets/caso-apcoatings.webp",
+  imageAlt: "Chatbot con IA integrado en la web de APCoatings",
+  link: "https://apcoatings.net/",
+},
+{
+  title: "Agenda B2B",
+  client: "Con: Yolanda Muñoz del Águila",
+  description:
+  "App que empareja empresas por intereses y genera agendas de reuniones útiles en minutos. Estrenada en la I Jornada Profesional Biocultura Madrid 2024.",
+  image: "/assets/caso-agenda-b2b.webp",
+  imageAlt: "Agenda de reuniones B2B generada automáticamente",
+  link: "https://github.com/pedrofmu/match-jornada-profesional",
+},
 ];
 
 export const about = {
