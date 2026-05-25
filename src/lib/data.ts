@@ -17,7 +17,7 @@ export type CaseStudy = {
 export const hero = {
   name: "Pedro FM",
   title: "OPTIMIZA, AUTOMATIZA\nY DIGITALIZA TU NEGOCIO",
-  subtitle: "Integra las nuevas tecnologias\nen los procesos de tu negocio",
+  subtitle: "Desarrollo de software \na medida para PYMES",
 };
 
 export const solutions: Solution[] = [
