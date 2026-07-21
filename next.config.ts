@@ -1,12 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Exportación estática: GitHub Pages solo sirve ficheros, sin servidor Node.
+  output: "export",
   reactCompiler: true,
   images: {
-    // Next 16 exige declarar las calidades permitidas (por defecto solo [75]).
-    // Las capturas de pantalla llevan texto pequeño y a 75 se ven pastosas.
-    qualities: [75, 90],
+    // Sin servidor no hay optimizador de imágenes: se sirven tal cual están
+    // en public/. Por eso ya no aplica `qualities`.
+    unoptimized: true,
   },
 };
 
