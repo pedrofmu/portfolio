@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@theme {
+  /* Portfolio section palette (from the original styles.css :root) */
+  --color-ink: #16150f;
+  --color-ink-soft: #5c5850;
+  --color-muted: #7b766b;
+  --color-paper: #fbfaf8;
+  --color-line: #e4e1d8;
+  --color-green: #1e6b4b;
+  --color-green-dark: #14523a;
+  --color-green-light: #dceae1;
+  --color-green-wash: #edf3ee;
+
+  /* Hero / CTA / chrome palette (from the original inline styles) */
+  --color-brand: #0f7263;
+  --color-brand-dark: #0a5548;
+  --color-cream: #fbf8f2;
+  --color-charcoal: #24312c;
+
+  /* Fonts (wired to next/font CSS variables in layout.tsx) */
+  --font-display: var(--font-bricolage), "Trebuchet MS", sans-serif;
+  --font-body: var(--font-instrument), Arial, sans-serif;
+
+  /* Radii */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+
+  /* Shadows */
+  --shadow-soft: 0 18px 50px rgba(31, 42, 35, 0.08);
+
+  /* Blob drift + hero motion keyframes */
+  --animate-drift-a: driftA 16s ease-in-out infinite alternate;
+  --animate-drift-b: driftB 21s ease-in-out infinite alternate;
+  --animate-drift-c: driftC 18s ease-in-out infinite alternate;
+  --animate-bobble: bobble 2.2s ease-in-out infinite;
+  --animate-card-in: cardIn 0.65s cubic-bezier(0.22, 0.61, 0.21, 1) both;
+}
+
+@keyframes driftA {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(8vw, 6vh) scale(1.18);
+  }
+}
+@keyframes driftB {
+  from {
+    transform: translate(0, 0) scale(1.1);
+  }
+  to {
+    transform: translate(-7vw, 4vh) scale(0.95);
+  }
+}
+@keyframes driftC {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(5vw, -6vh) scale(1.22);
+  }
+}
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes bobble {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Keep anchored sections clear of the fixed top bar */
+  :target {
+    scroll-margin-top: 72px;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background: var(--color-cream);
+    color: var(--color-charcoal);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-brand);
+  }
+  a:hover {
+    color: var(--color-brand-dark);
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  /* Focus styles carried over from the original portfolio sections */
+  :where(a, button):focus-visible {
+    outline: 3px solid #55a77e;
+    outline-offset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
