@@ -25,7 +25,7 @@ const apariciones: Aparicion[] = [
     category: "Ponencia",
     title: "BioCultura Madrid 2025 · La IA en los procesos de certificación",
     linkLabel: "Ver la ponencia en LinkedIn",
-    href: "",
+    href: "https://www.linkedin.com/feed/update/urn:li:activity:7392583558046855168/",
   },
   {
     image: mediumPosts,

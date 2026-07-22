@@ -195,7 +195,7 @@ export default function Hero() {
             </a>
           ))}
         </nav>
-        <MobileNavigation />
+        <MobileNavigation variant="overlay" />
       </motion.header>
 
       <motion.div
