@@ -8,8 +8,7 @@ export default function Footer() {
               pedrofm<span className="text-brand">.</span>
             </div>
             <p className="m-0 max-w-[280px] text-[14.5px] leading-[1.6] text-[#5C6B64]">
-              Desarrollo de software a medida para PYMES. Alcoy, Alicante — trabajo con
-              empresas de toda España.
+              Desarrollo de software a medida para PYMES. Alcoy, Alicante
             </p>
           </div>
           <div className="flex flex-col gap-2">

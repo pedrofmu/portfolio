@@ -31,8 +31,7 @@ export default function SobreMi() {
             Pedro Fernández Muñoz
           </h2>
           <p className="mb-[15px] text-[17px] leading-[1.72] text-ink-soft">
-            Soy desarrollador de software freelance en Alcoy, Alicante. Ayudo a pymes de
-            toda España a digitalizar sus operaciones: menos trabajo manual, menos errores
+            Soy desarrollador de software freelance en Alcoy, Alicante. Ayudo a pymes a digitalizar sus operaciones: menos trabajo manual, menos errores
             y herramientas que de verdad se usan.
           </p>
           <p className="mb-[15px] text-[17px] leading-[1.72] text-ink-soft">
