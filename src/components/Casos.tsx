@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 import Reveal from "./Reveal";
-import { Section, SectionHeading, containerClass } from "./ui";
+import { ExternalArrow, Section, SectionHeading, containerClass } from "./ui";
 import { useCarousel } from "./useCarousel";
 import casoApcoatings from "../../public/assets/caso-apcoatings.webp";
 import casoBiocultura from "../../public/assets/caso-intranet-biocultura.webp";
@@ -218,9 +218,10 @@ export default function Casos() {
                       target="_blank"
                       rel="noopener"
                       onClick={suppressClick}
-                      className="inline-flex min-h-11 items-center gap-[6px] text-[15px] font-semibold text-green underline decoration-transparent underline-offset-4 transition-colors duration-200 hover:text-green-dark hover:decoration-current"
+                      className="group/link inline-flex min-h-11 items-center gap-[6px] text-[15px] font-semibold text-green underline decoration-transparent underline-offset-4 transition-colors duration-200 hover:text-green-dark hover:decoration-current"
                     >
-                      {caso.linkLabel} <span aria-hidden="true">↗</span>
+                      {caso.linkLabel}
+                      <ExternalArrow className="group-hover/link:translate-x-[2px] group-hover/link:-translate-y-[2px]" />
                       <span className="sr-only"> (se abre en una pestaña nueva)</span>
                     </a>
                   </div>

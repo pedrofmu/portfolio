@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
-import { Section, containerClass } from "./ui";
+import { ExternalArrow, Section, containerClass } from "./ui";
 import retrato from "../../public/assets/pedro-fernandez.jpg";
 
 export default function SobreMi() {
@@ -49,9 +49,10 @@ export default function SobreMi() {
             href="https://www.linkedin.com/in/pedro-fern%C3%A1ndez-mu%C3%B1oz-4148a9287/"
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center gap-[6px] text-[15px] font-semibold text-green underline decoration-transparent underline-offset-4 transition-colors duration-200 hover:text-green-dark hover:decoration-current"
+            className="group inline-flex items-center gap-[6px] text-[15px] font-semibold text-green underline decoration-transparent underline-offset-4 transition-colors duration-200 hover:text-green-dark hover:decoration-current"
           >
-            LinkedIn <span aria-hidden="true">↗</span>
+            LinkedIn
+            <ExternalArrow className="group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
             <span className="sr-only"> (se abre en una pestaña nueva)</span>
           </a>
         </div>

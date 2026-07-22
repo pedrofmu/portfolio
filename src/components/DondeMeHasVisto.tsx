@@ -2,7 +2,7 @@
 
 import Image, { type StaticImageData } from "next/image";
 import Reveal from "./Reveal";
-import { Section, SectionHeading, containerClass } from "./ui";
+import { ExternalArrow, Section, SectionHeading, containerClass } from "./ui";
 import { useCarousel } from "./useCarousel";
 import ponenciaBioCultura from "../../public/assets/presentacion-biocultura.jpg";
 import mediumPosts from "../../public/assets/medium-posts.jpg";
@@ -104,7 +104,8 @@ export default function DondeMeHasVisto() {
                     {aparicion.title}
                   </h3>
                   <span className="inline-flex items-center gap-[6px] text-[15px] font-semibold text-white/90 transition-colors duration-200 group-hover:text-white">
-                    {aparicion.linkLabel} <span aria-hidden="true">↗</span>
+                    {aparicion.linkLabel}
+                    <ExternalArrow className="group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
                   </span>
                 </div>
                 <span className="sr-only"> (se abre en una pestaña nueva)</span>

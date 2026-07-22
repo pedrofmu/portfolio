@@ -26,6 +26,31 @@ export function Section({ id, white = false, labelledBy, children }: SectionProp
   );
 }
 
+/**
+ * External-link arrow. Inline SVG instead of "↗" (U+2197), which iOS renders
+ * with the color emoji font.
+ */
+export function ExternalArrow({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      aria-hidden="true"
+      className={`transition-transform duration-200 ${className}`}
+    >
+      <path
+        d="M3 9L9 3M9 3H4M9 3v5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 type SectionHeadingProps = {
   index: string;
   title: string;
