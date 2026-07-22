@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 import Reveal from "./Reveal";
 import { Section, SectionHeading, containerClass } from "./ui";
@@ -9,7 +9,14 @@ import casoApcoatings from "../../public/assets/caso-apcoatings.webp";
 import casoBiocultura from "../../public/assets/caso-intranet-biocultura.webp";
 import casoIris from "../../public/assets/caso-iris.jpg";
 
+/** Identificador estable de cada caso: sostiene el ancla `#caso-<id>`. */
+export type CasoId = "biocultura" | "apcoatings" | "solodb";
+
+/** Ancla que lleva a la sección Casos con el carrusel puesto en ese caso. */
+export const casoHref = (id: CasoId) => `#caso-${id}`;
+
 type Caso = {
+  id: CasoId;
   image: StaticImageData;
   alt: string;
   imagePosition?: string;
@@ -24,6 +31,7 @@ type Caso = {
 
 const casos: Caso[] = [
   {
+    id: "biocultura",
     image: casoBiocultura,
     alt: "Interfaz de gestión de BioCultura B2B",
     imagePosition: "top left",
@@ -40,6 +48,7 @@ const casos: Caso[] = [
     linkLabel: "Ver el proyecto en LinkedIn",
   },
   {
+    id: "apcoatings",
     image: casoApcoatings,
     alt: "Chatbot de inteligencia artificial integrado en APCoatings",
     imagePosition: "50% 25%",
@@ -55,6 +64,7 @@ const casos: Caso[] = [
     linkLabel: "apcoatings.net",
   },
   {
+    id: "solodb",
     image: casoIris,
     alt: "Iris, el módulo de SoloDB que organiza archivos y eventos de usuario",
     tag: "Herramienta SaaS",
@@ -69,14 +79,6 @@ const casos: Caso[] = [
     linkLabel: "solodb.net",
   },
 ];
-
-const slug = (title: string) =>
-  title
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
 
 export default function Casos() {
   const {
@@ -94,6 +96,27 @@ export default function Casos() {
   } = useCarousel(casos.length);
   /** Solo un detalle abierto a la vez: las tarjetas ocupan el ancho completo. */
   const [detalleAbierto, setDetalleAbierto] = useState<string | null>(null);
+
+  // Anclas `#caso-<id>` (las usa el hero): el hash no apunta a ningún elemento,
+  // así que el navegador no salta y colocamos nosotros carrusel y scroll.
+  useEffect(() => {
+    const irAlCaso = () => {
+      const id = window.location.hash.match(/^#caso-(.+)$/)?.[1];
+      if (!id) return;
+      const i = casos.findIndex((caso) => caso.id === id);
+      if (i < 0) return;
+      goTo(i, true);
+      document.getElementById("casos")?.scrollIntoView({
+        behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+    };
+
+    irAlCaso();
+    window.addEventListener("hashchange", irAlCaso);
+    return () => window.removeEventListener("hashchange", irAlCaso);
+  }, [goTo]);
 
   return (
     <Section id="casos" white labelledBy="casos-title">
@@ -122,7 +145,7 @@ export default function Casos() {
           >
             {casos.map((caso) => {
               const abierto = detalleAbierto === caso.title;
-              const detalleId = `caso-detalle-${slug(caso.title)}`;
+              const detalleId = `caso-detalle-${caso.id}`;
               return (
                 <article
                   key={caso.title}
@@ -281,13 +304,13 @@ export default function Casos() {
           className="mt-[clamp(48px,7vw,72px)] flex flex-col items-center gap-4 text-center"
         >
           <div className="font-display text-[clamp(1.2rem,3vw,1.5rem)] font-bold text-balance">
-            ¿Tienes un proceso parecido en tu empresa?
+            ¿Quieres saber lo que opinan los que ya han trabajado conmigo?
           </div>
           <a
-            href="#contacto"
+            href="#opiniones"
             className="inline-flex items-center gap-2 rounded-full bg-brand px-[26px] py-[14px] text-[16px] font-bold text-cream no-underline shadow-[0_10px_26px_rgba(15,114,99,0.24)] transition duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:text-cream"
           >
-            Cuéntame tu caso
+            Ver opiniones 
           </a>
         </Reveal>
       </Reveal>

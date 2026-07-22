@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import {
   motion,
   useMotionValue,
@@ -11,6 +17,7 @@ import {
   useTransform,
 } from "motion/react";
 
+import { casoHref, type CasoId } from "./Casos";
 import { SECTIONS } from "./sections";
 import MobileNavigation from "./MobileNavigation";
 
@@ -24,19 +31,22 @@ const results = [
   {
     title: "Toda la gestión del evento en un solo sitio",
     project: "Intranet BioCultura",
+    caso: "biocultura",
     rotation: -1.2,
   },
   {
     title: "Archivos organizados automáticamente",
     project: "SoloDB",
+    caso: "solodb",
     rotation: 0.8,
   },
   {
     title: "Nuevos leads desde el chatbot",
     project: "APCoatings",
+    caso: "apcoatings",
     rotation: -0.6,
   },
-];
+] satisfies { title: string; project: string; caso: CasoId; rotation: number }[];
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 24 },
@@ -118,6 +128,13 @@ export default function Hero() {
   }, [rawGlowX, rawGlowY, rawX, rawY, reduce, scrolled]);
 
   const backgroundPlayState = scrolled ? "paused" : "running";
+
+  // Si el hash ya apunta a ese caso el navegador no emite `hashchange`; lo
+  // lanzamos a mano para que Casos vuelva a colocar el carrusel igualmente.
+  const goToCaso = (event: ReactMouseEvent<HTMLAnchorElement>) => {
+    if (event.currentTarget.hash !== window.location.hash) return;
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
+  };
 
   return (
     <section
@@ -294,9 +311,12 @@ export default function Hero() {
                   index === 1 ? "ml-5" : index === 2 ? "ml-2" : "mr-3"
                 }`}
               >
-                <div
+                <a
+                  href={casoHref(result.caso)}
+                  onClick={goToCaso}
+                  aria-label={`Ver el caso de éxito: ${result.project}`}
                   style={{ "--rot": `${result.rotation}deg` } as CSSProperties}
-                  className="flex items-start gap-4 rotate-[var(--rot)] rounded-[18px] border border-[#DED9CE] bg-[rgba(255,255,255,0.74)] px-5 py-[19px] shadow-[0_18px_45px_rgba(54,61,54,0.07)] backdrop-blur-[8px] transition-[translate,scale,rotate,box-shadow] duration-300 ease-out motion-safe:hover:-translate-y-1.5 motion-safe:hover:scale-[1.015] motion-safe:hover:[rotate:0deg] motion-safe:hover:shadow-[0_24px_55px_rgba(54,61,54,0.13)]"
+                  className="flex items-start gap-4 rotate-[var(--rot)] rounded-[18px] border border-[#DED9CE] bg-[rgba(255,255,255,0.74)] px-5 py-[19px] no-underline shadow-[0_18px_45px_rgba(54,61,54,0.07)] backdrop-blur-[8px] transition-[translate,scale,rotate,box-shadow,border-color] duration-300 ease-out hover:border-brand focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-brand motion-safe:hover:-translate-y-1.5 motion-safe:hover:scale-[1.015] motion-safe:hover:[rotate:0deg] motion-safe:hover:shadow-[0_24px_55px_rgba(54,61,54,0.13)]"
                 >
                   <Check />
                   <div>
@@ -305,7 +325,7 @@ export default function Hero() {
                     </p>
                     <p className="mt-1.5 mb-0 text-[13.5px] text-[#788078]">{result.project}</p>
                   </div>
-                </div>
+                </a>
               </div>
             ))}
           </div>
