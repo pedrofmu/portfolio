@@ -6,12 +6,13 @@ import { SITE } from "../lib/site";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Sitio de una sola página: una única URL. Sin `lastModified`, porque un
-  // `new Date()` en cada build le enseña a Google a ignorar el dato; se añade
-  // a mano cuando el contenido cambie de verdad.
+  // Sitio de una sola página: una única URL. `lastModified` sale de una fecha
+  // fija en `site.ts` que se actualiza a mano cuando el contenido cambia de
+  // verdad: un `new Date()` por build le enseñaría a Google a ignorar el dato.
   return [
     {
       url: SITE.url,
+      lastModified: SITE.contentUpdated,
       images: [`${SITE.url}/opengraph-image.png`],
     },
   ];

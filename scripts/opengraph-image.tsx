@@ -25,8 +25,10 @@ import { SITE } from "../src/lib/site";
 // Con `output: export` la imagen tiene que generarse en el build, no por petición.
 export const dynamic = "force-static";
 
+// Debe coincidir con `src/app/opengraph-image.alt.txt`, que es el que se usa
+// mientras la imagen sea un PNG estático.
 export const alt =
-  "pedrofm — Desarrollo de software a medida para pymes en Alcoy, Alicante";
+  "Pedro Fernández Muñoz — Desarrollo de software a medida para pymes en Alcoy, Alicante";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

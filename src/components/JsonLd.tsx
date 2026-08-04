@@ -1,20 +1,25 @@
 import { SITE } from "../lib/site";
 
 /**
- * Datos estructurados del sitio en un único @graph. Tres nodos enlazados:
+ * Datos estructurados del sitio en un único @graph. Cuatro nodos enlazados:
  *
  * - ProfessionalService: el negocio local (dirección, geo, zonas servidas y
  *   catálogo de servicios). Es lo que alimenta las búsquedas locales.
  * - Person: Pedro, como profesional detrás del negocio.
  * - WebSite: la web en sí, para asociar nombre y editor.
+ * - WebPage: la home, que ata los tres anteriores. Su `mainEntity` apunta a
+ *   Person: es la declaración de que esta página trata sobre Pedro, y la señal
+ *   directa para quien busca su nombre.
  *
  * No se marcan opiniones: Google no admite reseñas autopublicadas sobre el
- * propio negocio para resultados enriquecidos.
+ * propio negocio para resultados enriquecidos. Tampoco hay FAQPage: no existe
+ * el contenido visible que lo respalde, y marcarlo sin él lo incumple.
  */
 
 const businessId = `${SITE.url}/#business`;
 const personId = `${SITE.url}/#pedro`;
 const websiteId = `${SITE.url}/#website`;
+const webpageId = `${SITE.url}/#webpage`;
 
 const services = [
   {
@@ -41,14 +46,17 @@ const graph = {
       "@type": "ProfessionalService",
       "@id": businessId,
       name: SITE.name,
+      alternateName: SITE.legalName,
       legalName: SITE.legalName,
       url: SITE.url,
       email: SITE.email,
       telephone: SITE.phone,
       image: `${SITE.url}/opengraph-image.png`,
       description: SITE.description,
+      serviceType: "Desarrollo de software a medida",
       priceRange: "€€",
       founder: { "@id": personId },
+      employee: { "@id": personId },
       address: {
         "@type": "PostalAddress",
         addressLocality: SITE.address.locality,
@@ -97,14 +105,38 @@ const graph = {
       "@type": "Person",
       "@id": personId,
       name: SITE.legalName,
+      // Mucha gente busca solo con el primer apellido.
+      alternateName: "Pedro Fernández",
+      givenName: SITE.givenName,
+      familyName: SITE.familyName,
       url: SITE.url,
+      mainEntityOfPage: { "@id": webpageId },
       email: SITE.email,
       telephone: SITE.phone,
       image: `${SITE.url}/assets/pedro-fernandez.jpg`,
-      jobTitle: "Desarrollador de software freelance",
+      jobTitle: SITE.jobTitle,
       description:
         "Desarrollador de software freelance en Alcoy (Alicante). Ayuda a pymes a digitalizar sus operaciones con programas internos, automatizaciones e IA.",
       knowsLanguage: SITE.languages,
+      // Persona + profesión + Alcoy en un solo nodo: justo la intersección de
+      // las dos búsquedas que interesan.
+      hasOccupation: {
+        "@type": "Occupation",
+        name: SITE.jobTitle,
+        occupationLocation: {
+          "@type": "City",
+          name: SITE.address.locality,
+        },
+      },
+      workLocation: {
+        "@type": "Place",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: SITE.address.locality,
+          addressRegion: SITE.address.region,
+          addressCountry: SITE.address.country,
+        },
+      },
       homeLocation: {
         "@type": "Place",
         address: {
@@ -122,9 +154,23 @@ const graph = {
       "@id": websiteId,
       url: SITE.url,
       name: SITE.name,
+      // Ata el dominio con el nombre propio y sus variantes.
+      alternateName: SITE.alternateNames,
       inLanguage: "es-ES",
       description: SITE.description,
       publisher: { "@id": businessId },
+    },
+    {
+      "@type": "WebPage",
+      "@id": webpageId,
+      url: SITE.url,
+      name: SITE.title,
+      description: SITE.description,
+      inLanguage: "es-ES",
+      isPartOf: { "@id": websiteId },
+      about: { "@id": businessId },
+      mainEntity: { "@id": personId },
+      primaryImageOfPage: `${SITE.url}/opengraph-image.png`,
     },
   ],
 };

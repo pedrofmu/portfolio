@@ -26,9 +26,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   // Necesario para que las URLs relativas de OG/canonical se resuelvan absolutas.
   metadataBase: new URL(SITE.url),
+  // `SITE.title` ya incluye el nombre propio: no se le concatena la marca.
   title: {
-    default: `${SITE.title} | ${SITE.name}`,
-    template: `%s | ${SITE.name}`,
+    default: SITE.title,
+    template: `%s | ${SITE.legalName}`,
   },
   description: SITE.description,
   applicationName: SITE.name,
@@ -43,12 +44,12 @@ export const metadata: Metadata = {
     locale: "es_ES",
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.title} | ${SITE.name}`,
+    title: SITE.title,
     description: SITE.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.title} | ${SITE.name}`,
+    title: SITE.title,
     description: SITE.description,
   },
   robots: {

@@ -9,9 +9,32 @@ export const SITE = {
   url: "https://pedrofm.dev",
   name: "pedrofm",
   legalName: "Pedro Fernández Muñoz",
-  title: "Desarrollo de software a medida para pymes en Alcoy y Alicante",
+
+  /**
+   * `<title>` completo, ya con el nombre propio delante: para una búsqueda de
+   * nombre es la señal más fuerte que tiene Google. 55 caracteres, así que
+   * entra entero en el SERP y ni el nombre ni "Alcoy" se cortan.
+   *
+   * Variante larga, si algún día se prefiere aceptar el recorte (~75 car.):
+   * "Pedro Fernández Muñoz · Desarrollo de software a medida en Alcoy y Alicante"
+   */
+  title: "Pedro Fernández Muñoz · Desarrollo de software en Alcoy",
   description:
-    "Desarrollador freelance en Alcoy (Alicante). Software a medida para pymes: programas internos, automatizaciones e IA. Presupuesto cerrado y primera llamada gratis.",
+    "Pedro Fernández Muñoz, desarrollador de software freelance en Alcoy (Alicante). Software a medida para pymes: programas internos, automatizaciones e IA. Primera llamada gratis.",
+
+  /** Partes del nombre y variantes: las consume el nodo Person del JSON-LD. */
+  givenName: "Pedro",
+  familyName: "Fernández Muñoz",
+  alternateNames: ["Pedro Fernández Muñoz", "Pedro Fernández", "pedrofm.dev"],
+  jobTitle: "Desarrollador de software freelance",
+
+  /**
+   * Última vez que cambió el contenido de verdad, para el `lastModified` del
+   * sitemap. Se actualiza a mano: un `new Date()` por build le enseñaría a
+   * Google a ignorar el dato.
+   */
+  contentUpdated: "2026-08-04",
+
   email: "hola@pedrofm.dev",
   phone: "+34673314676",
   linkedin:
