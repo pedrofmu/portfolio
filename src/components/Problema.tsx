@@ -27,7 +27,7 @@ export default function Problema() {
             El problema
           </div>
           <h2 className="mt-3 font-display text-[clamp(1.7rem,4.4vw,2.5rem)] leading-[1.12] font-bold tracking-[-0.01em] text-balance">
-            ¿Te suena algo de esto?
+            ¿Tu empresa sigue funcionando con Excels y tareas manuales?
           </h2>
         </Reveal>
         <div className="mt-5 flex flex-col">

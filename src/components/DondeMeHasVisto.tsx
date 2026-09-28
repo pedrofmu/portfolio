@@ -4,8 +4,8 @@ import Image, { type StaticImageData } from "next/image";
 import Reveal from "./Reveal";
 import { ExternalArrow, Section, SectionHeading, containerClass } from "./ui";
 import { useCarousel } from "./useCarousel";
-import ponenciaBioCultura from "../../public/assets/presentacion-biocultura.jpg";
-import mediumPosts from "../../public/assets/medium-posts.jpg";
+import ponenciaBioCultura from "../../public/assets/presentacion-biocultura.webp";
+import mediumPosts from "../../public/assets/medium-posts.webp";
 
 type Aparicion = {
   image: StaticImageData;

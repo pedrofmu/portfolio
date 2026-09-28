@@ -21,6 +21,12 @@ const personId = `${SITE.url}/#pedro`;
 const websiteId = `${SITE.url}/#website`;
 const webpageId = `${SITE.url}/#webpage`;
 
+/** Zonas locales de más cercana a más amplia, y al final el país entero. */
+const areaServed = [
+  ...SITE.areaServed.map((name) => ({ "@type": "AdministrativeArea", name })),
+  { "@type": "Country", name: SITE.country },
+];
+
 const services = [
   {
     name: "Programas internos a medida",
@@ -61,7 +67,6 @@ const graph = {
         "@type": "PostalAddress",
         addressLocality: SITE.address.locality,
         addressRegion: SITE.address.region,
-        postalCode: SITE.address.postalCode,
         addressCountry: SITE.address.country,
       },
       geo: {
@@ -69,10 +74,7 @@ const graph = {
         latitude: SITE.geo.latitude,
         longitude: SITE.geo.longitude,
       },
-      areaServed: SITE.areaServed.map((name) => ({
-        "@type": "AdministrativeArea",
-        name,
-      })),
+      areaServed,
       knowsLanguage: SITE.languages,
       sameAs: [SITE.linkedin, SITE.medium],
       knowsAbout: [
@@ -93,10 +95,7 @@ const graph = {
             name: service.name,
             description: service.description,
             provider: { "@id": businessId },
-            areaServed: SITE.areaServed.map((name) => ({
-              "@type": "AdministrativeArea",
-              name,
-            })),
+            areaServed,
           },
         })),
       },
@@ -113,10 +112,10 @@ const graph = {
       mainEntityOfPage: { "@id": webpageId },
       email: SITE.email,
       telephone: SITE.phone,
-      image: `${SITE.url}/assets/pedro-fernandez.jpg`,
+      image: `${SITE.url}/assets/pedro-fernandez.webp`,
       jobTitle: SITE.jobTitle,
       description:
-        "Desarrollador de software freelance en Alcoy (Alicante). Ayuda a pymes a digitalizar sus operaciones con programas internos, automatizaciones e IA.",
+        "Desarrollador de software freelance en Alcoy (Alicante). Ayuda a pymes de toda España a digitalizar sus operaciones con programas internos, automatizaciones e IA.",
       knowsLanguage: SITE.languages,
       // Persona + profesión + Alcoy en un solo nodo: justo la intersección de
       // las dos búsquedas que interesan.
@@ -167,6 +166,8 @@ const graph = {
       name: SITE.title,
       description: SITE.description,
       inLanguage: "es-ES",
+      // La misma fecha que el `lastModified` del sitemap: una sola fuente.
+      dateModified: SITE.contentUpdated,
       isPartOf: { "@id": websiteId },
       about: { "@id": businessId },
       mainEntity: { "@id": personId },

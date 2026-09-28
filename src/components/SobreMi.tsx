@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
 import { ExternalArrow, Section, containerClass } from "./ui";
-import retrato from "../../public/assets/pedro-fernandez.jpg";
+import retrato from "../../public/assets/pedro-fernandez.webp";
 
 export default function SobreMi() {
   return (
@@ -31,8 +31,10 @@ export default function SobreMi() {
             Pedro Fernández Muñoz
           </h2>
           <p className="mb-[15px] text-[17px] leading-[1.72] text-ink-soft">
-            Soy desarrollador de software freelance en Alcoy, Alicante. Ayudo a pymes a digitalizar sus operaciones: menos trabajo manual, menos errores
-            y herramientas que de verdad se usan.
+            Soy Pedro, programador y desarrollador de software freelance en Alcoy (Alicante).
+            Trabajo con pymes de toda España, en remoto o en persona, para digitalizar sus
+            operaciones: menos trabajo manual, menos errores y herramientas que de verdad se
+            usan.
           </p>
           <p className="mb-[15px] text-[17px] leading-[1.72] text-ink-soft">
             Cuando trabajas conmigo, hablas siempre con la misma persona: quien entiende tu

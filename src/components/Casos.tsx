@@ -7,7 +7,7 @@ import { ExternalArrow, Section, SectionHeading, containerClass } from "./ui";
 import { useCarousel } from "./useCarousel";
 import casoApcoatings from "../../public/assets/caso-apcoatings.webp";
 import casoBiocultura from "../../public/assets/caso-intranet-biocultura.webp";
-import casoIris from "../../public/assets/caso-iris.jpg";
+import casoIris from "../../public/assets/caso-iris.webp";
 
 /** Identificador estable de cada caso: sostiene el ancla `#caso-<id>`. */
 export type CasoId = "biocultura" | "apcoatings" | "solodb";
@@ -123,7 +123,7 @@ export default function Casos() {
       <Reveal className={containerClass}>
         <SectionHeading
           index="03 — Casos de éxito"
-          title="Proyectos reales, resultados reales"
+          title="Casos reales de digitalización de pymes"
           titleId="casos-title"
         />
 
@@ -226,21 +226,22 @@ export default function Casos() {
                     </a>
                   </div>
 
-                  {abierto ? (
-                    <div
-                      id={detalleId}
-                      className="border-t border-line px-8 py-6 max-[620px]:px-5"
-                    >
-                      {caso.detalle.map((parrafo) => (
-                        <p
-                          key={parrafo}
-                          className="mb-[13px] max-w-[720px] text-[15.5px] leading-[1.65] text-ink-soft last:mb-0"
-                        >
-                          {parrafo}
-                        </p>
-                      ))}
-                    </div>
-                  ) : null}
+                  {/* Siempre en el HTML y solo oculto: si se montase al abrir, los
+                      buscadores y los rastreadores de IA nunca verían el caso. */}
+                  <div
+                    id={detalleId}
+                    hidden={!abierto}
+                    className="border-t border-line px-8 py-6 max-[620px]:px-5"
+                  >
+                    {caso.detalle.map((parrafo) => (
+                      <p
+                        key={parrafo}
+                        className="mb-[13px] max-w-[720px] text-[15.5px] leading-[1.65] text-ink-soft last:mb-0"
+                      >
+                        {parrafo}
+                      </p>
+                    ))}
+                  </div>
                 </article>
               );
             })}

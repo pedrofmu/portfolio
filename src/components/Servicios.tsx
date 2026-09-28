@@ -4,7 +4,7 @@ import { Section, SectionHeading, containerClass } from "./ui";
 const services = [
   {
     number: "01",
-    title: "Programas internos",
+    title: "Programas internos a medida",
     outcome: "Menos errores, menos horas perdidas",
     body: (
       <>
@@ -16,13 +16,13 @@ const services = [
   },
   {
     number: "02",
-    title: "Herramientas con IA",
+    title: "Herramientas con inteligencia artificial",
     outcome: "Más productividad sin ampliar plantilla",
     body: "Chatbots de atención al cliente, análisis de datos y asistentes inteligentes que responden, ordenan y preparan el trabajo mientras tu equipo se centra en lo importante.",
   },
   {
     number: "03",
-    title: "Automatizaciones",
+    title: "Automatizaciones e integraciones",
     outcome: "Tus herramientas, por fin conectadas",
     body: "Conecto lo que ya usas — CRM, facturación, email, pagos, APIs — para que los datos se muevan solos y el trabajo manual desaparezca del día a día.",
   },
@@ -34,7 +34,7 @@ export default function Servicios() {
       <Reveal className={containerClass}>
         <SectionHeading
           index="02 — Servicios"
-          title="Tres formas de quitarte trabajo de encima"
+          title="Software a medida, IA y automatizaciones para pymes"
           titleId="servicios-title"
         />
         <div className="grid grid-cols-3 gap-5 max-[960px]:grid-cols-2 max-[620px]:grid-cols-1">

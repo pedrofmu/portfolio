@@ -225,17 +225,18 @@ export default function Hero() {
             className="mb-[22px] flex items-center gap-3 text-[13px] font-bold tracking-[0.105em] text-brand uppercase max-[620px]:text-[12px]"
           >
             <span className="block h-px w-8 bg-brand" aria-hidden="true" />
-            Software a medida · Alcoy, Alicante
+            Desarrollador freelance · Alcoy · En remoto a toda España
           </motion.p>
 
-          <motion.h1
+          {/* Sin `fadeUp`: el h1 es el LCP, y con `opacity: 0` inicial no se
+              pintaba hasta hidratar (~2 s en móvil). Lo anima el subrayado. */}
+          <h1
             id="hero-title"
-            {...fadeUp(0.16)}
             className="m-0 max-w-[820px] font-display text-[clamp(3.25rem,5.45vw,5.45rem)] leading-[0.99] font-bold tracking-[-0.052em] text-[#171915] text-balance max-[620px]:text-[clamp(2.55rem,12vw,3.75rem)]"
           >
-            Digitaliza tu pyme y{" "}
+            Software a medida para que tu pyme{" "}
             <span className="relative inline-block text-brand">
-              recupera horas
+              recupere horas
               <svg
                 viewBox="0 0 420 15"
                 preserveAspectRatio="none"
@@ -255,7 +256,7 @@ export default function Hero() {
               </svg>
             </span>{" "}
             cada semana.
-          </motion.h1>
+          </h1>
 
           <motion.p
             {...fadeUp(0.26)}
@@ -285,11 +286,15 @@ export default function Hero() {
 
           <motion.div
             {...fadeUp(0.46)}
-            className="mt-[26px] flex flex-wrap items-center gap-x-3 gap-y-2 text-[13.5px] text-[#68716B] max-[620px]:hidden [@media(max-width:900px)_and_(max-height:500px)]:hidden"
+            className="mt-[26px] flex flex-wrap items-center gap-x-3 gap-y-2 text-[13.5px] text-[#68716B] max-[620px]:mt-5 max-[620px]:flex-col max-[620px]:items-start max-[620px]:gap-y-1 max-[620px]:text-[13px] [@media(max-width:900px)_and_(max-height:500px)]:hidden"
           >
             {trustItems.map((item, index) => (
               <span key={item} className="inline-flex items-center gap-3">
-                {index > 0 && <span className="text-brand" aria-hidden="true">·</span>}
+                {index > 0 && (
+                  <span className="text-brand max-[620px]:hidden" aria-hidden="true">
+                    ·
+                  </span>
+                )}
                 {item}
               </span>
             ))}

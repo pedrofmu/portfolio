@@ -36,9 +36,8 @@ export const metadata: Metadata = {
   authors: [{ name: SITE.legalName, url: SITE.url }],
   creator: SITE.legalName,
   publisher: SITE.legalName,
-  alternates: {
-    canonical: "/",
-  },
+  // `alternates.canonical` y `robots` viven en `page.tsx`: puestos aquí los
+  // heredaba también el 404, que acababa con `index, follow` y canonical a la home.
   openGraph: {
     type: "website",
     locale: "es_ES",
@@ -51,17 +50,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE.title,
     description: SITE.description,
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
   },
   category: "technology",
 };
