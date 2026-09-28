@@ -234,9 +234,9 @@ export default function Hero() {
             id="hero-title"
             className="m-0 max-w-[820px] font-display text-[clamp(3.25rem,5.45vw,5.45rem)] leading-[0.99] font-bold tracking-[-0.052em] text-[#171915] text-balance max-[620px]:text-[clamp(2.55rem,12vw,3.75rem)]"
           >
-            Software a medida para que tu pyme{" "}
+            Digitaliza tu pyme y{" "}
             <span className="relative inline-block text-brand">
-              recupere horas
+              recupera horas
               <svg
                 viewBox="0 0 420 15"
                 preserveAspectRatio="none"
