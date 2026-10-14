@@ -1,58 +1,68 @@
-import Reveal from "./Reveal";
-import { Section, SectionHeading, containerClass } from "./ui";
+import { containerClass } from "./ui";
 
 const steps = [
   {
-    step: "Paso 1",
-    title: "Llamada inicial gratuita",
-    body: "30 minutos para entender tu problema. Si no te puedo ayudar, te lo digo claro.",
+    title: "Me cuentas qué necesitas",
+    body: "Empezamos con una llamada gratuita de 30 minutos para entender cómo trabajáis y dónde está el problema. Si no te puedo ayudar, te lo digo.",
   },
   {
-    step: "Paso 2",
-    title: "Propuesta clara",
-    body: "Qué se hace, en cuánto tiempo y por cuánto. Presupuesto cerrado: sabes el precio antes de empezar, sin sorpresas.",
+    title: "Acordamos alcance y precio",
+    body: "Te paso una propuesta con lo que voy a hacer, los plazos y un presupuesto cerrado. Lo dejamos acordado antes de empezar a programar.",
   },
   {
-    step: "Paso 3",
-    title: "Desarrollo con avances",
-    body: "Vas viendo el progreso en versiones que puedes probar. Nada de desaparecer tres meses.",
+    title: "Pruebas los avances",
+    body: "Durante el desarrollo te enseño versiones que puedes usar. Las revisamos juntos para comprobar que la herramienta encaja con vuestro trabajo.",
   },
   {
-    step: "Paso 4",
-    title: "Entrega y soporte",
-    body: "Te entrego la herramienta funcionando, con formación para tu equipo y soporte después.",
+    title: "Lo ponemos en marcha",
+    body: "Te entrego la herramienta funcionando y enseño a tu equipo a usarla. Después de la entrega, sigo disponible para daros soporte.",
   },
 ];
 
 export default function Proceso() {
   return (
-    <Section id="proceso" white labelledBy="proceso-title">
-      <Reveal className={containerClass}>
-        <SectionHeading
-          index="06 — Cómo trabajo"
-          title="Sencillo de principio a fin"
-          titleId="proceso-title"
-          copy="Trabajar con un freelance no debería dar vértigo. Por eso el proceso es corto, claro y sin letra pequeña."
-        />
-        <ol className="m-0 grid list-none grid-cols-4 gap-[18px] p-0 max-[960px]:grid-cols-2 max-[620px]:grid-cols-1">
+    <section
+      id="proceso"
+      aria-labelledby="proceso-title"
+      className="bg-white pt-[100px] pb-[112px] text-ink max-[820px]:pt-[76px] max-[820px]:pb-[88px] max-[620px]:py-14"
+    >
+      <div
+        className={`${containerClass} grid grid-cols-[1fr_1.15fr] items-start gap-x-20 gap-y-12 max-[820px]:grid-cols-1 max-[620px]:gap-y-10`}
+      >
+        <div>
+          <h2
+            id="proceso-title"
+            className="mb-7 font-display text-[clamp(38px,5vw,56px)] leading-[1.05] font-bold tracking-[-0.035em] text-balance"
+          >
+            Cómo trabajo
+          </h2>
+          <p className="max-w-[26ch] text-[clamp(22px,2.3vw,28px)] leading-[1.35] font-medium tracking-[-0.015em] text-pretty">
+            Hablas directamente conmigo, desde la primera llamada hasta la entrega.
+          </p>
+          <a
+            href="#contacto"
+            className="mt-6 inline-flex min-h-11 items-center text-[17px] font-semibold text-green underline decoration-green/40 decoration-2 underline-offset-[6px] transition-colors duration-200 hover:text-green-dark hover:decoration-green-dark active:translate-y-px"
+          >
+            Cuéntame tu caso
+          </a>
+        </div>
+
+        <ol
+          role="list"
+          className="m-0 flex list-none flex-col gap-10 p-0 max-[620px]:gap-8"
+        >
           {steps.map((item) => (
-            <li
-              key={item.step}
-              className="group min-h-[245px] rounded-md border border-line bg-paper px-[23px] py-[25px] transition duration-200 hover:border-[rgba(30,107,75,0.7)] hover:shadow-soft max-[960px]:min-h-[210px] max-[620px]:min-h-0"
-            >
-              <span className="mb-[15px] inline-block font-display text-[14px] font-bold text-[rgba(30,107,75,0.5)] transition-colors duration-200 group-hover:text-green">
-                {item.step}
-              </span>
-              <h3 className="mb-3 text-[19px] leading-[1.28] font-semibold">
+            <li key={item.title}>
+              <h3 className="mb-3 font-display text-[24px] leading-[1.2] font-semibold tracking-[-0.02em] text-balance">
                 {item.title}
               </h3>
-              <p className="mb-0 text-[15px] leading-[1.62] text-ink-soft">
+              <p className="max-w-[54ch] text-[17px] leading-[1.65] text-pretty">
                 {item.body}
               </p>
             </li>
           ))}
         </ol>
-      </Reveal>
-    </Section>
+      </div>
+    </section>
   );
 }

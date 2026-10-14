@@ -1,74 +1,61 @@
-import Reveal from "./Reveal";
-import { Section, SectionHeading, containerClass } from "./ui";
+import { Section, containerClass } from "./ui";
 
 const services = [
   {
-    number: "01",
-    title: "Programas internos a medida",
-    outcome: "Menos errores, menos horas perdidas",
-    body: (
-      <>
-        Apps a medida para inventario, tareas y proyectos. Sustituyen los Excels y
-        procesos manuales por una herramienta pensada para cómo trabaja <em>tu</em>{" "}
-        empresa.
-      </>
-    ),
+    title: "Programas a medida",
+    lead: "Una herramienta que encaje con tu forma de trabajar.",
+    body: "Desarrollo aplicaciones internas para gestionar inventario, tareas y proyectos. Los datos que hoy tienes repartidos en Excels pasan a un sitio donde todo el equipo puede trabajar.",
   },
   {
-    number: "02",
-    title: "Herramientas con inteligencia artificial",
-    outcome: "Más productividad sin ampliar plantilla",
-    body: "Chatbots de atención al cliente, análisis de datos y asistentes inteligentes que responden, ordenan y preparan el trabajo mientras tu equipo se centra en lo importante.",
+    title: "Inteligencia artificial",
+    lead: "Ayuda con las consultas, los datos y el trabajo repetitivo.",
+    body: "Creo chatbots para atender a tus clientes y asistentes que analizan datos, ordenan información y preparan trabajo para tu equipo. Partimos de una tarea concreta que quieras resolver.",
   },
   {
-    number: "03",
-    title: "Automatizaciones e integraciones",
-    outcome: "Tus herramientas, por fin conectadas",
-    body: "Conecto lo que ya usas — CRM, facturación, email, pagos, APIs — para que los datos se muevan solos y el trabajo manual desaparezca del día a día.",
+    title: "Automatizaciones",
+    lead: "Deja de copiar lo mismo de una herramienta a otra.",
+    body: "Conecto tu CRM, la facturación, el email y los pagos mediante integraciones y APIs. Automatizo el paso de datos entre ellos para ahorrarte tareas manuales y errores de copiado.",
   },
 ];
 
 export default function Servicios() {
   return (
     <Section id="servicios" labelledBy="servicios-title">
-      <Reveal className={containerClass}>
-        <SectionHeading
-          index="02 — Servicios"
-          title="Software a medida, IA y automatizaciones para pymes"
-          titleId="servicios-title"
-        />
-        <div className="grid grid-cols-3 gap-5 max-[960px]:grid-cols-2 max-[620px]:grid-cols-1">
-          {services.map((service, i) => {
-            const isLast = i === services.length - 1;
-            return (
-              <article
-                key={service.number}
-                className={`group flex min-h-[360px] flex-col rounded-md border border-line bg-white p-7 transition duration-200 hover:border-[rgba(30,107,75,0.7)] hover:shadow-soft max-[620px]:min-h-0 ${
-                  isLast
-                    ? "max-[960px]:col-span-2 max-[960px]:min-h-0 max-[620px]:col-span-1"
-                    : ""
-                }`}
-              >
-                <p
-                  aria-hidden="true"
-                  className="mb-4 font-display text-[44px] leading-none font-bold tracking-[-0.02em] text-[rgba(30,107,75,0.3)] transition-colors duration-200 group-hover:text-green"
-                >
-                  {service.number}
-                </p>
-                <h3 className="mb-[10px] text-[22px] leading-[1.25] font-semibold tracking-[-0.015em]">
+      <div className={containerClass}>
+        <div className="mb-12 grid grid-cols-[1fr_1.15fr] items-start gap-x-20 gap-y-5 max-[820px]:grid-cols-1 max-[620px]:mb-8">
+          <h2
+            id="servicios-title"
+            className="font-display text-[clamp(38px,5vw,56px)] leading-[1.05] font-bold tracking-[-0.035em]"
+          >
+            Servicios
+          </h2>
+          <p className="max-w-[48ch] text-[18px] leading-[1.6] text-pretty">
+            Software a medida, inteligencia artificial y automatizaciones para
+            pymes. Cuéntame qué le quita tiempo a tu equipo y vemos cómo resolverlo.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3 max-[620px]:gap-2">
+          {services.map((service) => (
+            <article
+              key={service.title}
+              className="-mx-8 px-8 py-10 even:bg-green-wash max-[820px]:-mx-6 max-[820px]:px-6 max-[620px]:-mx-5 max-[620px]:px-5 max-[620px]:py-8"
+            >
+              <div className="grid grid-cols-[1fr_1.15fr] items-baseline gap-x-20 gap-y-5 max-[820px]:grid-cols-1 max-[620px]:gap-y-4">
+                <h3 className="max-w-[15ch] font-display text-[clamp(28px,3.2vw,36px)] leading-[1.12] font-semibold tracking-[-0.025em] text-balance">
                   {service.title}
                 </h3>
-                <p className="mb-[13px] leading-[1.45] font-semibold text-green">
-                  {service.outcome}
-                </p>
-                <p className="mb-0 text-[15.5px] leading-[1.65] text-ink-soft">
-                  {service.body}
-                </p>
-              </article>
-            );
-          })}
+                <div className="max-w-[54ch] text-[17px] leading-[1.65]">
+                  <p className="mb-3 font-semibold text-green-dark text-pretty">
+                    {service.lead}
+                  </p>
+                  <p className="text-pretty">{service.body}</p>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
-      </Reveal>
+      </div>
     </Section>
   );
 }
