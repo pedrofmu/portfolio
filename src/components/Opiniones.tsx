@@ -48,7 +48,6 @@ export default function Opiniones() {
     <Section id="opiniones" labelledBy="opiniones-title">
       <Reveal className={containerClass}>
         <SectionHeading
-          index="04 — Opiniones"
           title="Lo que dicen quienes ya trabajan conmigo"
           titleId="opiniones-title"
         />

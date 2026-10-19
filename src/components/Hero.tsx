@@ -262,7 +262,7 @@ export default function Hero() {
             {...fadeUp(0.26)}
             className="mt-7 max-w-[700px] text-[clamp(1.05rem,1.5vw,1.27rem)] leading-[1.58] text-[#4F5852] text-balance max-[620px]:mt-6"
           >
-            Desarrollo sistemas internos, automatizaciones e integraciones con IA para que tu
+            Desarrollo sistemas internos y herramientas con IA para que tu
             equipo utilice el tiempo en lo que realmente importa.
           </motion.p>
 

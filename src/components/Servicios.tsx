@@ -11,11 +11,6 @@ const services = [
     lead: "Ayuda con las consultas, los datos y el trabajo repetitivo.",
     body: "Creo chatbots para atender a tus clientes y asistentes que analizan datos, ordenan información y preparan trabajo para tu equipo. Partimos de una tarea concreta que quieras resolver.",
   },
-  {
-    title: "Automatizaciones",
-    lead: "Deja de copiar lo mismo de una herramienta a otra.",
-    body: "Conecto tu CRM, la facturación, el email y los pagos mediante integraciones y APIs. Automatizo el paso de datos entre ellos para ahorrarte tareas manuales y errores de copiado.",
-  },
 ];
 
 export default function Servicios() {
@@ -30,8 +25,7 @@ export default function Servicios() {
             Servicios
           </h2>
           <p className="max-w-[48ch] text-[18px] leading-[1.6] text-pretty">
-            Software a medida, inteligencia artificial y automatizaciones para
-            pymes. Cuéntame qué le quita tiempo a tu equipo y vemos cómo resolverlo.
+            Software a medida e inteligencia artificial para pymes. Cuéntame qué le quita tiempo a tu equipo y vemos cómo resolverlo.
           </p>
         </div>
 

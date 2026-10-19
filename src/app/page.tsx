@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import TopBar from "../components/TopBar";
 import Hero from "../components/Hero";
-import Problema from "../components/Problema";
 import Servicios from "../components/Servicios";
 import Casos from "../components/Casos";
 import Opiniones from "../components/Opiniones";
@@ -35,7 +34,6 @@ export default function Home() {
     <>
       <TopBar />
       <Hero />
-      <Problema />
       <Servicios />
       <Casos />
       <Opiniones />

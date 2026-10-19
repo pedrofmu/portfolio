@@ -52,20 +52,16 @@ export function ExternalArrow({ className = "" }: { className?: string }) {
 }
 
 type SectionHeadingProps = {
-  index: string;
   title: string;
   titleId?: string;
   /** Renders the optional supporting paragraph (matches `.section-heading-copy`). */
   copy?: ReactNode;
 };
 
-/** Matches the original `.section-heading` / `.section-index` / heading `h2`. */
-export function SectionHeading({ index, title, titleId, copy }: SectionHeadingProps) {
+/** Matches the original `.section-heading` / heading `h2`. */
+export function SectionHeading({ title, titleId, copy }: SectionHeadingProps) {
   return (
     <div className="mb-12 max-[620px]:mb-8">
-      <p className="mb-[13px] text-[13px] font-semibold tracking-[0.1em] text-muted uppercase">
-        {index}
-      </p>
       <h2
         id={titleId}
         className="mb-0 font-display text-[clamp(30px,4vw,42px)] leading-[1.12] font-bold tracking-[-0.025em] text-balance max-[620px]:text-[30px]"

@@ -56,7 +56,6 @@ export default function DondeMeHasVisto() {
     <Section id="donde-me-has-visto" white labelledBy="donde-me-has-visto-title">
       <Reveal className={containerClass}>
         <SectionHeading
-          index="05 — Dónde me has visto"
           title="Charlas, artículos y otras apariciones"
           titleId="donde-me-has-visto-title"
         />

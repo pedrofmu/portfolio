@@ -17,9 +17,9 @@ export const SITE = {
    * contenido y el JSON-LD. 60 caracteres, así que entra entero en el SERP.
    */
   title: "Desarrollo de software a medida para pymes · Pedro Fernández",
-  /** 153 caracteres: por debajo del corte del SERP, con la llamada gratis dentro. */
+  /** 144 caracteres: por debajo del corte del SERP, con la llamada gratis dentro. */
   description:
-    "Desarrollador de software freelance para pymes de toda España, desde Alcoy (Alicante). Programas internos, automatizaciones e IA. Primera llamada gratis.",
+    "Desarrollador de software freelance para pymes de toda España, desde Alcoy (Alicante). Programas internos a medida e IA. Primera llamada gratis.",
 
   /** Partes del nombre y variantes: las consume el nodo Person del JSON-LD. */
   givenName: "Pedro",

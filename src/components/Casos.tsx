@@ -122,7 +122,6 @@ export default function Casos() {
     <Section id="casos" white labelledBy="casos-title">
       <Reveal className={containerClass}>
         <SectionHeading
-          index="03 — Casos de éxito"
           title="Casos reales de digitalización de pymes"
           titleId="casos-title"
         />

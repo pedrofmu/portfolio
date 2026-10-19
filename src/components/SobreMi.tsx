@@ -21,9 +21,6 @@ export default function SobreMi() {
         </div>
 
         <div>
-          <p className="mb-[13px] text-[13px] font-semibold tracking-[0.1em] text-muted uppercase">
-            07 — Quién soy
-          </p>
           <h2
             id="sobre-mi-title"
             className="mb-[21px] font-display text-[clamp(30px,4vw,42px)] leading-[1.12] font-bold tracking-[-0.025em] text-balance max-[620px]:text-[30px]"

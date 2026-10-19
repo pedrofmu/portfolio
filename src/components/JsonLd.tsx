@@ -38,11 +38,6 @@ const services = [
     description:
       "Chatbots de atención al cliente, análisis de datos y asistentes que responden y preparan el trabajo del equipo.",
   },
-  {
-    name: "Automatizaciones e integraciones",
-    description:
-      "Conexión de CRM, facturación, email, pagos y APIs para que los datos se muevan solos y desaparezca el trabajo manual.",
-  },
 ];
 
 const graph = {
@@ -80,8 +75,6 @@ const graph = {
       knowsAbout: [
         "Digitalización de pymes",
         "Software de gestión a medida",
-        "Automatización de procesos",
-        "Integración de sistemas",
         "Inteligencia artificial aplicada a negocio",
         "Desarrollo web",
       ],
@@ -115,7 +108,7 @@ const graph = {
       image: `${SITE.url}/assets/pedro-fernandez.webp`,
       jobTitle: SITE.jobTitle,
       description:
-        "Desarrollador de software freelance en Alcoy (Alicante). Ayuda a pymes de toda España a digitalizar sus operaciones con programas internos, automatizaciones e IA.",
+        "Desarrollador de software freelance en Alcoy (Alicante). Ayuda a pymes de toda España a digitalizar sus operaciones con programas internos e IA.",
       knowsLanguage: SITE.languages,
       // Persona + profesión + Alcoy en un solo nodo: justo la intersección de
       // las dos búsquedas que interesan.
