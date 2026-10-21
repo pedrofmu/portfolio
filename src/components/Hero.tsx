@@ -73,8 +73,6 @@ export default function Hero() {
   // parallax a un `ViewTimeline` nativo: corre en el compositor y no en JS.
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const [scrolled, setScrolled] = useState(false);
-  /** WCAG 2.2.2: todo lo que se mueve solo (paisaje y tira de casos) se puede parar. */
-  const [motionPaused, setMotionPaused] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const next = y > 70;
@@ -86,7 +84,6 @@ export default function Hero() {
   const { scrollerRef, onClickCapture: onMarqueeClick } = useMarquee<HTMLDivElement>(
     "(max-width: 900px)",
     MARQUEE_COPIES,
-    motionPaused,
   );
 
   // Si el hash ya apunta a ese caso el navegador no emite `hashchange`; lo
@@ -103,7 +100,7 @@ export default function Hero() {
       aria-labelledby="hero-title"
       className="relative flex min-h-[100svh] flex-col overflow-hidden bg-cream"
     >
-      <InkLandscape progress={scrollYProgress} paused={scrolled || motionPaused} />
+      <InkLandscape progress={scrollYProgress} paused={scrolled} />
 
       <header
         style={fadeUp(0)}
@@ -272,25 +269,6 @@ export default function Hero() {
           />
         </svg>
       </div>
-
-      {/* Con `prefers-reduced-motion` no hay nada que pausar. */}
-      <button
-        type="button"
-        onClick={() => setMotionPaused((isPaused) => !isPaused)}
-        className="absolute right-[clamp(12px,4vw,52px)] bottom-3 z-[2] inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[10px] border-0 bg-transparent px-2 text-[13px] font-semibold text-[#4F5852] transition-colors duration-200 hover:text-brand motion-reduce:hidden max-[900px]:bottom-1"
-      >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
-          {motionPaused ? (
-            <path d="M3.5 2.2v9.6L11.6 7z" />
-          ) : (
-            <>
-              <rect x="3" y="2.5" width="2.6" height="9" rx="0.8" />
-              <rect x="8.4" y="2.5" width="2.6" height="9" rx="0.8" />
-            </>
-          )}
-        </svg>
-        {motionPaused ? "Reanudar animación" : "Pausar animación"}
-      </button>
     </section>
   );
 }

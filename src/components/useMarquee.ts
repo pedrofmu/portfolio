@@ -17,18 +17,11 @@ const DRAG_THRESHOLD = 5;
  * deslizar con el dedo o arrastrar con el ratón, y se para mientras el
  * usuario interactúa, con el foco dentro o con el puntero encima.
  *
- * Solo se activa por debajo de `query`, y nunca con `prefers-reduced-motion`
- * ni mientras `paused` (el botón de pausa del hero) esté activo.
+ * Solo se activa por debajo de `query`, y nunca con `prefers-reduced-motion`.
  */
-export function useMarquee<T extends HTMLElement>(query: string, copies: number, paused = false) {
+export function useMarquee<T extends HTMLElement>(query: string, copies: number) {
   const scrollerRef = useRef<T>(null);
   const dragged = useRef(false);
-  const pausedRef = useRef(paused);
-
-  useEffect(() => {
-    pausedRef.current = paused;
-  }, [paused]);
-
   useEffect(() => {
     const scroller = scrollerRef.current;
     const track = scroller?.firstElementChild as HTMLElement | null;
@@ -71,7 +64,7 @@ export function useMarquee<T extends HTMLElement>(query: string, copies: number,
       frame = requestAnimationFrame(tick);
       const dt = last ? Math.min(now - last, 64) : 0;
       last = now;
-      if (holds > 0 || now < resumeAt || !visible || pausedRef.current) return;
+      if (holds > 0 || now < resumeAt || !visible) return;
 
       const width = setWidth();
       if (!width) return;
