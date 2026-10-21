@@ -68,7 +68,7 @@ export default function DondeMeHasVisto() {
             aria-label="Dónde me has visto"
             tabIndex={0}
             {...dragProps}
-            className={`flex gap-6 overflow-x-auto overscroll-x-contain [scrollbar-width:none] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#55a77e] [&::-webkit-scrollbar]:hidden ${
+            className={`flex gap-6 overflow-x-auto overscroll-x-contain [scrollbar-width:none] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-brand [&::-webkit-scrollbar]:hidden ${
               canScroll ? "" : "justify-center"
             } ${
               isDragging
@@ -96,7 +96,7 @@ export default function DondeMeHasVisto() {
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
                 <div className="relative p-7 max-[620px]:p-5">
-                  <p className="mb-[10px] text-[12px] font-semibold tracking-[0.1em] text-green-light uppercase">
+                  <p className="mb-[10px] text-[13.5px] font-semibold text-[#CFE5DE]">
                     {aparicion.category}
                   </p>
                   <h3 className="mb-[10px] font-display text-[clamp(20px,2.4vw,25px)] leading-[1.25] font-semibold tracking-[-0.015em] text-balance text-white">
@@ -122,7 +122,7 @@ export default function DondeMeHasVisto() {
               aria-label="Aparición anterior"
               disabled={atStart}
               onClick={prev}
-              className="grid h-11 w-11 place-items-center rounded-full border border-line bg-white text-ink transition-colors duration-200 hover:not-disabled:border-[rgba(30,107,75,0.7)] hover:not-disabled:text-green disabled:cursor-default disabled:opacity-[0.35]"
+              className="grid h-11 w-11 place-items-center rounded-[10px] border border-[#CBC4B4] bg-cream/80 text-ink transition-colors duration-200 hover:not-disabled:border-[rgba(30,107,75,0.7)] hover:not-disabled:text-green disabled:cursor-default disabled:opacity-[0.35]"
             >
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path
@@ -142,7 +142,7 @@ export default function DondeMeHasVisto() {
                   aria-label={`Ir a la aparición ${i + 1}: ${aparicion.title}`}
                   aria-current={i === index ? "true" : undefined}
                   onClick={() => goTo(i)}
-                  className="h-11 w-11 cursor-pointer border-0 bg-transparent p-0 after:mx-auto after:block after:h-[7px] after:w-[7px] after:rounded-full after:bg-[#cbc7bb] after:transition-[width,background-color] after:duration-200 hover:after:bg-muted aria-[current=true]:after:w-[18px] aria-[current=true]:after:bg-green"
+                  className="h-11 w-11 cursor-pointer border-0 bg-transparent p-0 after:mx-auto after:block after:h-[7px] after:w-[7px] after:rounded-full after:bg-[#958f81] after:transition-[width,background-color] after:duration-200 hover:after:bg-muted aria-[current=true]:after:w-[18px] aria-[current=true]:after:bg-green"
                 />
               ))}
             </div>
@@ -151,7 +151,7 @@ export default function DondeMeHasVisto() {
               aria-label="Aparición siguiente"
               disabled={atEnd}
               onClick={next}
-              className="grid h-11 w-11 place-items-center rounded-full border border-line bg-white text-ink transition-colors duration-200 hover:not-disabled:border-[rgba(30,107,75,0.7)] hover:not-disabled:text-green disabled:cursor-default disabled:opacity-[0.35]"
+              className="grid h-11 w-11 place-items-center rounded-[10px] border border-[#CBC4B4] bg-cream/80 text-ink transition-colors duration-200 hover:not-disabled:border-[rgba(30,107,75,0.7)] hover:not-disabled:text-green disabled:cursor-default disabled:opacity-[0.35]"
             >
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path

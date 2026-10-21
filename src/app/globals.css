@@ -4,13 +4,13 @@
   /* Portfolio section palette (from the original styles.css :root) */
   --color-ink: #16150f;
   --color-ink-soft: #5c5850;
-  --color-muted: #7b766b;
-  --color-paper: #fbfaf8;
+  --color-muted: #726d62;
+  --color-paper: #fbf8f2;
   --color-line: #e4e1d8;
-  --color-green: #1e6b4b;
-  --color-green-dark: #14523a;
-  --color-green-light: #dceae1;
-  --color-green-wash: #edf3ee;
+  --color-green: #0f7263;
+  --color-green-dark: #0a5548;
+  --color-green-light: #d4e7e0;
+  --color-green-wash: #eef4f0;
 
   /* Hero / CTA / chrome palette (from the original inline styles) */
   --color-brand: #0f7263;
@@ -23,45 +23,175 @@
   --font-body: var(--font-instrument), Arial, sans-serif;
 
   /* Radii */
-  --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 20px;
+  /* Esquinas de papel: casi rectas, como las fichas del hero */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
 
   /* Shadows */
-  --shadow-soft: 0 18px 50px rgba(31, 42, 35, 0.08);
+  /* Papel que se levanta: filo fino y sombra larga y difusa */
+  --shadow-soft: 0 1px 0 rgba(36, 49, 44, 0.05), 0 26px 40px -26px rgba(31, 42, 38, 0.45);
 
-  /* Blob drift + hero motion keyframes */
-  --animate-drift-a: driftA 16s ease-in-out infinite alternate;
-  --animate-drift-b: driftB 21s ease-in-out infinite alternate;
-  --animate-drift-c: driftC 18s ease-in-out infinite alternate;
+  /* Hero motion keyframes */
   --animate-bobble: bobble 2.2s ease-in-out infinite;
-  --animate-card-in: cardIn 0.65s cubic-bezier(0.22, 0.61, 0.21, 1) both;
+  --animate-fade-up: fadeUp 0.5s cubic-bezier(0.22, 0.61, 0.21, 1) both;
+  --animate-card-in: cardIn 0.5s cubic-bezier(0.22, 0.61, 0.21, 1) both;
+  /* Subrayado del titular: se traza con el pincel tras el texto. */
+  --animate-brush: brush 0.6s cubic-bezier(0.22, 0.61, 0.21, 1) 0.3s both;
 }
 
-@keyframes driftA {
+/* Hero sumi-e: cada cresta se "pinta" de izquierda a derecha con un borde
+   difuminado, como una pincelada que avanza. La ventana (`.ink-sweep`, con
+   una máscara fija) avanza mientras su contenido (`.ink-sweep-content`)
+   retrocede lo mismo y se queda quieto en pantalla. Solo se anima
+   `transform` y `opacity`: el compositor lo mueve sin volver a pintar los
+   filtros de tinta, que son lo más caro de la página. */
+.ink-sweep {
+  width: 140%;
+  -webkit-mask-image: linear-gradient(90deg, #000 71.5%, transparent);
+  mask-image: linear-gradient(90deg, #000 71.5%, transparent);
+  animation: inkSweep 1.5s cubic-bezier(0.4, 0.15, 0.2, 1) both;
+}
+.ink-sweep-content {
+  width: calc(100% / 1.4);
+  animation: inkSweepContent 1.5s cubic-bezier(0.4, 0.15, 0.2, 1) both;
+}
+@keyframes inkSweep {
   from {
-    transform: translate(0, 0) scale(1);
+    transform: translateX(-100%);
+    opacity: 0.2;
   }
   to {
-    transform: translate(8vw, 6vh) scale(1.18);
+    transform: none;
+    opacity: 1;
   }
 }
-@keyframes driftB {
+@keyframes inkSweepContent {
   from {
-    transform: translate(0, 0) scale(1.1);
+    transform: translateX(140%);
   }
   to {
-    transform: translate(-7vw, 4vh) scale(0.95);
+    transform: none;
   }
 }
-@keyframes driftC {
+
+/* Grano del papel: una tesela de ruido que el navegador rasteriza una sola
+   vez, en lugar de un filtro a pantalla completa. */
+.paper-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.38 0 0 0 0 0.33 0 0 0 0 0.24 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+.mist {
+  animation: mistDrift 60s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes mistDrift {
   from {
-    transform: translate(0, 0) scale(1);
+    transform: translateX(-8vw) scaleX(1);
   }
   to {
-    transform: translate(5vw, -6vh) scale(1.22);
+    transform: translateX(10vw) scaleX(1.15);
   }
 }
+
+/* La bandada surge de la nada junto al borde izquierdo, cruza en ~22 s y
+   desaparece hasta la siguiente pasada. */
+.flock {
+  animation: flock 46s linear 0.6s infinite both;
+  will-change: transform, opacity;
+}
+@keyframes flock {
+  0% {
+    opacity: 0;
+    transform: translate(1vw, 6px) rotate(-2deg);
+  }
+  7% {
+    opacity: 1;
+  }
+  12% {
+    transform: translate(22vw, -14px) rotate(1deg);
+  }
+  24% {
+    transform: translate(48vw, 4px) rotate(-1deg);
+  }
+  36% {
+    transform: translate(74vw, -10px) rotate(2deg);
+  }
+  48%,
+  100% {
+    opacity: 1;
+    transform: translate(100vw, -22px) rotate(-1deg);
+  }
+}
+
+/* Aleteo: cada ala gira sobre el cuerpo, de alas en V a batida hacia abajo. */
+.wing-left,
+.wing-right {
+  animation: wingLeft 0.8s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+.wing-left {
+  transform-origin: 100% 60%;
+}
+.wing-right {
+  transform-origin: 0% 60%;
+  animation-name: wingRight;
+}
+@keyframes wingLeft {
+  from {
+    transform: rotate(38deg) scaleX(0.82);
+  }
+  to {
+    transform: rotate(-30deg) scaleX(0.92);
+  }
+}
+@keyframes wingRight {
+  from {
+    transform: rotate(-38deg) scaleX(0.82);
+  }
+  to {
+    transform: rotate(30deg) scaleX(0.92);
+  }
+}
+
+/* Vaivén propio de cada pájaro dentro de la bandada. */
+.bird-bob {
+  animation: birdBob 3.4s ease-in-out infinite alternate;
+}
+@keyframes birdBob {
+  from {
+    transform: translate(0, -2px);
+  }
+  to {
+    transform: translate(3px, 3px);
+  }
+}
+
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes brush {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  to {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
 @keyframes cardIn {
   from {
     opacity: 0;
@@ -83,13 +213,11 @@
 }
 
 @layer base {
+  /* `scroll-padding-top` también aparta de la barra fija los elementos que
+     reciben el foco con el teclado, no solo las anclas. */
   html {
     scroll-behavior: smooth;
-  }
-
-  /* Keep anchored sections clear of the fixed top bar */
-  :target {
-    scroll-margin-top: 72px;
+    scroll-padding-top: 72px;
   }
 
   body {
@@ -112,10 +240,14 @@
     max-width: 100%;
   }
 
-  /* Focus styles carried over from the original portfolio sections */
+  /* Verde de marca: ≥ 3:1 sobre todos los fondos claros (crema, papel, pie).
+     Sobre fondos verdes se cambia a crema con `.focus-light`. */
   :where(a, button):focus-visible {
-    outline: 3px solid #55a77e;
+    outline: 3px solid var(--color-brand);
     outline-offset: 4px;
+  }
+  .focus-light :where(a, button):focus-visible {
+    outline-color: var(--color-cream);
   }
 }
 

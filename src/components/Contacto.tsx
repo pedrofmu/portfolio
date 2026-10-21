@@ -1,22 +1,70 @@
 import Reveal from "./Reveal";
+import { ridgePoints, toPath, type RidgeShape } from "../lib/inkRidge";
+
+// Remate de la página: dos crestas bajas en tinta verde oscura, con el mismo
+// trazo que el paisaje del hero, para cerrar el recorrido como empezó.
+const CANVAS = { width: 1600, height: 160 };
+const RIDGES: (RidgeShape & { opacity: number })[] = [
+  {
+    base: 120,
+    rough: 2.4,
+    seed: 71,
+    opacity: 0.16,
+    peaks: [
+      { x: 160, h: 46, w: 140 },
+      { x: 520, h: 70, w: 110 },
+      { x: 930, h: 54, w: 150 },
+      { x: 1260, h: 78, w: 105 },
+      { x: 1540, h: 40, w: 150 },
+    ],
+  },
+  {
+    base: 150,
+    rough: 2.8,
+    seed: 89,
+    opacity: 0.24,
+    peaks: [
+      { x: 40, h: 34, w: 170 },
+      { x: 380, h: 26, w: 190 },
+      { x: 740, h: 48, w: 110 },
+      { x: 1080, h: 30, w: 180 },
+      { x: 1420, h: 44, w: 130 },
+    ],
+  },
+];
+const SILHOUETTES = RIDGES.map((ridge) => ({
+  d: toPath(ridgePoints(ridge, CANVAS), true, CANVAS),
+  opacity: ridge.opacity,
+}));
 
 export default function Contacto() {
   return (
     <section
       id="contacto"
-      className="bg-[linear-gradient(145deg,#0F7263_0%,#0A5548_100%)] px-6 py-[clamp(64px,10vw,112px)] max-[620px]:px-5 max-[620px]:py-14"
+      aria-labelledby="contacto-title"
+      className="focus-light relative overflow-hidden bg-brand px-6 pt-[clamp(64px,10vw,112px)] pb-[clamp(96px,13vw,150px)] max-[620px]:px-5 max-[620px]:pt-14 max-[620px]:pb-24"
     >
-      <div className="mx-auto flex max-w-[760px] flex-col items-center gap-[18px] text-center">
+      <svg
+        viewBox={`0 0 ${CANVAS.width} ${CANVAS.height}`}
+        preserveAspectRatio="xMidYMax slice"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[clamp(72px,9vw,130px)] w-full"
+      >
+        {SILHOUETTES.map((ridge) => (
+          <path key={ridge.d} d={ridge.d} fill="#04231E" fillOpacity={ridge.opacity} />
+        ))}
+      </svg>
+      <div className="relative mx-auto flex max-w-[760px] flex-col items-center gap-[18px] text-center">
         <Reveal
           y={26}
           className="m-0 font-display text-[clamp(1.9rem,5.5vw,3rem)] leading-[1.1] font-extrabold tracking-[-0.01em] text-cream text-balance"
         >
-          <h2>Cuéntame tu caso</h2>
+          <h2 id="contacto-title">Cuéntame tu caso</h2>
         </Reveal>
         <Reveal
           y={26}
           delay={70}
-          className="m-0 max-w-[480px] text-[clamp(1rem,2.3vw,1.15rem)] leading-[1.6] text-[#CFE5DE] text-balance"
+          className="m-0 max-w-[480px] text-[clamp(1rem,2.3vw,1.15rem)] leading-[1.6] text-[#DCEDE7] text-balance"
         >
           <p>
             Valoración y presupuesto del proyecto gratuitos y sin compromiso. Te digo claro
@@ -30,7 +78,7 @@ export default function Contacto() {
         >
           <a
             href="mailto:hola@pedrofm.dev"
-            className="inline-flex items-center gap-[10px] rounded-full bg-cream px-[26px] py-[15px] text-[16px] font-bold text-brand-dark no-underline transition-transform duration-200 hover:-translate-y-0.5 hover:text-brand-dark max-[620px]:justify-center"
+            className="inline-flex items-center gap-[10px] rounded-[13px] bg-cream px-[26px] py-[15px] text-[16px] font-bold text-brand-dark no-underline transition-transform duration-200 hover:-translate-y-0.5 hover:text-brand-dark max-[620px]:justify-center"
           >
             Escríbeme: hola@pedrofm.dev
           </a>
@@ -38,13 +86,15 @@ export default function Contacto() {
             href="https://wa.me/34673314676"
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center gap-[10px] rounded-full border-[1.5px] border-[rgba(251,248,242,0.55)] bg-transparent px-[26px] py-[15px] text-[16px] font-bold text-cream no-underline transition duration-200 hover:-translate-y-0.5 hover:border-cream hover:text-cream max-[620px]:justify-center"
+            className="inline-flex items-center gap-[10px] rounded-[13px] border-[1.5px] border-[rgba(251,248,242,0.55)] bg-transparent px-[26px] py-[15px] text-[16px] font-bold text-cream no-underline transition duration-200 hover:-translate-y-0.5 hover:border-cream hover:text-cream max-[620px]:justify-center"
           >
             WhatsApp
+            <span className="sr-only"> (se abre en una pestaña nueva)</span>
           </a>
         </Reveal>
-        <Reveal y={26} delay={210} className="mt-[6px] max-w-[300px] text-[13.5px] text-[#A9CCC2]">
-          Respuesta en menos de 24 h · Español · Valencià · English · Français
+        <Reveal y={26} delay={210} className="mt-[6px] max-w-[300px] text-[13.5px] text-[#D3E8E1]">
+          Respuesta en menos de 24 h · Español · <span lang="ca">Valencià</span> ·{" "}
+          <span lang="en">English</span> · <span lang="fr">Français</span>
         </Reveal>
       </div>
     </section>

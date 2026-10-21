@@ -7,9 +7,9 @@ import Link from "next/link";
  */
 export default function NotFound() {
   return (
-    <main className="grid min-h-[100svh] place-items-center bg-[linear-gradient(180deg,#FDFBF6_0%,#F5EFE3_100%)] px-6 text-center">
+    <main id="contenido" tabIndex={-1} className="grid outline-none min-h-[100svh] place-items-center bg-cream px-6 text-center">
       <div className="max-w-[520px]">
-        <p className="mb-4 text-[13px] font-bold tracking-[0.105em] text-brand uppercase">
+        <p className="mb-4 text-[15px] font-semibold text-brand">
           Error 404
         </p>
         <h1 className="m-0 font-display text-[clamp(2.2rem,6vw,3.4rem)] leading-[1.05] font-bold tracking-[-0.04em] text-[#171915] text-balance">

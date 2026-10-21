@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import JsonLd from "../components/JsonLd";
+import MotionProvider from "../components/MotionProvider";
 import { SITE } from "../lib/site";
 
 const bricolage = Bricolage_Grotesque({
@@ -62,7 +63,13 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${bricolage.variable} ${instrument.variable}`}>
       <body>
-        {children}
+        <a
+          href="#contenido"
+          className="sr-only z-[100] rounded-[10px] bg-brand font-semibold text-cream no-underline focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:px-5 focus:py-3 hover:text-cream"
+        >
+          Saltar al contenido
+        </a>
+        <MotionProvider>{children}</MotionProvider>
         <JsonLd />
       </body>
     </html>

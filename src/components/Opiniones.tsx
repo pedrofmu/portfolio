@@ -52,7 +52,7 @@ export default function Opiniones() {
           titleId="opiniones-title"
         />
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5">
-          <figure className="group relative m-0 flex min-h-[270px] max-w-[720px] flex-col justify-between rounded-md border border-line bg-white p-[29px] transition duration-200 before:font-[Georgia,serif] before:text-[74px] before:leading-[0.65] before:text-green-light before:transition-colors before:duration-200 hover:border-[rgba(30,107,75,0.7)] hover:shadow-soft hover:before:text-green-dark before:content-['“']">
+          <figure className="group relative m-0 flex min-h-[270px] max-w-[720px] flex-col justify-between rounded-md border border-[#D6CFBF] bg-[#FFFDF8] p-[29px] shadow-[0_1px_0_rgba(36,49,44,0.05)] transition duration-200 before:font-[Georgia,serif] before:text-[74px] before:leading-[0.65] before:text-green-light before:transition-colors before:duration-200 hover:border-[rgba(30,107,75,0.7)] hover:shadow-soft hover:before:text-green-dark before:content-['“']">
             <blockquote
               ref={quoteRef}
               id="testimonial-quote-1"

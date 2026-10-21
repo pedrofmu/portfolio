@@ -18,7 +18,7 @@ export function Section({ id, white = false, labelledBy, children }: SectionProp
       id={id}
       aria-labelledby={labelledBy}
       className={`bg-paper py-[90px] text-ink max-[820px]:py-[76px] max-[620px]:py-14 ${
-        white ? "border-t border-line bg-white" : ""
+        white ? "border-t border-line bg-[#FFFDF8]" : ""
       }`}
     >
       {children}

@@ -134,7 +134,7 @@ export default function Casos() {
             aria-label="Casos de éxito"
             tabIndex={0}
             {...dragProps}
-            className={`flex items-start gap-6 overflow-x-auto overscroll-x-contain [scrollbar-width:none] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#55a77e] [&::-webkit-scrollbar]:hidden ${
+            className={`flex items-start gap-6 overflow-x-auto overscroll-x-contain [scrollbar-width:none] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-brand [&::-webkit-scrollbar]:hidden ${
               canScroll ? "" : "justify-center"
             } ${
               isDragging
@@ -162,7 +162,7 @@ export default function Casos() {
                     />
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
                     <div className="pointer-events-none relative z-10 p-8 max-[620px]:p-5">
-                      <p className="mb-[10px] text-[12px] font-semibold tracking-[0.1em] text-green-light uppercase">
+                      <p className="mb-[10px] text-[13.5px] font-semibold text-[#CFE5DE]">
                         {caso.tag}
                       </p>
                       <h3 className="mb-[10px] max-w-[720px] font-display text-[clamp(21px,2.6vw,28px)] leading-[1.25] font-semibold tracking-[-0.015em] text-balance text-white">
@@ -178,7 +178,7 @@ export default function Casos() {
                       target="_blank"
                       rel="noopener"
                       onClick={suppressClick}
-                      className="absolute inset-0 z-20 focus-visible:outline-3 focus-visible:-outline-offset-3 focus-visible:outline-[#55a77e]"
+                      className="absolute inset-0 z-20 focus-visible:outline-3 focus-visible:-outline-offset-3 focus-visible:outline-brand"
                     >
                       <span className="sr-only">
                         {caso.linkLabel} (se abre en una pestaña nueva)
@@ -256,7 +256,7 @@ export default function Casos() {
               aria-label="Caso anterior"
               disabled={atStart}
               onClick={prev}
-              className="grid h-11 w-11 place-items-center rounded-full border border-line bg-white text-ink transition-colors duration-200 hover:not-disabled:border-[rgba(30,107,75,0.7)] hover:not-disabled:text-green disabled:cursor-default disabled:opacity-[0.35]"
+              className="grid h-11 w-11 place-items-center rounded-[10px] border border-[#CBC4B4] bg-cream/80 text-ink transition-colors duration-200 hover:not-disabled:border-[rgba(30,107,75,0.7)] hover:not-disabled:text-green disabled:cursor-default disabled:opacity-[0.35]"
             >
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path
@@ -276,7 +276,7 @@ export default function Casos() {
                   aria-label={`Ir al caso ${i + 1}: ${caso.title}`}
                   aria-current={i === index ? "true" : undefined}
                   onClick={() => goTo(i)}
-                  className="h-11 w-11 cursor-pointer border-0 bg-transparent p-0 after:mx-auto after:block after:h-[7px] after:w-[7px] after:rounded-full after:bg-[#cbc7bb] after:transition-[width,background-color] after:duration-200 hover:after:bg-muted aria-[current=true]:after:w-[18px] aria-[current=true]:after:bg-green"
+                  className="h-11 w-11 cursor-pointer border-0 bg-transparent p-0 after:mx-auto after:block after:h-[7px] after:w-[7px] after:rounded-full after:bg-[#958f81] after:transition-[width,background-color] after:duration-200 hover:after:bg-muted aria-[current=true]:after:w-[18px] aria-[current=true]:after:bg-green"
                 />
               ))}
             </div>
@@ -285,7 +285,7 @@ export default function Casos() {
               aria-label="Caso siguiente"
               disabled={atEnd}
               onClick={next}
-              className="grid h-11 w-11 place-items-center rounded-full border border-line bg-white text-ink transition-colors duration-200 hover:not-disabled:border-[rgba(30,107,75,0.7)] hover:not-disabled:text-green disabled:cursor-default disabled:opacity-[0.35]"
+              className="grid h-11 w-11 place-items-center rounded-[10px] border border-[#CBC4B4] bg-cream/80 text-ink transition-colors duration-200 hover:not-disabled:border-[rgba(30,107,75,0.7)] hover:not-disabled:text-green disabled:cursor-default disabled:opacity-[0.35]"
             >
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path
@@ -309,7 +309,7 @@ export default function Casos() {
           </div>
           <a
             href="#opiniones"
-            className="inline-flex items-center gap-2 rounded-full bg-brand px-[26px] py-[14px] text-[16px] font-bold text-cream no-underline shadow-[0_10px_26px_rgba(15,114,99,0.24)] transition duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:text-cream"
+            className="inline-flex items-center gap-2 rounded-[13px] bg-brand px-[26px] py-[14px] text-[16px] font-bold text-cream no-underline shadow-[0_10px_26px_rgba(15,114,99,0.24)] transition duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:text-cream"
           >
             Ver opiniones 
           </a>

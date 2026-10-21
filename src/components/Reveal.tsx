@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, type HTMLMotionProps } from "motion/react";
+import { m, useReducedMotion, type HTMLMotionProps } from "motion/react";
 
 type RevealProps = HTMLMotionProps<"div"> & {
   /** Initial vertical offset in px (18 for section containers, 26 for hero-style reveals). */
@@ -19,12 +19,12 @@ export default function Reveal({
 
   if (reduce) {
     return (
-      <motion.div {...props}>{children}</motion.div>
+      <m.div {...props}>{children}</m.div>
     );
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1, margin: "0px 0px -7% 0px" }}
@@ -36,6 +36,6 @@ export default function Reveal({
       {...props}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

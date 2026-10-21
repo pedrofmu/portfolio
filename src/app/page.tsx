@@ -33,14 +33,16 @@ export default function Home() {
   return (
     <>
       <TopBar />
-      <Hero />
-      <Servicios />
-      <Casos />
-      <Opiniones />
-      <DondeMeHasVisto />
-      <Proceso />
-      <SobreMi />
-      <Contacto />
+      <main id="contenido" tabIndex={-1} className="outline-none">
+        <Hero />
+        <Servicios />
+        <Casos />
+        <Opiniones />
+        <DondeMeHasVisto />
+        <Proceso />
+        <SobreMi />
+        <Contacto />
+      </main>
       <Footer />
     </>
   );

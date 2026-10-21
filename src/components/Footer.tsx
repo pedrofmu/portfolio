@@ -13,9 +13,9 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex flex-col gap-2">
-            <div className="text-[13px] font-bold tracking-[0.1em] text-[#7A877F] uppercase">
+            <h2 className="m-0 text-[14px] font-semibold text-[#5C6B64]">
               Contacto
-            </div>
+            </h2>
             <a href="mailto:hola@pedrofm.dev" className="text-[14.5px] font-semibold no-underline">
               hola@pedrofm.dev
             </a>
@@ -29,6 +29,7 @@ export default function Footer() {
               className="text-[14.5px] font-semibold no-underline"
             >
               pedrofm.dev
+              <span className="sr-only"> (se abre en una pestaña nueva)</span>
             </a>
             <a
               href="https://www.linkedin.com/in/pedro-fern%C3%A1ndez-mu%C3%B1oz-4148a9287/"
@@ -37,16 +38,18 @@ export default function Footer() {
               className="text-[14.5px] font-semibold no-underline"
             >
               LinkedIn
+              <span className="sr-only"> (se abre en una pestaña nueva)</span>
             </a>
-            <div className="mt-1 text-[13.5px] text-[#7A877F]">
-              Español · Valencià · English · Français
+            <div className="mt-1 text-[13.5px] text-[#5F6E67]">
+              Español · <span lang="ca">Valencià</span> · <span lang="en">English</span> ·{" "}
+              <span lang="fr">Français</span>
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <div className="text-[13px] font-bold tracking-[0.1em] text-[#7A877F] uppercase">
+            <h2 className="m-0 text-[14px] font-semibold text-[#5C6B64]">
               Aviso legal y privacidad
-            </div>
-            <p className="m-0 text-[12.5px] leading-[1.65] text-[#6B7A72]">
+            </h2>
+            <p className="m-0 text-[12.5px] leading-[1.65] text-[#5F6E67]">
               Responsable: Pedro Fernández Muñoz (Alcoy, Alicante). Este sitio no utiliza
               cookies de seguimiento ni formularios que almacenen datos. Los datos personales
               que me facilites por email, teléfono o WhatsApp se utilizan únicamente para
@@ -61,10 +64,10 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div className="flex flex-wrap justify-between gap-[10px] border-t border-[#E2DAC9] pt-5 text-[13px] text-[#7A877F] max-[620px]:flex-col max-[620px]:items-start">
+        <div className="flex flex-wrap justify-between gap-[10px] border-t border-[#E2DAC9] pt-5 text-[13px] text-[#5F6E67] max-[620px]:flex-col max-[620px]:items-start">
           <div>© 2026 Pedro Fernández Muñoz · Alcoy, Alicante</div>
           <a href="#inicio" className="font-semibold no-underline">
-            Volver arriba ↑
+            Volver arriba <span aria-hidden="true">↑</span>
           </a>
         </div>
       </div>

@@ -1,31 +1,19 @@
 "use client";
 
+import { useRef, useState, type CSSProperties, type MouseEvent as ReactMouseEvent } from "react";
 import {
-  useEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type MouseEvent as ReactMouseEvent,
-} from "react";
-import {
-  motion,
-  useMotionValue,
+  m,
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
-  useSpring,
   useTransform,
 } from "motion/react";
 
 import { casoHref, type CasoId } from "./Casos";
+import InkLandscape from "./InkLandscape";
+import { useMarquee } from "./useMarquee";
 import { SECTIONS } from "./sections";
 import MobileNavigation from "./MobileNavigation";
-
-const trustItems = [
-  "Primera llamada gratuita",
-  "Presupuesto cerrado, sin sorpresas",
-  "Respuesta en 24 h",
-];
 
 const results = [
   {
@@ -48,20 +36,27 @@ const results = [
   },
 ] satisfies { title: string; project: string; caso: CasoId; rotation: number }[];
 
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.72, delay, ease: [0.22, 0.61, 0.21, 1] as const },
-});
+/** Copias de la tira de casos en móvil: la central es la "real", las otras
+ * permiten que el bucle infinito nunca se quede sin tarjetas por los lados. */
+const MARQUEE_COPIES = 3;
+const marqueeItems = Array.from({ length: MARQUEE_COPIES }, (_, copy) =>
+  results.map((result, index) => ({ ...result, copy, index })),
+).flat();
 
-function Check() {
+/** Retraso de `animate-fade-up`. La entrada va con CSS y no con Motion:
+ * arranca con el primer pintado, sin esperar a hidratar (en móvil, el texto
+ * se quedaba invisible ~2 s). */
+const fadeUp = (delay: number) => ({ animationDelay: `${delay}s` });
+
+/** Sello cuadrado tipo hanko, en el verde de la marca, con un visto a pincel. */
+function Seal() {
   return (
-    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#DFECE5] text-brand">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <span className="grid h-8 w-8 shrink-0 -rotate-3 place-items-center rounded-[5px] border-[1.5px] border-brand/70 bg-[#E3EEE7] text-brand">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
         <path
-          d="M3 8.5 6.5 12 13 4.5"
+          d="M2.6 8.6c1.3.5 2.4 1.6 3.5 3.3C7.6 8.4 10 5.6 13.6 3.4"
           stroke="currentColor"
-          strokeWidth="2.2"
+          strokeWidth="2.1"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -72,62 +67,27 @@ function Check() {
 
 export default function Hero() {
   const reduce = useReducedMotion();
-  const backgroundRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
+  // Con `target` y este `offset` (la vista de salida), Motion enlaza el
+  // parallax a un `ViewTimeline` nativo: corre en el compositor y no en JS.
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const [scrolled, setScrolled] = useState(false);
-  const [pointerSeen, setPointerSeen] = useState(false);
-  const rawX = useMotionValue(0);
-  const rawY = useMotionValue(0);
-  const rawGlowX = useMotionValue(0);
-  const rawGlowY = useMotionValue(0);
-  const x = useSpring(rawX, { stiffness: 45, damping: 18, mass: 1 });
-  const y = useSpring(rawY, { stiffness: 45, damping: 18, mass: 1 });
-  const glowX = useSpring(rawGlowX, { stiffness: 90, damping: 18, mass: 1 });
-  const glowY = useSpring(rawGlowY, { stiffness: 90, damping: 18, mass: 1 });
+  /** WCAG 2.2.2: todo lo que se mueve solo (paisaje y tira de casos) se puede parar. */
+  const [motionPaused, setMotionPaused] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const next = y > 70;
     if (next !== scrolled) setScrolled(next);
   });
 
-  const heroY = useTransform(scrollY, (y) => y * 0.18);
-  const heroOpacity = useTransform(scrollY, [0, 720], [1, 0.08], { clamp: true });
-  const backgroundY = useTransform(scrollY, (y) => y * 0.08);
-  const lightA = useTransform(
-    [x, y],
-    ([mouseX, mouseY]: number[]) => `translate(${mouseX * 46}px, ${mouseY * 34}px)`,
+  const heroTransform = useTransform(scrollYProgress, [0, 1], ["translateY(0svh)", "translateY(18svh)"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.08]);
+  const { scrollerRef, onClickCapture: onMarqueeClick } = useMarquee<HTMLDivElement>(
+    "(max-width: 900px)",
+    MARQUEE_COPIES,
+    motionPaused,
   );
-  const lightB = useTransform(
-    [x, y],
-    ([mouseX, mouseY]: number[]) => `translate(${mouseX * -64}px, ${mouseY * -46}px)`,
-  );
-  const lightC = useTransform(
-    [x, y],
-    ([mouseX, mouseY]: number[]) => `translate(${mouseX * 30}px, ${mouseY * 54}px)`,
-  );
-  const pointerGlow = useTransform(
-    [glowX, glowY],
-    ([pointerX, pointerY]: number[]) => `translate(${pointerX}px, ${pointerY}px)`,
-  );
-
-  useEffect(() => {
-    if (reduce || scrolled || !window.matchMedia?.("(pointer: fine)").matches) return;
-
-    const moveGlow = (event: PointerEvent) => {
-      const rect = backgroundRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      rawX.set(event.clientX / window.innerWidth - 0.5);
-      rawY.set(event.clientY / window.innerHeight - 0.5);
-      rawGlowX.set(event.clientX - rect.left);
-      rawGlowY.set(event.clientY - rect.top);
-      setPointerSeen(true);
-    };
-
-    window.addEventListener("pointermove", moveGlow, { passive: true });
-    return () => window.removeEventListener("pointermove", moveGlow);
-  }, [rawGlowX, rawGlowY, rawX, rawY, reduce, scrolled]);
-
-  const backgroundPlayState = scrolled ? "paused" : "running";
 
   // Si el hash ya apunta a ese caso el navegador no emite `hashchange`; lo
   // lanzamos a mano para que Casos vuelva a colocar el carrusel igualmente.
@@ -138,58 +98,16 @@ export default function Hero() {
 
   return (
     <section
+      ref={heroRef}
       id="inicio"
       aria-labelledby="hero-title"
-      className="relative flex min-h-[100svh] flex-col overflow-hidden bg-[linear-gradient(180deg,#FDFBF6_0%,#F5EFE3_100%)]"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden bg-cream"
     >
-      <motion.div
-        ref={backgroundRef}
-        aria-hidden="true"
-        style={{ y: backgroundY }}
-        animate={{ opacity: scrolled ? 0.35 : 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="pointer-events-none absolute inset-[-12%_0_0] z-0 overflow-hidden will-change-transform"
-      >
-        <motion.div
-          style={{ transform: lightA }}
-          className="absolute top-[-14%] left-[-12%] h-[56vw] max-h-none min-h-[420px] w-[56vw] min-w-[420px] will-change-transform"
-        >
-          <div
-            style={{ animationPlayState: backgroundPlayState }}
-            className="animate-drift-a h-full w-full rounded-full bg-[radial-gradient(circle_at_35%_35%,rgba(63,185,162,0.42),rgba(63,185,162,0)_66%)] blur-[46px]"
-          />
-        </motion.div>
-        <motion.div
-          style={{ transform: lightB }}
-          className="absolute top-[-6%] right-[-16%] h-[48vw] min-h-[380px] w-[48vw] min-w-[380px] will-change-transform"
-        >
-          <div
-            style={{ animationPlayState: backgroundPlayState }}
-            className="animate-drift-b h-full w-full rounded-full bg-[radial-gradient(circle_at_60%_40%,rgba(240,196,120,0.4),rgba(240,196,120,0)_64%)] blur-[50px]"
-          />
-        </motion.div>
-        <motion.div
-          style={{ transform: lightC }}
-          className="absolute bottom-[-20%] left-[22%] h-[52vw] min-h-[400px] w-[52vw] min-w-[400px] will-change-transform"
-        >
-          <div
-            style={{ animationPlayState: backgroundPlayState }}
-            className="animate-drift-c h-full w-full rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(173,206,182,0.5),rgba(173,206,182,0)_65%)] blur-[48px]"
-          />
-        </motion.div>
-        <motion.div
-          style={{ transform: pointerGlow }}
-          animate={{ opacity: pointerSeen && !scrolled ? 1 : 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="absolute top-0 left-0 -mt-[180px] -ml-[180px] h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle,rgba(63,185,162,0.32),rgba(63,185,162,0)_68%)] blur-[28px] opacity-0 will-change-transform"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(36,49,44,0.055)_1px,transparent_1.6px)] bg-[length:26px_26px]" />
-      </motion.div>
+      <InkLandscape progress={scrollYProgress} paused={scrolled || motionPaused} />
 
-      <motion.header
-        {...fadeUp(0)}
-        transition={{ duration: 0.65, ease: [0.22, 0.61, 0.21, 1] }}
-        className="relative z-[2] mx-auto flex w-full max-w-[1320px] items-center justify-between px-[clamp(20px,5vw,68px)] py-[clamp(18px,2.2vw,26px)]"
+      <header
+        style={fadeUp(0)}
+        className="animate-fade-up relative z-[2] mx-auto flex w-full max-w-[1320px] items-center justify-between px-[clamp(20px,5vw,68px)] py-[clamp(18px,2.2vw,26px)]"
       >
         <a
           href="#inicio"
@@ -213,26 +131,18 @@ export default function Hero() {
           ))}
         </nav>
         <MobileNavigation />
-      </motion.header>
+      </header>
 
-      <motion.div
-        style={{ y: heroY, opacity: heroOpacity }}
-        className="relative z-[1] mx-auto grid w-full max-w-[1320px] flex-1 grid-cols-[minmax(0,1.42fr)_minmax(310px,0.58fr)] items-center gap-[clamp(48px,7vw,104px)] px-[clamp(20px,5vw,68px)] pt-[clamp(42px,8vh,92px)] pb-[clamp(72px,10vh,128px)] will-change-transform max-[900px]:grid-cols-1 max-[900px]:gap-12 max-[900px]:pt-12 max-[620px]:pt-10 max-[620px]:pb-16"
+      <m.div
+        style={reduce ? { opacity: heroOpacity } : { transform: heroTransform, opacity: heroOpacity }}
+        className="relative z-[1] mx-auto grid w-full max-w-[1320px] flex-1 grid-cols-[minmax(0,1.42fr)_minmax(310px,0.58fr)] content-start items-start gap-[clamp(48px,7vw,104px)] px-[clamp(20px,5vw,68px)] pt-[clamp(28px,7vh,84px)] pb-[clamp(72px,10vh,128px)] will-change-transform max-[900px]:grid-cols-1 max-[900px]:gap-10 max-[900px]:pt-12 max-[900px]:content-stretch max-[900px]:items-center max-[620px]:gap-7 max-[620px]:pt-8 max-[620px]:pb-8"
       >
         <div className="min-w-0 max-w-[860px]">
-          <motion.p
-            {...fadeUp(0.08)}
-            className="mb-[22px] flex items-center gap-3 text-[13px] font-bold tracking-[0.105em] text-brand uppercase max-[620px]:text-[12px]"
-          >
-            <span className="block h-px w-8 bg-brand" aria-hidden="true" />
-            Desarrollador freelance · Alcoy · En remoto a toda España
-          </motion.p>
-
           {/* Sin `fadeUp`: el h1 es el LCP, y con `opacity: 0` inicial no se
               pintaba hasta hidratar (~2 s en móvil). Lo anima el subrayado. */}
           <h1
             id="hero-title"
-            className="m-0 max-w-[820px] font-display text-[clamp(3.25rem,5.45vw,5.45rem)] leading-[0.99] font-bold tracking-[-0.052em] text-[#171915] text-balance max-[620px]:text-[clamp(2.55rem,12vw,3.75rem)]"
+            className="m-0 max-w-[820px] font-display text-[clamp(3.25rem,5.8vw,6rem)] leading-[0.99] font-bold tracking-[-0.052em] text-[#171915] text-balance max-[620px]:text-[clamp(2.55rem,12vw,3.75rem)]"
           >
             Digitaliza tu pyme y{" "}
             <span className="relative inline-block text-brand">
@@ -243,99 +153,106 @@ export default function Hero() {
                 className="absolute -bottom-[5px] left-0 h-[11px] w-full overflow-visible"
                 aria-hidden="true"
               >
-                <motion.path
+                <path
                   d="M4 9.5C91 4.2 241 3.5 416 7.4"
+                  pathLength={1}
+                  className="animate-brush"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="6"
                   strokeLinecap="round"
-                  initial={{ pathLength: reduce ? 1 : 0, opacity: reduce ? 1 : 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 0.85, delay: 0.72, ease: [0.22, 0.61, 0.21, 1] }}
+                  filter="url(#ink-edge)"
                 />
               </svg>
             </span>{" "}
             cada semana.
           </h1>
 
-          <motion.p
-            {...fadeUp(0.26)}
-            className="mt-7 max-w-[700px] text-[clamp(1.05rem,1.5vw,1.27rem)] leading-[1.58] text-[#4F5852] text-balance max-[620px]:mt-6"
+          <p
+            style={fadeUp(0.08)}
+            className="animate-fade-up mt-7 max-w-[700px] text-[clamp(1.05rem,1.5vw,1.27rem)] leading-[1.58] text-[#3E4641] text-balance max-[620px]:mt-6"
           >
             Desarrollo sistemas internos y herramientas con IA para que tu
             equipo utilice el tiempo en lo que realmente importa.
-          </motion.p>
+          </p>
 
-          <motion.div
-            {...fadeUp(0.36)}
-            className="mt-7 flex flex-wrap gap-3.5 max-[620px]:mt-6 max-[620px]:flex-col max-[620px]:gap-3"
+          <div
+            style={fadeUp(0.14)}
+            className="animate-fade-up mt-7 flex flex-wrap gap-3.5 max-[620px]:mt-6 max-[620px]:gap-2.5"
           >
             <a
               href="#contacto"
-              className="inline-flex items-center justify-center rounded-[13px] bg-brand px-7 py-[15px] text-[16px] font-bold text-cream no-underline shadow-[0_12px_30px_rgba(15,114,99,0.2)] transition duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:text-cream max-[620px]:w-full"
+              className="inline-flex items-center justify-center rounded-[13px] bg-brand px-7 py-[15px] text-[16px] font-bold text-cream no-underline shadow-[0_12px_30px_rgba(15,114,99,0.2)] transition duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:text-cream max-[620px]:flex-[1_1_140px] max-[620px]:px-3.5 max-[620px]:whitespace-nowrap max-[620px]:py-[14px] max-[620px]:text-[15px]"
             >
               Cuéntame tu caso
             </a>
             <a
               href="#casos"
-              className="inline-flex items-center justify-center rounded-[13px] border border-[#CFC9BC] bg-white/55 px-7 py-[15px] text-[16px] font-bold text-charcoal no-underline transition duration-200 hover:-translate-y-0.5 hover:border-brand hover:bg-white/80 hover:text-brand max-[620px]:w-full"
+              className="inline-flex items-center justify-center rounded-[13px] border border-[#CBC4B4] bg-cream/70 px-7 py-[15px] text-[16px] font-bold text-charcoal no-underline transition duration-200 hover:-translate-y-0.5 hover:border-brand hover:bg-cream hover:text-brand max-[620px]:flex-[1_1_140px] max-[620px]:px-3.5 max-[620px]:whitespace-nowrap max-[620px]:py-[14px] max-[620px]:text-[15px]"
             >
               Ver casos de éxito
             </a>
-          </motion.div>
+          </div>
 
-          <motion.div
-            {...fadeUp(0.46)}
-            className="mt-[26px] flex flex-wrap items-center gap-x-3 gap-y-2 text-[13.5px] text-[#68716B] max-[620px]:mt-5 max-[620px]:flex-col max-[620px]:items-start max-[620px]:gap-y-1 max-[620px]:text-[13px] [@media(max-width:900px)_and_(max-height:500px)]:hidden"
-          >
-            {trustItems.map((item, index) => (
-              <span key={item} className="inline-flex items-center gap-3">
-                {index > 0 && (
-                  <span className="text-brand max-[620px]:hidden" aria-hidden="true">
-                    ·
-                  </span>
-                )}
-                {item}
-              </span>
-            ))}
-          </motion.div>
 
         </div>
 
-        <motion.aside
-          {...fadeUp(0.3)}
+        {/* En escritorio, columna de fichas; en móvil y tablet, una tira que
+            avanza sola hacia la izquierda en bucle y que se puede deslizar. */}
+        <aside
+          style={fadeUp(0.1)}
           aria-label="Resultados de proyectos recientes"
-          className="relative w-full max-w-[390px] justify-self-end max-[900px]:max-w-none max-[900px]:justify-self-stretch max-[620px]:hidden [@media(max-width:900px)_and_(max-height:500px)]:hidden"
+          className="animate-fade-up relative mt-[clamp(16px,6vh,72px)] w-full max-w-[390px] justify-self-end max-[900px]:mt-0 max-[900px]:-mx-[clamp(20px,5vw,68px)] max-[900px]:-mb-7 max-[900px]:w-auto max-[900px]:max-w-none max-[900px]:justify-self-stretch [@media(max-width:900px)_and_(max-height:500px)]:hidden"
         >
-          <div className="space-y-4">
-            {results.map((result, index) => (
-              <div
-                key={result.project}
-                style={{ animationDelay: `${420 + index * 100}ms` }}
-                className={`animate-card-in ${
-                  index === 1 ? "ml-5" : index === 2 ? "ml-2" : "mr-3"
-                }`}
-              >
-                <a
-                  href={casoHref(result.caso)}
-                  onClick={goToCaso}
-                  aria-label={`Ver el caso de éxito: ${result.project}`}
-                  style={{ "--rot": `${result.rotation}deg` } as CSSProperties}
-                  className="flex items-start gap-4 rotate-[var(--rot)] rounded-[18px] border border-[#DED9CE] bg-[rgba(255,255,255,0.74)] px-5 py-[19px] no-underline shadow-[0_18px_45px_rgba(54,61,54,0.07)] backdrop-blur-[8px] transition-[translate,scale,rotate,box-shadow,border-color] duration-300 ease-out hover:border-brand focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-brand motion-safe:hover:-translate-y-1.5 motion-safe:hover:scale-[1.015] motion-safe:hover:[rotate:0deg] motion-safe:hover:shadow-[0_24px_55px_rgba(54,61,54,0.13)]"
-                >
-                  <Check />
-                  <div>
-                    <p className="m-0 text-[15px] leading-[1.35] font-bold text-[#20241F]">
-                      {result.title}
-                    </p>
-                    <p className="mt-1.5 mb-0 text-[13.5px] text-[#788078]">{result.project}</p>
-                  </div>
-                </a>
-              </div>
-            ))}
+          <div
+            ref={scrollerRef}
+            onClickCapture={onMarqueeClick}
+            className="max-[900px]:cursor-grab max-[900px]:overflow-x-auto max-[900px]:overscroll-x-contain max-[900px]:[scrollbar-width:none] max-[900px]:active:cursor-grabbing max-[900px]:[&::-webkit-scrollbar]:hidden"
+          >
+            <ul className="m-0 list-none space-y-4 p-0 max-[900px]:flex max-[900px]:w-max max-[900px]:gap-3 max-[900px]:space-y-0 max-[900px]:pt-3 max-[900px]:pb-10">
+              {marqueeItems.map((result) => {
+                // Las copias solo existen para el bucle: fuera del árbol de
+                // accesibilidad y del orden de tabulación, y ocultas en escritorio.
+                const clone = result.copy !== Math.floor(MARQUEE_COPIES / 2);
+                return (
+                  <li
+                    key={`${result.copy}-${result.project}`}
+                    aria-hidden={clone || undefined}
+                    inert={clone || undefined}
+                    style={{ animationDelay: `${160 + result.index * 70}ms` }}
+                    className={`animate-card-in max-[900px]:w-[min(76vw,320px)] max-[900px]:shrink-0 ${
+                      clone ? "min-[901px]:hidden" : ""
+                    } ${
+                      result.index === 1
+                        ? "min-[901px]:ml-6"
+                        : result.index === 2
+                          ? "min-[901px]:ml-2"
+                          : "min-[901px]:mr-4"
+                    }`}
+                  >
+                    <a
+                      href={casoHref(result.caso)}
+                      onClick={goToCaso}
+                      draggable={false}
+                      style={{ "--rot": `${result.rotation}deg` } as CSSProperties}
+                      className="flex h-full items-start gap-4 rotate-[var(--rot)] rounded-[6px] border border-[#D6CFBF] bg-[rgba(251,248,242,0.93)] px-5 py-[18px] no-underline shadow-[0_1px_0_rgba(36,49,44,0.05),0_24px_34px_-24px_rgba(31,42,38,0.5)] transition-[translate,rotate,box-shadow,border-color] duration-300 ease-out select-none hover:border-brand focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-brand motion-safe:hover:-translate-y-1 motion-safe:hover:[rotate:0deg] motion-safe:hover:shadow-[0_1px_0_rgba(36,49,44,0.05),0_30px_40px_-24px_rgba(31,42,38,0.55)] max-[620px]:gap-3.5 max-[620px]:px-4 max-[620px]:py-4"
+                    >
+                      <Seal />
+                      <div>
+                        <span className="sr-only">Caso de éxito: </span>
+                        <p className="m-0 text-[15px] leading-[1.35] font-bold text-[#20241F]">
+                          {result.title}
+                        </p>
+                        <p className="mt-1.5 mb-0 text-[13.5px] text-[#6B746E]">{result.project}</p>
+                      </div>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        </motion.aside>
-      </motion.div>
+        </aside>
+      </m.div>
 
       <div className="pointer-events-none absolute right-0 bottom-5 left-0 z-[1] flex justify-center text-[#758078] max-[620px]:hidden [@media(max-width:900px)_and_(max-height:500px)]:hidden">
         <svg
@@ -355,6 +272,25 @@ export default function Hero() {
           />
         </svg>
       </div>
+
+      {/* Con `prefers-reduced-motion` no hay nada que pausar. */}
+      <button
+        type="button"
+        onClick={() => setMotionPaused((isPaused) => !isPaused)}
+        className="absolute right-[clamp(12px,4vw,52px)] bottom-3 z-[2] inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[10px] border-0 bg-transparent px-2 text-[13px] font-semibold text-[#4F5852] transition-colors duration-200 hover:text-brand motion-reduce:hidden max-[900px]:bottom-1"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+          {motionPaused ? (
+            <path d="M3.5 2.2v9.6L11.6 7z" />
+          ) : (
+            <>
+              <rect x="3" y="2.5" width="2.6" height="9" rx="0.8" />
+              <rect x="8.4" y="2.5" width="2.6" height="9" rx="0.8" />
+            </>
+          )}
+        </svg>
+        {motionPaused ? "Reanudar animación" : "Pausar animación"}
+      </button>
     </section>
   );
 }

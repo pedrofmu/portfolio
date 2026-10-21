@@ -9,7 +9,7 @@ export default function SobreMi() {
       <Reveal
         className={`${containerClass} grid grid-cols-[minmax(280px,0.8fr)_minmax(320px,1.2fr)] items-center gap-[clamp(42px,7vw,76px)] max-[820px]:grid-cols-1`}
       >
-        <div className="relative aspect-[4/5] max-w-[380px] overflow-hidden rounded-[18px] bg-green-wash shadow-[18px_18px_0_var(--color-green-light)] after:absolute after:inset-0 after:rounded-[inherit] after:border after:border-[rgba(22,21,15,0.09)] after:content-[''] max-[820px]:w-[min(100%,430px)] max-[620px]:shadow-[10px_10px_0_var(--color-green-light)]">
+        <div className="relative aspect-[4/5] max-w-[380px] overflow-hidden rounded-[6px] border-[6px] border-[#FFFDF8] bg-green-wash shadow-[0_0_0_1px_#D6CFBF,0_30px_44px_-28px_rgba(31,42,38,0.55)] -rotate-[1.2deg] max-[820px]:w-[min(100%,430px)]">
           <Image
             src={retrato}
             alt="Retrato de Pedro Fernández Muñoz"
