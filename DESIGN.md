@@ -153,6 +153,13 @@ Reuse these before inventing new ones.
 - **Above-the-fold entrances use CSS** (`animate-fade-up`, `animate-card-in`)
   so they run before hydration; Motion `initial` would keep them invisible
   until the JS loads.
+- **The hero plays in one go.** An inline script in `layout.tsx` sets
+  `data-hero-wait` on `<html>` until the hero's HTML is fully parsed and its
+  fonts have loaded (3 s at most). Until then the hero is hidden and every CSS
+  animation inside `#inicio` waits on its first frame (`globals.css`), so they
+  all start in the same frame instead of one ridge at a time as a slow
+  connection delivers the HTML. New hero motion gets this for free as a CSS
+  animation; don't start hero motion from JS while the attribute is set.
 - **Start with CSS:** use CSS keyframes in `globals.css`, not SMIL, which
   waits for the `load` event.
 - **Always respect `prefers-reduced-motion`.** The global rule in

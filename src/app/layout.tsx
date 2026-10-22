@@ -18,6 +18,24 @@ const instrument = Instrument_Sans({
   display: "swap",
 });
 
+/** Fuentes que necesita el hero antes de mostrarse: titular y texto. */
+const HERO_FONTS = [
+  `700 1em ${bricolage.style.fontFamily}`,
+  `400 1em ${instrument.style.fontFamily}`,
+  `700 1em ${instrument.style.fontFamily}`,
+];
+
+/**
+ * Espera del hero: mientras `<html>` tenga `data-hero-wait`, el hero no se ve
+ * y sus animaciones esperan en el primer fotograma (ver globals.css). Con mala
+ * conexión el HTML llega a trozos y el navegador pinta lo que tiene: sin esto,
+ * cada cresta y cada bloque de texto arrancaba al llegar el suyo, a saltos.
+ * Se quita cuando el hero está entero (ya existe lo que va detrás) y sus
+ * fuentes han cargado, o a los 3 s como mucho, y todo arranca a la vez. Sin JS
+ * no se pone y el hero se ve como siempre.
+ */
+const heroWaitScript = `(function(){var r=document.documentElement,show=function(){r.removeAttribute("data-hero-wait")};r.setAttribute("data-hero-wait","");setTimeout(show,3000);(function wait(){var h=document.getElementById("inicio");if(!h||!(h.nextElementSibling||document.readyState!=="loading"))return requestAnimationFrame(wait);try{Promise.all(${JSON.stringify(HERO_FONTS)}.map(function(f){return document.fonts.load(f)})).then(show,show)}catch(e){show()}})()})()`;
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -61,7 +79,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${bricolage.variable} ${instrument.variable}`}>
+    // `suppressHydrationWarning`: el script de la espera cambia un atributo de
+    // `<html>` antes de hidratar.
+    <html
+      lang="es"
+      className={`${bricolage.variable} ${instrument.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: heroWaitScript }} />
+      </head>
       <body>
         <a
           href="#contenido"

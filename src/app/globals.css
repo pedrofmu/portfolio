@@ -77,6 +77,18 @@
   }
 }
 
+/* Espera del hero (la pone y la quita el script de layout.tsx): hasta que el
+   HTML del hero está entero y con sus fuentes no se ve nada, y cada animación
+   espera en su primer fotograma. Al quitarla arrancan todas en el mismo
+   fotograma. `!important` gana al `animation-play-state` en línea del
+   paisaje. */
+[data-hero-wait] #inicio {
+  visibility: hidden;
+}
+[data-hero-wait] #inicio * {
+  animation-play-state: paused !important;
+}
+
 /* Grano del papel: una tesela de ruido que el navegador rasteriza una sola
    vez, en lugar de un filtro a pantalla completa. */
 .paper-grain {

@@ -44,8 +44,9 @@ const marqueeItems = Array.from({ length: MARQUEE_COPIES }, (_, copy) =>
 ).flat();
 
 /** Retraso de `animate-fade-up`. La entrada va con CSS y no con Motion:
- * arranca con el primer pintado, sin esperar a hidratar (en móvil, el texto
- * se quedaba invisible ~2 s). */
+ * arranca en cuanto el hero está entero y con sus fuentes (`data-hero-wait`,
+ * en layout.tsx), sin esperar a hidratar (en móvil, el texto se quedaba
+ * invisible ~2 s). */
 const fadeUp = (delay: number) => ({ animationDelay: `${delay}s` });
 
 /** Sello cuadrado tipo hanko, en el verde de la marca, con un visto a pincel. */
