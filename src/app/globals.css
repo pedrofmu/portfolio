@@ -38,6 +38,8 @@
   --animate-card-in: cardIn 0.5s cubic-bezier(0.22, 0.61, 0.21, 1) both;
   /* Subrayado del titular: se traza con el pincel tras el texto. */
   --animate-brush: brush 0.6s cubic-bezier(0.22, 0.61, 0.21, 1) 0.3s both;
+  /* Lámina de Casos: se posa sobre el papel al abrir otro caso. */
+  --animate-print-in: printIn 0.45s cubic-bezier(0.22, 0.61, 0.21, 1) both;
 }
 
 /* Hero sumi-e: cada cresta se "pinta" de izquierda a derecha con un borde
@@ -196,6 +198,18 @@
   from {
     opacity: 0;
     transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* Solo `transform` y `opacity`: la inclinación de la lámina va en `rotate`,
+   así que se suma a esta y la lámina termina en su ángulo. */
+@keyframes printIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) rotate(-1.5deg);
   }
   to {
     opacity: 1;

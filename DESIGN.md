@@ -116,6 +116,17 @@ Reuse these before inventing new ones.
 - **Prints (photos of people):** `rounded-[6px]`, a 6px `#FFFDF8` border as
   the paper margin, a hairline `#D6CFBF` ring, `shadow-soft`, slight tilt.
   No offset block shadows.
+- **Case index (`Casos`):** the cases as an accordion with exactly one open
+  (its header is `aria-disabled`). Closed names in `muted`, the open one in
+  ink, each with its one-line result. The open case shows a before/after
+  `dl` ("Antes" in `muted`, "Ahora" in `green-dark`), its link and «Leer el
+  caso completo», whose full text always stays in the HTML. Its demo print
+  sits in the right column on desktop and above the text on phones.
+- **Video prints:** a square, muted demo in the print frame. Encode it
+  without an audio track (H.264, 720px, in `public/assets/casos/`). The
+  project's screenshot is the cover whenever the video isn't playing:
+  cropped with `object-cover` + position, or contained on the screenshot's
+  own background colour when a crop would cut its text.
 - **Horizontal strips on mobile:** `useMarquee` for an auto-drifting loop,
   `useCarousel` for stepped carousels with arrows and dots.
 
@@ -149,6 +160,11 @@ Reuse these before inventing new ones.
   `requestAnimationFrame`) must check `useReducedMotion` or `matchMedia`.
 - **Auto-moving content pauses** on hover, touch and focus, and clones are
   `aria-hidden` and `inert`.
+- **Demo videos** play muted and looped, one at a time and only while on
+  screen, with a visible «Pausar vídeo» button. With reduced motion they
+  don't autoplay: the cover shows with «Reproducir vídeo». Opening another
+  case settles its print in with `animate-print-in`, an answer to the click
+  and not an entrance.
 
 ## Copy
 

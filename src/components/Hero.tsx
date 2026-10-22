@@ -23,9 +23,9 @@ const results = [
     rotation: -1.2,
   },
   {
-    title: "Archivos organizados automáticamente",
-    project: "SoloDB",
-    caso: "solodb",
+    title: "Firmas comprobadas desde una foto",
+    project: "Signature recognition",
+    caso: "signature-recognition",
     rotation: 0.8,
   },
   {
