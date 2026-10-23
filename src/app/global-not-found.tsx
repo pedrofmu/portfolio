@@ -21,11 +21,14 @@ import { SITE } from "../lib/site";
 
 const pickScript = `(function(){${detectLocaleJs({ fromPath: true })}var r=document.documentElement;r.setAttribute("data-lang",p);r.lang=p})()`;
 
-/** Muestra el bloque del idioma elegido; sin `data-lang`, solo el del idioma por defecto. */
+/**
+ * Muestra el bloque del idioma elegido; sin `data-lang`, solo el del idioma por
+ * defecto (`DEFAULT_LOCALE`). Clases literales: Tailwind no ve las que se montan.
+ */
 const visibility: Record<Locale, string> = {
-  es: "hidden [html[data-lang=es]_&]:grid",
+  es: "grid [html[data-lang]:not([data-lang=es])_&]:hidden",
   ca: "hidden [html[data-lang=ca]_&]:grid",
-  en: "grid [html[data-lang]:not([data-lang=en])_&]:hidden",
+  en: "hidden [html[data-lang=en]_&]:grid",
   fr: "hidden [html[data-lang=fr]_&]:grid",
 };
 

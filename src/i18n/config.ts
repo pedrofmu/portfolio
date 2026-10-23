@@ -9,8 +9,11 @@
 export const LOCALES = ["es", "ca", "en", "fr"] as const;
 export type Locale = (typeof LOCALES)[number];
 
-/** El que se sirve si el navegador no pide ninguno de los nuestros. */
-export const DEFAULT_LOCALE: Locale = "en";
+/**
+ * El que se sirve si el navegador no pide ninguno de los nuestros, y el que
+ * habla `/` (el x-default) sin JS. Castellano: es el público prioritario.
+ */
+export const DEFAULT_LOCALE: Locale = "es";
 
 export const hasLocale = (value: string): value is Locale =>
   (LOCALES as readonly string[]).includes(value);
@@ -53,7 +56,8 @@ export const LOCALE_STORAGE_KEY = "lang";
 
 /**
  * Idiomas de España sin versión propia: quien navega en gallego o euskera
- * lee castellano, y mandarle al inglés por defecto no tendría sentido.
+ * lee castellano, y mandarle al inglés porque lo tenga más abajo en su lista
+ * no tendría sentido.
  */
 const NEIGHBOURS: Record<string, Locale> = { gl: "es", eu: "es", ast: "es", an: "es" };
 

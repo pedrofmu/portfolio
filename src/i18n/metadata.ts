@@ -26,7 +26,7 @@ const OG_IMAGE = {
 
 /**
  * Metadatos comunes de un idioma: los usa su layout y el de `/` (con el
- * inglés, que es el x-default). `alternates` y `robots` van en cada página:
+ * castellano, que es el x-default). `alternates` y `robots` van en cada página:
  * puestos aquí los heredaría también el 404.
  */
 export function localeMetadata(lang: Locale, path = localePath(lang)): Metadata {
