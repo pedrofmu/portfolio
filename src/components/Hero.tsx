@@ -9,32 +9,21 @@ import {
   useTransform,
 } from "motion/react";
 
+import type { Locale } from "../i18n/config";
+import type { Dictionary } from "../i18n";
 import { casoHref, type CasoId } from "./Casos";
 import InkLandscape from "./InkLandscape";
+import LanguageSwitcher from "./LanguageSwitcher";
 import { useMarquee } from "./useMarquee";
-import { SECTIONS } from "./sections";
+import { SECTION_IDS } from "./sections";
 import MobileNavigation from "./MobileNavigation";
 
+/** Fichas del hero, en orden. Su texto está en el diccionario (`hero.results`). */
 const results = [
-  {
-    title: "Toda la gestión del evento en un solo sitio",
-    project: "Intranet BioCultura",
-    caso: "biocultura",
-    rotation: -1.2,
-  },
-  {
-    title: "Firmas comprobadas desde una foto",
-    project: "Signature recognition",
-    caso: "signature-recognition",
-    rotation: 0.8,
-  },
-  {
-    title: "Nuevos leads desde el chatbot",
-    project: "APCoatings",
-    caso: "apcoatings",
-    rotation: -0.6,
-  },
-] satisfies { title: string; project: string; caso: CasoId; rotation: number }[];
+  { caso: "biocultura", rotation: -1.2 },
+  { caso: "signature-recognition", rotation: 0.8 },
+  { caso: "apcoatings", rotation: -0.6 },
+] satisfies { caso: CasoId; rotation: number }[];
 
 /** Copias de la tira de casos en móvil: la central es la "real", las otras
  * permiten que el bucle infinito nunca se quede sin tarjetas por los lados. */
@@ -66,7 +55,13 @@ function Seal() {
   );
 }
 
-export default function Hero() {
+type HeroProps = {
+  lang: Locale;
+  t: Dictionary["hero"];
+  nav: Dictionary["nav"];
+};
+
+export default function Hero({ lang, t, nav }: HeroProps) {
   const reduce = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
@@ -109,26 +104,29 @@ export default function Hero() {
       >
         <a
           href="#inicio"
-          aria-label="pedrofm, volver al inicio"
+          aria-label={nav.home}
           className="font-display text-[22px] font-extrabold text-charcoal no-underline"
         >
           pedrofm<span className="text-brand">.</span>
         </a>
-        <nav
-          aria-label="Secciones"
-          className="hidden items-center gap-[26px] lg:flex"
-        >
-          {SECTIONS.map((section) => (
-            <a
-              key={section.href}
-              href={section.href}
-              className="text-[13.5px] font-semibold tracking-[0.02em] text-[#5E6B64] no-underline transition-colors duration-200 hover:text-brand"
-            >
-              {section.label}
-            </a>
-          ))}
-        </nav>
-        <MobileNavigation />
+        <div className="flex items-center gap-2 lg:gap-[18px]">
+          <nav
+            aria-label={nav.label}
+            className="hidden items-center gap-[26px] lg:flex"
+          >
+            {SECTION_IDS.map((id) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="text-[13.5px] font-semibold tracking-[0.02em] text-[#5E6B64] no-underline transition-colors duration-200 hover:text-brand"
+              >
+                {nav.sections[id]}
+              </a>
+            ))}
+          </nav>
+          <LanguageSwitcher lang={lang} label={nav.language} />
+          <MobileNavigation t={nav} />
+        </div>
       </header>
 
       <m.div
@@ -142,9 +140,9 @@ export default function Hero() {
             id="hero-title"
             className="m-0 max-w-[820px] font-display text-[clamp(3.25rem,5.8vw,6rem)] leading-[0.99] font-bold tracking-[-0.052em] text-[#171915] text-balance max-[620px]:text-[clamp(2.55rem,12vw,3.75rem)]"
           >
-            Digitaliza tu pyme y{" "}
+            {t.title.start}{" "}
             <span className="relative inline-block text-brand">
-              recupera horas
+              {t.title.highlight}
               <svg
                 viewBox="0 0 420 15"
                 preserveAspectRatio="none"
@@ -163,15 +161,14 @@ export default function Hero() {
                 />
               </svg>
             </span>{" "}
-            cada semana.
+            {t.title.end}
           </h1>
 
           <p
             style={fadeUp(0.08)}
             className="animate-fade-up mt-7 max-w-[700px] text-[clamp(1.05rem,1.5vw,1.27rem)] leading-[1.58] text-[#3E4641] text-balance max-[620px]:mt-6"
           >
-            Desarrollo sistemas internos y herramientas con IA para que tu
-            equipo utilice el tiempo en lo que realmente importa.
+            {t.lead}
           </p>
 
           <div
@@ -182,13 +179,13 @@ export default function Hero() {
               href="#contacto"
               className="inline-flex items-center justify-center rounded-[13px] bg-brand px-7 py-[15px] text-[16px] font-bold text-cream no-underline shadow-[0_12px_30px_rgba(15,114,99,0.2)] transition duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:text-cream max-[620px]:flex-[1_1_140px] max-[620px]:px-3.5 max-[620px]:whitespace-nowrap max-[620px]:py-[14px] max-[620px]:text-[15px]"
             >
-              Cuéntame tu caso
+              {t.primary}
             </a>
             <a
               href="#casos"
               className="inline-flex items-center justify-center rounded-[13px] border border-[#CBC4B4] bg-cream/70 px-7 py-[15px] text-[16px] font-bold text-charcoal no-underline transition duration-200 hover:-translate-y-0.5 hover:border-brand hover:bg-cream hover:text-brand max-[620px]:flex-[1_1_140px] max-[620px]:px-3.5 max-[620px]:whitespace-nowrap max-[620px]:py-[14px] max-[620px]:text-[15px]"
             >
-              Ver casos de éxito
+              {t.secondary}
             </a>
           </div>
 
@@ -199,7 +196,7 @@ export default function Hero() {
             avanza sola hacia la izquierda en bucle y que se puede deslizar. */}
         <aside
           style={fadeUp(0.1)}
-          aria-label="Resultados de proyectos recientes"
+          aria-label={t.resultsLabel}
           className="animate-fade-up relative mt-[clamp(16px,6vh,72px)] w-full max-w-[390px] justify-self-end max-[900px]:mt-0 max-[900px]:-mx-[clamp(20px,5vw,68px)] max-[900px]:-mb-7 max-[900px]:w-auto max-[900px]:max-w-none max-[900px]:justify-self-stretch [@media(max-width:900px)_and_(max-height:500px)]:hidden"
         >
           <div
@@ -214,7 +211,7 @@ export default function Hero() {
                 const clone = result.copy !== Math.floor(MARQUEE_COPIES / 2);
                 return (
                   <li
-                    key={`${result.copy}-${result.project}`}
+                    key={`${result.copy}-${result.caso}`}
                     aria-hidden={clone || undefined}
                     inert={clone || undefined}
                     style={{ animationDelay: `${160 + result.index * 70}ms` }}
@@ -237,11 +234,13 @@ export default function Hero() {
                     >
                       <Seal />
                       <div>
-                        <span className="sr-only">Caso de éxito: </span>
+                        <span className="sr-only">{t.resultPrefix} </span>
                         <p className="m-0 text-[15px] leading-[1.35] font-bold text-[#20241F]">
-                          {result.title}
+                          {t.results[result.caso].title}
                         </p>
-                        <p className="mt-1.5 mb-0 text-[13.5px] text-[#6B746E]">{result.project}</p>
+                        <p className="mt-1.5 mb-0 text-[13.5px] text-[#6B746E]">
+                          {t.results[result.caso].project}
+                        </p>
                       </div>
                     </a>
                   </li>

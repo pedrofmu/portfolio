@@ -1,43 +1,44 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
+import type { Dictionary } from "../i18n";
 import Reveal from "./Reveal";
 import { ExternalArrow, Section, SectionHeading, containerClass } from "./ui";
 import { useCarousel } from "./useCarousel";
 import ponenciaBioCultura from "../../public/assets/presentacion-biocultura.webp";
 import mediumPosts from "../../public/assets/medium-posts.webp";
 
+type Textos = Dictionary["apariciones"];
+
+/** Lo que no cambia con el idioma; los textos están en el diccionario (`apariciones.items`). */
 type Aparicion = {
+  id: keyof Textos["items"];
   image: StaticImageData;
-  alt: string;
   imagePosition?: string;
-  category: string;
-  title: string;
-  linkLabel: string;
   href: string;
 };
 
 const apariciones: Aparicion[] = [
   {
+    id: "biocultura",
     image: ponenciaBioCultura,
-    alt: "Ponencia de Pedro Fernández en BioCultura Madrid 2025",
     imagePosition: "top left",
-    category: "Ponencia",
-    title: "BioCultura Madrid 2025 · La IA en los procesos de certificación",
-    linkLabel: "Ver la ponencia en LinkedIn",
     href: "https://www.linkedin.com/feed/update/urn:li:activity:7392583558046855168/",
   },
   {
+    id: "medium",
     image: mediumPosts,
-    alt: "Pedro Fernández, autor de los artículos publicados en Medium",
-    category: "Artículos",
-    title: "Escribo sobre informática en Medium",
-    linkLabel: "Leer en medium.com/@pedrofm",
     href: "https://medium.com/@pedrofm",
   },
 ];
 
-export default function DondeMeHasVisto() {
+type DondeMeHasVistoProps = {
+  t: Textos;
+  /** «(se abre en una pestaña nueva)» para los enlaces externos. */
+  newTab: string;
+};
+
+export default function DondeMeHasVisto({ t, newTab }: DondeMeHasVistoProps) {
   const {
     trackRef,
     index,
@@ -55,17 +56,14 @@ export default function DondeMeHasVisto() {
   return (
     <Section id="donde-me-has-visto" white labelledBy="donde-me-has-visto-title">
       <Reveal className={containerClass}>
-        <SectionHeading
-          title="Charlas, artículos y otras apariciones"
-          titleId="donde-me-has-visto-title"
-        />
+        <SectionHeading title={t.title} titleId="donde-me-has-visto-title" />
 
         <div>
           <div
             ref={trackRef}
             role="region"
-            aria-roledescription="carrusel"
-            aria-label="Dónde me has visto"
+            aria-roledescription={t.carousel}
+            aria-label={t.label}
             tabIndex={0}
             {...dragProps}
             className={`flex gap-6 overflow-x-auto overscroll-x-contain [scrollbar-width:none] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-brand [&::-webkit-scrollbar]:hidden ${
@@ -87,7 +85,7 @@ export default function DondeMeHasVisto() {
               >
                 <Image
                   src={aparicion.image}
-                  alt={aparicion.alt}
+                  alt={t.items[aparicion.id].alt}
                   fill
                   quality={90}
                   sizes="(max-width: 620px) 100vw, 520px"
@@ -97,17 +95,17 @@ export default function DondeMeHasVisto() {
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
                 <div className="relative p-7 max-[620px]:p-5">
                   <p className="mb-[10px] text-[13.5px] font-semibold text-[#CFE5DE]">
-                    {aparicion.category}
+                    {t.items[aparicion.id].category}
                   </p>
                   <h3 className="mb-[10px] font-display text-[clamp(20px,2.4vw,25px)] leading-[1.25] font-semibold tracking-[-0.015em] text-balance text-white">
-                    {aparicion.title}
+                    {t.items[aparicion.id].title}
                   </h3>
                   <span className="inline-flex items-center gap-[6px] text-[15px] font-semibold text-white/90 transition-colors duration-200 group-hover:text-white">
-                    {aparicion.linkLabel}
+                    {t.items[aparicion.id].linkLabel}
                     <ExternalArrow className="group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
                   </span>
                 </div>
-                <span className="sr-only"> (se abre en una pestaña nueva)</span>
+                <span className="sr-only"> {newTab}</span>
               </a>
             ))}
           </div>
@@ -119,7 +117,7 @@ export default function DondeMeHasVisto() {
           >
             <button
               type="button"
-              aria-label="Aparición anterior"
+              aria-label={t.prev}
               disabled={atStart}
               onClick={prev}
               className="grid h-11 w-11 place-items-center rounded-[10px] border border-[#CBC4B4] bg-cream/80 text-ink transition-colors duration-200 hover:not-disabled:border-[rgba(30,107,75,0.7)] hover:not-disabled:text-green disabled:cursor-default disabled:opacity-[0.35]"
@@ -139,7 +137,7 @@ export default function DondeMeHasVisto() {
                 <button
                   key={aparicion.href}
                   type="button"
-                  aria-label={`Ir a la aparición ${i + 1}: ${aparicion.title}`}
+                  aria-label={`${t.goTo} ${i + 1}: ${t.items[aparicion.id].title}`}
                   aria-current={i === index ? "true" : undefined}
                   onClick={() => goTo(i)}
                   className="h-11 w-11 cursor-pointer border-0 bg-transparent p-0 after:mx-auto after:block after:h-[7px] after:w-[7px] after:rounded-full after:bg-[#958f81] after:transition-[width,background-color] after:duration-200 hover:after:bg-muted aria-[current=true]:after:w-[18px] aria-[current=true]:after:bg-green"
@@ -148,7 +146,7 @@ export default function DondeMeHasVisto() {
             </div>
             <button
               type="button"
-              aria-label="Aparición siguiente"
+              aria-label={t.next}
               disabled={atEnd}
               onClick={next}
               className="grid h-11 w-11 place-items-center rounded-[10px] border border-[#CBC4B4] bg-cream/80 text-ink transition-colors duration-200 hover:not-disabled:border-[rgba(30,107,75,0.7)] hover:not-disabled:text-green disabled:cursor-default disabled:opacity-[0.35]"

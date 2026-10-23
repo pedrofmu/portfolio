@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties } from "react";
 import Image, { type StaticImageData } from "next/image";
+import { VIDEO_LOCALE, type Locale } from "../i18n/config";
+import type { Dictionary } from "../i18n";
 import Reveal from "./Reveal";
 import { ExternalArrow, Section, SectionHeading, containerClass } from "./ui";
 import casoApcoatings from "../../public/assets/caso-apcoatings.webp";
@@ -34,17 +36,9 @@ function useReducirMovimiento() {
   );
 }
 
+/** Lo que no cambia con el idioma; los textos están en el diccionario (`casos.items`). */
 type Caso = {
   id: CasoId;
-  nombre: string;
-  result: string;
-  antes: string;
-  ahora: string;
-  /** Párrafos que se despliegan con «Leer el caso completo». */
-  detalle: string[];
-  /** Demo sin sonido, cuadrada, en `public/assets/casos/`. */
-  video: string;
-  videoLabel: string;
   /** Portada: se ve mientras el vídeo no se reproduce. */
   image: StaticImageData;
   /** La captura es apaisada y la lámina cuadrada: recorte o captura entera sobre su fondo. */
@@ -53,79 +47,41 @@ type Caso = {
   imageBackground?: string;
   rotation: number;
   linkHref: string;
-  linkLabel: string;
 };
+
+type Textos = Dictionary["casos"];
 
 const casos: Caso[] = [
   {
     id: "biocultura",
-    nombre: "Intranet BioCultura",
-    result: "Toda la gestión del evento en un solo sitio.",
-    antes:
-      "En VidaSana, las propuestas de actividades llegaban por correo y a una web anticuada. Todo el equipo compartía una cuenta y los ponentes salían duplicados.",
-    ahora:
-      "Un formulario público recoge las propuestas y un panel privado sirve para revisarlas, validarlas y publicarlas, con una cuenta por persona, filtros y exportación a Excel.",
-    detalle: [
-      "Las propuestas de actividades se gestionaban por correo y a través de una web anticuada en la que nadie encontraba nada: la interfaz no guiaba, y cada tarea empezaba por averiguar dónde estaba cada cosa y cómo se usaba.",
-      "Por debajo el problema era peor. Los usuarios estaban escritos en el propio código y todo el equipo compartía una única cuenta. La base de datos no exigía unicidad, así que registros como los ponentes aparecían duplicados y filtrar era imposible. Tampoco había forma de exportar a Excel.",
-      "La intranet lo reordena de arriba abajo: un formulario público para recibir las propuestas y un panel privado para revisarlas, validarlas y publicarlas, con una cuenta por persona, registros únicos, filtros que funcionan y exportación a Excel.",
-    ],
-    video: "/assets/casos/biocultura.mp4",
-    videoLabel:
-      "Vídeo sin sonido: una actividad pasa de la propuesta al programa de BioCultura.",
     image: casoBiocultura,
     imagePosition: "left top",
     rotation: -1,
     linkHref:
       "https://www.linkedin.com/posts/pedro-fern%C3%A1ndez-mu%C3%B1oz-4148a9287_saas-intranet-gestiaejndeeventos-ugcPost-7480987992707284992-JmTG/",
-    linkLabel: "Ver el proyecto en LinkedIn",
   },
   {
     id: "apcoatings",
-    nombre: "Chatbot APCoatings",
-    result: "Las visitas a la web se convierten en leads cualificados.",
-    antes:
-      "En la web de Abad Pinturas, quien tenía una duda concreta debía buscar la respuesta entre el catálogo y unas fichas técnicas que no todo el mundo entiende.",
-    ahora:
-      "El chatbot cruza el catálogo con las fichas técnicas y recomienda el producto en lenguaje llano, a cualquier hora. El equipo recibe la consulta ya encauzada.",
-    detalle: [
-      "Quien entra en la web de APCoatings suele llegar con una duda muy concreta: qué producto usar para una superficie o una situación determinada. La respuesta existe, pero está repartida entre el catálogo y las fichas técnicas, y escrita en un lenguaje que no todo el mundo maneja.",
-      "El chatbot cruza el catálogo de la web con esas fichas técnicas y recomienda producto según el caso de uso, explicándolo en lenguaje llano. Funciona a cualquier hora, también cuando no hay nadie al otro lado.",
-      "Así una visita que se habría ido sin respuesta se convierte en un lead cualificado, y el equipo recibe la consulta ya encauzada.",
-    ],
-    video: "/assets/casos/apcoatings.mp4",
-    videoLabel:
-      "Vídeo sin sonido: el chatbot de APCoatings recomienda un sistema de pintura a un cliente.",
     image: casoApcoatings,
     imageFit: "contain",
     imageBackground: "#171D2A",
     rotation: 0.8,
     linkHref: "https://apcoatings.net",
-    linkLabel: "apcoatings.net",
   },
   {
     id: "signature-recognition",
-    nombre: "Signature recognition",
-    result: "Firmas comprobadas desde una foto, sin revisión manual.",
-    antes:
-      "En el gestor de permisos de Jield BV, que se usa en laboratorios, los permisos se firman a mano en papel. Saber qué firmas faltaban obligaba a revisarlos uno a uno.",
-    ahora:
-      "Basta una foto del papel firmado, aunque tenga sombras o esté en ángulo: el servicio encuentra cada casilla y comprueba si está firmada. Si no puede leer una, pide otra foto.",
-    detalle: [
-      "Jield BV tiene un gestor de permisos que se usa en laboratorios. Los permisos se firman a mano en papel, y saber quién ha firmado y qué firmas faltan requería revisar cada uno.",
-      "Desarrollé un servicio con FastAPI y OpenCV que añade a cada casilla de firma del PDF dos marcadores ArUco y un código DataMatrix con su identificador. Al recibir una foto del papel firmado, el servicio localiza las casillas, corrige la perspectiva de cada una y compara la tinta con el papel de alrededor para detectar si está firmada.",
-      "Así, el gestor de permisos sabe qué firmas están y cuáles faltan, sin revisión manual ni escáner. La comparación con el papel permite trabajar con sombras y fotos tomadas en ángulo, incluso desde móviles básicos. Si no se puede leer el identificador de una casilla, el servicio pide otra foto en lugar de atribuir la firma a una persona equivocada.",
-    ],
-    video: "/assets/casos/signature-recognition.mp4",
-    videoLabel:
-      "Vídeo sin sonido: el servicio detecta qué casillas de un permiso están firmadas a partir de una foto.",
     image: casoSignatureRecognition,
     imagePosition: "left top",
     rotation: -0.6,
     linkHref: "https://jield.dev",
-    linkLabel: "jield.dev",
   },
 ];
+
+/**
+ * Demo sin sonido, cuadrada, en `public/assets/casos/`. Hay una por idioma de
+ * grabación (`<id>-es.mp4`, `<id>-en.mp4`) porque los rótulos van en el vídeo.
+ */
+const videoSrc = (id: CasoId, lang: Locale) => `/assets/casos/${id}-${VIDEO_LOCALE[lang]}.mp4`;
 
 function Chevron({ className = "" }: { className?: string }) {
   return (
@@ -145,7 +101,15 @@ function Chevron({ className = "" }: { className?: string }) {
  * Demo del caso como una lámina de papel. Solo se reproduce la del caso
  * abierto y mientras está en pantalla; parada, se ve la captura de portada.
  */
-function CasoVideo({ caso, activo }: { caso: Caso; activo: boolean }) {
+type CasoVideoProps = {
+  caso: Caso;
+  src: string;
+  label: string;
+  t: Pick<Textos, "pause" | "play">;
+  activo: boolean;
+};
+
+function CasoVideo({ caso, src, label, t, activo }: CasoVideoProps) {
   const reduce = useReducirMovimiento();
   const figureRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -206,13 +170,13 @@ function CasoVideo({ caso, activo }: { caso: Caso; activo: boolean }) {
       >
         <video
           ref={videoRef}
-          src={caso.video}
+          src={src}
           muted
           loop
           playsInline
           preload="none"
           disablePictureInPicture
-          aria-label={caso.videoLabel}
+          aria-label={label}
           onPlaying={() => setReproduciendo(true)}
           onPause={() => setReproduciendo(false)}
           className="absolute inset-0 h-full w-full object-cover"
@@ -249,13 +213,20 @@ function CasoVideo({ caso, activo }: { caso: Caso; activo: boolean }) {
             />
           )}
         </svg>
-        {quiere ? "Pausar vídeo" : "Reproducir vídeo"}
+        {quiere ? t.pause : t.play}
       </button>
     </figure>
   );
 }
 
-export default function Casos() {
+type CasosProps = {
+  lang: Locale;
+  t: Textos;
+  /** «(se abre en una pestaña nueva)» para los enlaces externos. */
+  newTab: string;
+};
+
+export default function Casos({ lang, t, newTab }: CasosProps) {
   /** Siempre hay un caso abierto: en escritorio su lámina llena la columna derecha. */
   const [activo, setActivo] = useState<CasoId>(casos[0].id);
   const [completo, setCompleto] = useState<CasoId | null>(null);
@@ -294,16 +265,14 @@ export default function Casos() {
   return (
     <Section id="casos" white labelledBy="casos-title">
       <Reveal className={containerClass}>
-        <SectionHeading
-          title="Casos reales de digitalización de pymes"
-          titleId="casos-title"
-        />
+        <SectionHeading title={t.title} titleId="casos-title" />
 
         {/* La lámina vive dentro de su caso (en móvil sale ahí, sobre el texto)
             y en escritorio se coloca en la columna derecha con `absolute`. */}
         <div className="relative min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_47%] min-[900px]:gap-x-16">
           <div className="border-b border-line">
             {casos.map((caso) => {
+              const texto = t.items[caso.id];
               const abierto = caso.id === activo;
               const verCompleto = completo === caso.id;
               const botonId = `caso-boton-${caso.id}`;
@@ -331,14 +300,14 @@ export default function Casos() {
                             abierto ? "text-[#171915]" : "text-muted group-hover:text-[#171915]"
                           }`}
                         >
-                          {caso.nombre}
+                          {texto.name}
                         </span>
                         <span
                           className={`mt-2 block text-[16px] leading-[1.5] text-pretty ${
                             abierto ? "text-ink-soft" : "text-muted"
                           }`}
                         >
-                          {caso.result}
+                          {texto.result}
                         </span>
                       </span>
                       {abierto ? null : (
@@ -357,10 +326,10 @@ export default function Casos() {
                     className="flex flex-col pb-9 max-[620px]:pb-8"
                   >
                     <dl className="m-0 grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-5 gap-y-3.5 text-[16px] leading-[1.62]">
-                      <dt className="text-[14.5px] font-semibold text-muted">Antes</dt>
-                      <dd className="m-0 max-w-[60ch] text-pretty text-ink-soft">{caso.antes}</dd>
-                      <dt className="text-[14.5px] font-semibold text-green-dark">Ahora</dt>
-                      <dd className="m-0 max-w-[60ch] text-pretty text-charcoal">{caso.ahora}</dd>
+                      <dt className="text-[14.5px] font-semibold text-muted">{t.before}</dt>
+                      <dd className="m-0 max-w-[60ch] text-pretty text-ink-soft">{texto.before}</dd>
+                      <dt className="text-[14.5px] font-semibold text-green-dark">{t.now}</dt>
+                      <dd className="m-0 max-w-[60ch] text-pretty text-charcoal">{texto.now}</dd>
                     </dl>
 
                     <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-1">
@@ -371,7 +340,7 @@ export default function Casos() {
                         onClick={() => setCompleto(verCompleto ? null : caso.id)}
                         className="inline-flex min-h-11 cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-[15px] font-semibold text-green transition-colors duration-200 hover:text-green-dark"
                       >
-                        {verCompleto ? "Ocultar el caso completo" : "Leer el caso completo"}
+                        {verCompleto ? t.hideFull : t.readFull}
                         <Chevron
                           className={`transition-transform duration-200 ${verCompleto ? "rotate-180" : ""}`}
                         />
@@ -382,14 +351,14 @@ export default function Casos() {
                         rel="noopener"
                         className="group/link inline-flex min-h-11 items-center gap-[6px] text-[15px] font-semibold text-green underline decoration-transparent underline-offset-4 transition-colors duration-200 hover:text-green-dark hover:decoration-current"
                       >
-                        {caso.linkLabel}
+                        {texto.linkLabel}
                         <ExternalArrow className="group-hover/link:translate-x-[2px] group-hover/link:-translate-y-[2px]" />
-                        <span className="sr-only"> (se abre en una pestaña nueva)</span>
+                        <span className="sr-only"> {newTab}</span>
                       </a>
                     </div>
 
                     <div id={completoId} hidden={!verCompleto} className="mt-4">
-                      {caso.detalle.map((parrafo) => (
+                      {texto.detail.map((parrafo) => (
                         <p
                           key={parrafo}
                           className="mb-[13px] max-w-[62ch] text-[15.5px] leading-[1.65] text-ink-soft text-pretty last:mb-0"
@@ -401,7 +370,14 @@ export default function Casos() {
 
                     {/* Se monta de nuevo al abrir el caso: el vídeo empieza de
                         cero y vuelve a la reproducción automática. */}
-                    <CasoVideo key={abierto ? "abierto" : "cerrado"} caso={caso} activo={abierto} />
+                    <CasoVideo
+                      key={abierto ? "abierto" : "cerrado"}
+                      caso={caso}
+                      src={videoSrc(caso.id, lang)}
+                      label={texto.videoLabel}
+                      t={t}
+                      activo={abierto}
+                    />
                   </div>
                 </article>
               );

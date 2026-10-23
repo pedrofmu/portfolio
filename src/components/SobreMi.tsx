@@ -1,9 +1,16 @@
 import Image from "next/image";
+import type { Dictionary } from "../i18n";
 import Reveal from "./Reveal";
 import { ExternalArrow, Section, containerClass } from "./ui";
 import retrato from "../../public/assets/pedro-fernandez.webp";
 
-export default function SobreMi() {
+type SobreMiProps = {
+  t: Dictionary["sobreMi"];
+  /** «(se abre en una pestaña nueva)» para el enlace a LinkedIn. */
+  newTab: string;
+};
+
+export default function SobreMi({ t, newTab }: SobreMiProps) {
   return (
     <Section id="sobre-mi" labelledBy="sobre-mi-title">
       <Reveal
@@ -12,7 +19,7 @@ export default function SobreMi() {
         <div className="relative aspect-[4/5] max-w-[380px] overflow-hidden rounded-[6px] border-[6px] border-[#FFFDF8] bg-green-wash shadow-[0_0_0_1px_#D6CFBF,0_30px_44px_-28px_rgba(31,42,38,0.55)] -rotate-[1.2deg] max-[820px]:w-[min(100%,430px)]">
           <Image
             src={retrato}
-            alt="Retrato de Pedro Fernández Muñoz"
+            alt={t.portraitAlt}
             fill
             sizes="(max-width: 820px) 430px, 380px"
             style={{ objectPosition: "53% center" }}
@@ -27,22 +34,13 @@ export default function SobreMi() {
           >
             Pedro Fernández Muñoz
           </h2>
-          <p className="mb-[15px] text-[17px] leading-[1.72] text-ink-soft">
-            Soy Pedro, programador y desarrollador de software freelance en Alcoy (Alicante).
-            Trabajo con pymes de toda España, en remoto o en persona, para digitalizar sus
-            operaciones: menos trabajo manual, menos errores y herramientas que de verdad se
-            usan.
-          </p>
-          <p className="mb-[15px] text-[17px] leading-[1.72] text-ink-soft">
-            Cuando trabajas conmigo, hablas siempre con la misma persona: quien entiende tu
-            problema es quien lo programa. Sin comerciales de por medio, sin proyectos que
-            pasan por cinco manos.
-          </p>
+          {t.paragraphs.map((paragraph) => (
+            <p key={paragraph} className="mb-[15px] text-[17px] leading-[1.72] text-ink-soft">
+              {paragraph}
+            </p>
+          ))}
           <p className="mt-[22px] mb-[18px] border-t border-line pt-[19px] text-[14.5px] leading-[1.67] text-muted">
-            <strong className="text-ink-soft">Garantía técnica:</strong> titulado en
-            Administración de Sistemas y certificado por AWS. Desarrollo con Next.js, React,
-            Laravel, Go, TypeScript y Node.js, con infraestructura en AWS o en tus propios
-            servidores.
+            <strong className="text-ink-soft">{t.credentialsLabel}</strong> {t.credentials}
           </p>
           <a
             href="https://www.linkedin.com/in/pedro-fern%C3%A1ndez-mu%C3%B1oz-4148a9287/"
@@ -52,7 +50,7 @@ export default function SobreMi() {
           >
             LinkedIn
             <ExternalArrow className="group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
-            <span className="sr-only"> (se abre en una pestaña nueva)</span>
+            <span className="sr-only"> {newTab}</span>
           </a>
         </div>
       </Reveal>

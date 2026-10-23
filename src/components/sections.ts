@@ -1,8 +1,11 @@
-export const SECTIONS = [
-  { href: "#servicios", label: "Servicios" },
-  { href: "#casos", label: "Proyectos" },
-  { href: "#opiniones", label: "Opiniones" },
-  { href: "#donde-me-has-visto", label: "Dónde me has visto" },
-  { href: "#proceso", label: "Cómo trabajo" },
-  { href: "#sobre-mi", label: "Quién soy" },
-];
+/** Secciones del menú, en orden. El texto de cada una está en el diccionario. */
+export const SECTION_IDS = [
+  "servicios",
+  "casos",
+  "opiniones",
+  "donde-me-has-visto",
+  "proceso",
+  "sobre-mi",
+] as const;
+
+export type SectionId = (typeof SECTION_IDS)[number];

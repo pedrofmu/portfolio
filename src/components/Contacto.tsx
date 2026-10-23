@@ -1,5 +1,9 @@
+import { Fragment } from "react";
 import Reveal from "./Reveal";
 import { ridgePoints, toPath, type RidgeShape } from "../lib/inkRidge";
+import { SITE } from "../lib/site";
+import { LOCALES, LOCALE_NAMES, type Locale } from "../i18n/config";
+import type { Dictionary } from "../i18n";
 
 // Remate de la página: dos crestas bajas en tinta verde oscura, con el mismo
 // trazo que el paisaje del hero, para cerrar el recorrido como empezó.
@@ -37,7 +41,14 @@ const SILHOUETTES = RIDGES.map((ridge) => ({
   opacity: ridge.opacity,
 }));
 
-export default function Contacto() {
+type ContactoProps = {
+  lang: Locale;
+  t: Dictionary["contacto"];
+  /** «(se abre en una pestaña nueva)» para el enlace a WhatsApp. */
+  newTab: string;
+};
+
+export default function Contacto({ lang, t, newTab }: ContactoProps) {
   return (
     <section
       id="contacto"
@@ -59,17 +70,14 @@ export default function Contacto() {
           y={26}
           className="m-0 font-display text-[clamp(1.9rem,5.5vw,3rem)] leading-[1.1] font-extrabold tracking-[-0.01em] text-cream text-balance"
         >
-          <h2 id="contacto-title">Cuéntame tu caso</h2>
+          <h2 id="contacto-title">{t.title}</h2>
         </Reveal>
         <Reveal
           y={26}
           delay={70}
           className="m-0 max-w-[480px] text-[clamp(1rem,2.3vw,1.15rem)] leading-[1.6] text-[#DCEDE7] text-balance"
         >
-          <p>
-            Valoración y presupuesto del proyecto gratuitos y sin compromiso. Te digo claro
-            si te puedo ayudar.
-          </p>
+          <p>{t.lead}</p>
         </Reveal>
         <Reveal
           y={26}
@@ -77,10 +85,10 @@ export default function Contacto() {
           className="mt-[14px] flex flex-wrap justify-center gap-[14px] max-[620px]:w-full max-[620px]:flex-col max-[620px]:items-stretch"
         >
           <a
-            href="mailto:hola@pedrofm.dev"
+            href={`mailto:${SITE.email}`}
             className="inline-flex items-center gap-[10px] rounded-[13px] bg-cream px-[26px] py-[15px] text-[16px] font-bold text-brand-dark no-underline transition-transform duration-200 hover:-translate-y-0.5 hover:text-brand-dark max-[620px]:justify-center"
           >
-            Escríbeme: hola@pedrofm.dev
+            {t.email} {SITE.email}
           </a>
           <a
             href="https://wa.me/34673314676"
@@ -89,12 +97,20 @@ export default function Contacto() {
             className="inline-flex items-center gap-[10px] rounded-[13px] border-[1.5px] border-[rgba(251,248,242,0.55)] bg-transparent px-[26px] py-[15px] text-[16px] font-bold text-cream no-underline transition duration-200 hover:-translate-y-0.5 hover:border-cream hover:text-cream max-[620px]:justify-center"
           >
             WhatsApp
-            <span className="sr-only"> (se abre en una pestaña nueva)</span>
+            <span className="sr-only"> {newTab}</span>
           </a>
         </Reveal>
         <Reveal y={26} delay={210} className="mt-[6px] max-w-[300px] text-[13.5px] text-[#D3E8E1]">
-          Respuesta en menos de 24 h · Español · <span lang="ca">Valencià</span> ·{" "}
-          <span lang="en">English</span> · <span lang="fr">Français</span>
+          {t.reply}
+          {/* Idiomas de trabajo, cada uno en sí mismo (y marcado para el lector de pantalla). */}
+          {LOCALES.map((locale) => (
+            <Fragment key={locale}>
+              {" · "}
+              <span lang={locale === lang ? undefined : locale} translate="no">
+                {LOCALE_NAMES[locale]}
+              </span>
+            </Fragment>
+          ))}
         </Reveal>
       </div>
     </section>

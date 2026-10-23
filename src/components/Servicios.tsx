@@ -1,19 +1,7 @@
+import type { Dictionary } from "../i18n";
 import { Section, containerClass } from "./ui";
 
-const services = [
-  {
-    title: "Programas a medida",
-    lead: "Una herramienta que encaje con tu forma de trabajar.",
-    body: "Desarrollo aplicaciones internas para gestionar inventario, tareas y proyectos. Los datos que hoy tienes repartidos en Excels pasan a un sitio donde todo el equipo puede trabajar.",
-  },
-  {
-    title: "Inteligencia artificial",
-    lead: "Ayuda con las consultas, los datos y el trabajo repetitivo.",
-    body: "Creo chatbots para atender a tus clientes y asistentes que analizan datos, ordenan información y preparan trabajo para tu equipo. Partimos de una tarea concreta que quieras resolver.",
-  },
-];
-
-export default function Servicios() {
+export default function Servicios({ t }: { t: Dictionary["servicios"] }) {
   return (
     <Section id="servicios" labelledBy="servicios-title">
       <div className={containerClass}>
@@ -22,15 +10,13 @@ export default function Servicios() {
             id="servicios-title"
             className="font-display text-[clamp(38px,5vw,56px)] leading-[1.05] font-bold tracking-[-0.035em]"
           >
-            Servicios
+            {t.title}
           </h2>
-          <p className="max-w-[48ch] text-[18px] leading-[1.6] text-pretty">
-            Software a medida e inteligencia artificial para pymes. Cuéntame qué le quita tiempo a tu equipo y vemos cómo resolverlo.
-          </p>
+          <p className="max-w-[48ch] text-[18px] leading-[1.6] text-pretty">{t.intro}</p>
         </div>
 
         <div className="flex flex-col gap-3 max-[620px]:gap-2">
-          {services.map((service) => (
+          {t.items.map((service) => (
             <article
               key={service.title}
               className="-mx-8 px-8 py-10 even:bg-green-wash max-[820px]:-mx-6 max-[820px]:px-6 max-[620px]:-mx-5 max-[620px]:px-5 max-[620px]:py-8"

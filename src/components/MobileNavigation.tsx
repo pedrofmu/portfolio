@@ -1,35 +1,17 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 
-import { SECTIONS } from "./sections";
+import type { Dictionary } from "../i18n";
+import { SECTION_IDS } from "./sections";
+import { useDismiss } from "./useDismiss";
 
-export default function MobileNavigation() {
+export default function MobileNavigation({ t }: { t: Dictionary["nav"] }) {
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-
-  // Escape cierra y devuelve el foco al botón; un clic o foco fuera, también cierra.
-  useEffect(() => {
-    if (!open) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      setOpen(false);
-      buttonRef.current?.focus();
-    };
-    const onOutside = (event: Event) => {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
-    };
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("pointerdown", onOutside);
-    document.addEventListener("focusin", onOutside);
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("pointerdown", onOutside);
-      document.removeEventListener("focusin", onOutside);
-    };
-  }, [open]);
+  useDismiss(open, setOpen, rootRef, buttonRef);
 
   return (
     <div ref={rootRef} className="relative lg:hidden">
@@ -55,24 +37,24 @@ export default function MobileNavigation() {
             </>
           )}
         </svg>
-        <span className="sr-only">{open ? "Cerrar menú" : "Abrir menú"}</span>
+        <span className="sr-only">{open ? t.closeMenu : t.openMenu}</span>
       </button>
 
       {open ? (
         <nav
           id={menuId}
-          aria-label="Secciones"
+          aria-label={t.label}
           className="absolute top-[calc(100%+8px)] right-0 z-50 max-h-[calc(100svh-78px)] w-[min(20rem,calc(100vw-40px))] overflow-y-auto rounded-[8px] border border-[#D6CFBF] bg-cream p-2 shadow-soft"
         >
           <div className="flex flex-col">
-            {SECTIONS.map((section) => (
+            {SECTION_IDS.map((id) => (
               <a
-                key={section.href}
-                href={section.href}
+                key={id}
+                href={`#${id}`}
                 onClick={() => setOpen(false)}
                 className="flex min-h-11 items-center rounded-[6px] px-3 text-[15px] font-semibold text-charcoal no-underline transition-colors duration-200 hover:bg-green-wash hover:text-brand"
               >
-                {section.label}
+                {t.sections[id]}
               </a>
             ))}
           </div>
@@ -81,7 +63,7 @@ export default function MobileNavigation() {
             onClick={() => setOpen(false)}
             className="mt-2 flex min-h-11 items-center justify-center rounded-[10px] bg-brand px-4 text-[15px] font-bold text-cream no-underline transition-colors duration-200 hover:bg-brand-dark hover:text-cream"
           >
-            Cuéntame tu caso
+            {t.cta}
           </a>
         </nav>
       ) : null}

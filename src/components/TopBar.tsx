@@ -3,10 +3,13 @@
 import { useState } from "react";
 import { m, useMotionValueEvent, useScroll } from "motion/react";
 
+import type { Locale } from "../i18n/config";
+import type { Dictionary } from "../i18n";
+import LanguageSwitcher from "./LanguageSwitcher";
 import MobileNavigation from "./MobileNavigation";
-import { SECTIONS } from "./sections";
+import { SECTION_IDS } from "./sections";
 
-export default function TopBar() {
+export default function TopBar({ lang, nav }: { lang: Locale; nav: Dictionary["nav"] }) {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
 
@@ -35,26 +38,29 @@ export default function TopBar() {
         >
           pedrofm<span className="text-brand">.</span>
         </a>
-        <nav aria-label="Secciones" className="hidden lg:flex items-center gap-[22px]">
-          {SECTIONS.map((section) => (
+        {/* De 1024 a 1280 px la barra va justa con el selector de idioma y las
+            etiquetas largas (en/fr): el hueco entre enlaces se estrecha. */}
+        <nav aria-label={nav.label} className="hidden items-center gap-[18px] lg:flex xl:gap-[22px]">
+          {SECTION_IDS.map((id) => (
             <a
-              key={section.href}
-              href={section.href}
-              className="text-[14.5px] font-medium text-charcoal/75 no-underline transition-colors duration-200 hover:text-brand"
+              key={id}
+              href={`#${id}`}
+              className="text-[14.5px] font-medium whitespace-nowrap text-charcoal/75 no-underline transition-colors duration-200 hover:text-brand"
             >
-              {section.label}
+              {nav.sections[id]}
             </a>
           ))}
         </nav>
-        <div className="hidden items-center gap-[22px] lg:flex">
+        <div className="flex items-center gap-2 lg:gap-1 xl:gap-3">
+          <LanguageSwitcher lang={lang} label={nav.language} />
           <a
             href="#contacto"
-            className="inline-flex items-center gap-2 rounded-[11px] bg-brand px-[18px] py-[10px] text-[14.5px] font-semibold text-cream no-underline transition-colors duration-200 hover:bg-brand-dark hover:text-cream"
+            className="hidden items-center gap-2 rounded-[11px] bg-brand px-[18px] py-[10px] text-[14.5px] font-semibold whitespace-nowrap text-cream no-underline transition-colors duration-200 hover:bg-brand-dark hover:text-cream lg:inline-flex"
           >
-            Cuéntame tu caso
+            {nav.cta}
           </a>
+          <MobileNavigation t={nav} />
         </div>
-        <MobileNavigation />
       </div>
     </m.div>
   );
