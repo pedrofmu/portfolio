@@ -7,6 +7,7 @@ import { bricolage, fontVariables, instrument } from "../fonts";
 import { LOCALES, hasLocale } from "../../i18n/config";
 import { getDictionary } from "../../i18n";
 import { localeMetadata } from "../../i18n/metadata";
+import { heroWaitScript } from "../../lib/heroWait";
 
 export { viewport } from "../../i18n/metadata";
 
@@ -17,16 +18,8 @@ const HERO_FONTS = [
   `700 1em ${instrument.style.fontFamily}`,
 ];
 
-/**
- * Espera del hero: mientras `<html>` tenga `data-hero-wait`, el hero no se ve
- * y sus animaciones esperan en el primer fotograma (ver globals.css). Con mala
- * conexión el HTML llega a trozos y el navegador pinta lo que tiene: sin esto,
- * cada cresta y cada bloque de texto arrancaba al llegar el suyo, a saltos.
- * Se quita cuando el hero está entero (ya existe lo que va detrás) y sus
- * fuentes han cargado, o a los 3 s como mucho, y todo arranca a la vez. Sin JS
- * no se pone y el hero se ve como siempre.
- */
-const heroWaitScript = `(function(){var r=document.documentElement,show=function(){r.removeAttribute("data-hero-wait")};r.setAttribute("data-hero-wait","");setTimeout(show,3000);(function wait(){var h=document.getElementById("inicio");if(!h||!(h.nextElementSibling||document.readyState!=="loading"))return requestAnimationFrame(wait);try{Promise.all(${JSON.stringify(HERO_FONTS)}.map(function(f){return document.fonts.load(f)})).then(show,show)}catch(e){show()}})()})()`;
+/** Pantalla de carga hasta que el hero está listo: ver `lib/heroWait.ts`. */
+const waitScript = heroWaitScript(HERO_FONTS);
 
 // Un HTML estático por idioma; cualquier otro segmento es un 404.
 export const dynamicParams = false;
@@ -51,7 +44,7 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
     // `<html>` antes de hidratar.
     <html lang={lang} className={fontVariables} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: heroWaitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: waitScript }} />
       </head>
       <body>
         <a

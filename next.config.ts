@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
   experimental: {
     // Varios layouts raíz (`/` y `/[lang]`): el 404 es `app/global-not-found.tsx`.
     globalNotFound: true,
+    // El CSS va dentro del HTML (`<style>`) en lugar de en un fichero aparte:
+    // una petición menos antes del primer pintado, y en `/` el script que
+    // redirige al idioma ya no espera a la hoja de estilos (un script en línea
+    // se bloquea hasta que cargan las hojas que tiene delante). Con mala
+    // conexión son segundos. Es Tailwind: ~10 kB comprimido.
+    inlineCss: true,
   },
   turbopack: {
     // Fija la raíz: si hay un `package-lock.json` en una carpeta superior,

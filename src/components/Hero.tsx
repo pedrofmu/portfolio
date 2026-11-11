@@ -1,6 +1,12 @@
 "use client";
 
-import { useRef, useState, type CSSProperties, type MouseEvent as ReactMouseEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import {
   m,
   useMotionValueEvent,
@@ -11,6 +17,7 @@ import {
 
 import type { Locale } from "../i18n/config";
 import type { Dictionary } from "../i18n";
+import { HERO_HYDRATED_EVENT } from "../lib/heroWait";
 import { casoHref, type CasoId } from "./Casos";
 import InkLandscape from "./InkLandscape";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -33,9 +40,9 @@ const marqueeItems = Array.from({ length: MARQUEE_COPIES }, (_, copy) =>
 ).flat();
 
 /** Retraso de `animate-fade-up`. La entrada va con CSS y no con Motion:
- * arranca en cuanto el hero está entero y con sus fuentes (`data-hero-wait`,
- * en layout.tsx), sin esperar a hidratar (en móvil, el texto se quedaba
- * invisible ~2 s). */
+ * arranca en el mismo fotograma en que se va la pantalla de carga
+ * (`data-hero-wait`, en `lib/heroWait.ts`), y sin JS se ve igualmente (con
+ * Motion, el texto se quedaría invisible hasta hidratar). */
 const fadeUp = (delay: number) => ({ animationDelay: `${delay}s` });
 
 /** Sello cuadrado tipo hanko, en el verde de la marca, con un visto a pincel. */
@@ -81,6 +88,12 @@ export default function Hero({ lang, t, nav }: HeroProps) {
     "(max-width: 900px)",
     MARQUEE_COPIES,
   );
+
+  // Hidratado: el menú, el selector de idioma y la tira ya responden. Es lo
+  // último que espera la pantalla de carga (`lib/heroWait.ts`).
+  useEffect(() => {
+    document.dispatchEvent(new Event(HERO_HYDRATED_EVENT));
+  }, []);
 
   // Si el hash ya apunta a ese caso el navegador no emite `hashchange`; lo
   // lanzamos a mano para que Casos vuelva a colocar el carrusel igualmente.

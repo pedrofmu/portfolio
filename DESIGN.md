@@ -167,13 +167,28 @@ Reuse these before inventing new ones.
 - **Above-the-fold entrances use CSS** (`animate-fade-up`, `animate-card-in`)
   so they run before hydration; Motion `initial` would keep them invisible
   until the JS loads.
-- **The hero plays in one go.** An inline script in `layout.tsx` sets
-  `data-hero-wait` on `<html>` until the hero's HTML is fully parsed and its
-  fonts have loaded (3 s at most). Until then the hero is hidden and every CSS
+- **The hero plays in one go, after a loading screen.** An inline script
+  (`src/lib/heroWait.ts`) sets `data-hero-wait` on `<html>` until the hero's
+  HTML is fully parsed, its fonts have loaded and React has hydrated it (6 s
+  at most). Until then the loading screen covers the page and every CSS
   animation inside `#inicio` waits on its first frame (`globals.css`), so they
   all start in the same frame instead of one ridge at a time as a slow
-  connection delivers the HTML. New hero motion gets this for free as a CSS
+  connection delivers the HTML. The hero is painted underneath meanwhile, so
+  the ink filters are already rasterised at the reveal: don't hide it with
+  `visibility` or `display`. New hero motion gets this for free as a CSS
   animation; don't start hero motion from JS while the attribute is set.
+- **The loading screen is the wordmark on paper with one small brush stroke**
+  (`body::before` and `body::after` in `globals.css`). The wordmark is still;
+  beneath it a short brand-green stroke (44px) draws itself left to right,
+  rests and is wiped away, every 2 s. That stroke is the only loading
+  indicator on the site: no spinner, no pulse, no dots, no progress bar. It
+  is a paper-coloured cover sliding over a painted stroke, so only
+  `transform` animates and it stays smooth while the page is busy loading.
+  With reduced motion only the wordmark shows. The screen fades out (0.25 s)
+  as the hero starts. `/` shows it too while it redirects, so it continues
+  into the language page. The wordmark is a traced outline, not text, so it
+  never shows a fallback font; retrace it if the logo font changes. Without
+  JS it never appears.
 - **Start with CSS:** use CSS keyframes in `globals.css`, not SMIL, which
   waits for the `load` event.
 - **Always respect `prefers-reduced-motion`.** The global rule in

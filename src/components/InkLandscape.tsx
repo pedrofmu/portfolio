@@ -191,7 +191,7 @@ function Layer({
   // del recorrido equivale a arrastrar `lag` px por cada px de scroll.
   const transform = useTransform(progress, [0, 1], ["translateY(0svh)", `translateY(${layer.lag * 100}svh)`]);
   const gradientId = `ink-${layer.id}`;
-  const sweep = { animationDelay: `${index * 240}ms`, animationPlayState: playState };
+  const sweep = { animationDelay: `${index * 300}ms`, animationPlayState: playState };
 
   return (
     <m.div style={reduce ? undefined : { transform }} className="absolute inset-0 will-change-transform">
