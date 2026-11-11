@@ -184,7 +184,11 @@ Reuse these before inventing new ones.
   indicator on the site: no spinner, no pulse, no dots, no progress bar. It
   is a paper-coloured cover sliding over a painted stroke, so only
   `transform` animates and it stays smooth while the page is busy loading.
-  With reduced motion only the wordmark shows. The screen fades out (0.25 s)
+  With reduced motion only the wordmark shows. For the first second the
+  screen is plain paper: the wordmark and stroke appear only if loading takes
+  longer (`data-loader-logo`), so a fast load never flashes the logo. The
+  1 s count carries over from `/` to the language page, so a logo already
+  showing doesn't blink on the redirect. The screen fades out (0.25 s)
   as the hero starts. `/` shows it too while it redirects, so it continues
   into the language page. The wordmark is a traced outline, not text, so it
   never shows a fallback font; retrace it if the logo font changes. Without
