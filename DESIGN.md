@@ -105,9 +105,9 @@ Reuse these before inventing new ones.
   code. The current language's own name (sentence case, `#5E6B64`, 14px
   semibold) plus a brush chevron, 44px tall, sitting before the ☰ button on
   phones and after the nav on desktop, in both the hero header and the
-  TopBar. It opens a paper slip (same as the mobile menu) listing the four
+  TopBar. It opens a paper slip (same as the mobile menu) listing the three
   languages, each written in itself, the current one in brand with the
-  seal's brush check. The footer repeats the four as text links. Every
+  seal's brush check. The footer repeats the three as text links. Every
   language link is a `LanguageLink`: a real `<a>` with `lang`, `hrefLang`
   and `translate="no"` that remembers the choice and keeps the section being
   read.
@@ -137,7 +137,7 @@ Reuse these before inventing new ones.
   without an audio track (H.264, 720px, CRF 25, `-preset slow`,
   `+faststart`, in `public/assets/casos/`). The captions are burned in, so
   each demo exists twice: `<id>-es.mp4` (shown on es and ca) and
-  `<id>-en.mp4` (shown on en and fr), see `VIDEO_LOCALE`. The
+  `<id>-en.mp4` (shown on en), see `VIDEO_LOCALE`. The
   project's screenshot is the cover whenever the video isn't playing:
   cropped with `object-cover` + position, or contained on the screenshot's
   own background colour when a crop would cut its text.
@@ -208,10 +208,10 @@ Reuse these before inventing new ones.
 
 ## Copy
 
-- Four languages, each with its own URL (`/es/`, `/ca/`, `/en/`, `/fr/`).
+- Three languages, each with its own URL (`/es/`, `/ca/`, `/en/`).
   `/` picks one in the browser (saved choice → browser language → English)
   and redirects; language pages never redirect. All copy lives in
-  `src/i18n/dictionaries/`: change a text in all four, and never hard-code a
+  `src/i18n/dictionaries/`: change a text in all three, and never hard-code a
   string in a component.
 - Each language speaks to its own audience:
   - **es:** SMEs across Spain, from Alcoy and remote. Informal *tú*.
@@ -221,13 +221,11 @@ Reuse these before inventing new ones.
   - **en (British spelling):** companies abroad hiring remotely, and
     English-speaking businesses in Spain; mention remote work, Central
     European Time, GDPR and quotes in euros where they answer a doubt.
-  - **fr (*vous*):** same audience and angle as English, francophone.
 - Translations of a client's words are always marked as translations
   ("Translated from Spanish."). The valencià page keeps the original Spanish
   quote with `lang="es"`.
 - Typography per language: curly apostrophes (’), a non-breaking space
-  between a number and its unit (`24\u00a0h`), and in French a
-  non-breaking space before `:`.
+  between a number and its unit (`24\u00a0h`).
 - Plain, direct, from the client's point of view ("Cuéntame tu caso", "Ver
   casos de éxito"). CTAs say what happens.
 - One job per text element. Before adding a line, ask whether removing it
@@ -239,8 +237,8 @@ Reuse these before inventing new ones.
 
 - Desktop content is left-aligned. Centring is reserved for the contact block
   and short closing prompts.
-- Every new section must work at 360px, in all four languages (English and
-  French labels run longer than Spanish; check the TopBar at 1024px too).
+- Every new section must work at 360px, in all three languages (English
+  labels run longer than Spanish; check the TopBar at 1024px too).
   Check: 16–20px gutters, no horizontal page scroll, tap targets ≥ 44px,
   buttons that don't wrap their label (let them stack instead).
 - On phones, show content instead of hiding it: a peeking or drifting strip

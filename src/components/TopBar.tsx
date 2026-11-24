@@ -39,7 +39,7 @@ export default function TopBar({ lang, nav }: { lang: Locale; nav: Dictionary["n
           pedrofm<span className="text-brand">.</span>
         </a>
         {/* De 1024 a 1280 px la barra va justa con el selector de idioma y las
-            etiquetas largas (en/fr): el hueco entre enlaces se estrecha. */}
+            etiquetas largas (en): el hueco entre enlaces se estrecha. */}
         <nav aria-label={nav.label} className="hidden items-center gap-[18px] lg:flex xl:gap-[22px]">
           {SECTION_IDS.map((id) => (
             <a

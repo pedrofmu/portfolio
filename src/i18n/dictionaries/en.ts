@@ -186,7 +186,7 @@ export const en: Dictionary = {
     paragraphs: [
       "I’m Pedro, a freelance software developer based in Alcoy, Spain. I work remotely with companies across Europe, and in person with businesses in Spain, to digitalise their operations: less manual work, fewer errors and tools people actually use.",
       "When you work with me, you always talk to the same person: whoever understands your problem is the one who builds the solution. No salespeople in between, no projects passed through five pairs of hands.",
-      "I work in English, Spanish, French and Valencian, on Central European Time and under EU data protection law (GDPR).",
+      "I work in English, Spanish and Valencian, on Central European Time and under EU data protection law (GDPR).",
     ],
     credentialsLabel: "Credentials:",
     credentials:

@@ -3,7 +3,7 @@ import { LOCALES, LOCALE_NAMES } from "../../i18n/config";
 import { getDictionary } from "../../i18n";
 
 /**
- * Lo que se ve en `/` si el script del layout no redirige (sin JS): los cuatro
+ * Lo que se ve en `/` si el script del layout no redirige (sin JS): los tres
  * idiomas, cada uno escrito en sí mismo y con una línea de lo que encontrará.
  */
 export default function LanguagePicker() {

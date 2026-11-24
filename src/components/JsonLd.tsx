@@ -13,7 +13,7 @@ import type { Dictionary } from "../i18n";
  *   apunta a Person: es la declaración de que esta página trata sobre Pedro, y
  *   la señal directa para quien busca su nombre.
  *
- * Negocio, persona y web son los mismos en los cuatro idiomas (mismo `@id`);
+ * Negocio, persona y web son los mismos en los tres idiomas (mismo `@id`);
  * solo cambian sus textos y la WebPage, que es una por idioma.
  *
  * No se marcan opiniones: Google no admite reseñas autopublicadas sobre el

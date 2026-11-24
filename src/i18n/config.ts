@@ -3,10 +3,10 @@
  * componentes de cliente, y los textos no deben acabar en su bundle.
  *
  * Cada idioma tiene su público (ver DESIGN.md, «Copy»): es, pymes de toda
- * España; ca, pymes valencianas, con trato en persona; en y fr, empresas de
- * fuera que contratan en remoto y negocios extranjeros instalados en España.
+ * España; ca, pymes valencianas, con trato en persona; en, empresas de fuera
+ * que contratan en remoto y negocios extranjeros instalados en España.
  */
-export const LOCALES = ["es", "ca", "en", "fr"] as const;
+export const LOCALES = ["es", "ca", "en"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 /**
@@ -23,7 +23,6 @@ export const LOCALE_NAMES: Record<Locale, string> = {
   es: "Español",
   ca: "Valencià",
   en: "English",
-  fr: "Français",
 };
 
 /** Open Graph usa `idioma_PAÍS`. El inglés es británico: el público es europeo. */
@@ -31,15 +30,13 @@ export const OG_LOCALES: Record<Locale, string> = {
   es: "es_ES",
   ca: "ca_ES",
   en: "en_GB",
-  fr: "fr_FR",
 };
 
-/** Las demos están grabadas en dos idiomas: castellano para es y ca, inglés para en y fr. */
+/** Las demos están grabadas en dos idiomas: castellano para es y ca, inglés para en. */
 export const VIDEO_LOCALE: Record<Locale, "es" | "en"> = {
   es: "es",
   ca: "es",
   en: "en",
-  fr: "en",
 };
 
 /** Con `trailingSlash`, cada idioma es una carpeta: `/es/`, `/ca/`… */
@@ -65,7 +62,7 @@ const NEIGHBOURS: Record<string, Locale> = { gl: "es", eu: "es", ast: "es", an: 
  * JS como texto, para un `<script>` en línea antes de pintar, que deja en `p`
  * el idioma del visitante: el que eligió a mano, si no el primero de su
  * navegador que tengamos y, si no, `DEFAULT_LOCALE`. Con `fromPath`, manda
- * antes el idioma de la URL (`/fr/…`): lo usa el 404.
+ * antes el idioma de la URL (`/en/…`): lo usa el 404.
  */
 export function detectLocaleJs({ fromPath = false } = {}) {
   const locales = JSON.stringify(LOCALES);

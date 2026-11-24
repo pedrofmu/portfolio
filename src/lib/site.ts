@@ -98,5 +98,5 @@ export const SITE = {
   googleBusinessProfile: null as string | null,
 
   /** Idiomas de trabajo (BCP-47), declarados como atributo profesional. */
-  languages: ["es", "ca", "en", "fr"],
+  languages: ["es", "ca", "en"],
 } as const;

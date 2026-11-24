@@ -14,8 +14,8 @@ import { SITE } from "../lib/site";
 /**
  * 404 de todo el sitio (GitHub Pages sirve `404.html` para cualquier ruta que
  * no existe). Hay varios layouts raíz, así que Next pide este fichero en lugar
- * de un `not-found.tsx`. Lleva el texto en los cuatro idiomas y un script elige
- * cuál se ve antes de pintar: el de la URL (`/fr/…`), el elegido o el del
+ * de un `not-found.tsx`. Lleva el texto en los tres idiomas y un script elige
+ * cuál se ve antes de pintar: el de la URL (`/en/…`), el elegido o el del
  * navegador. Sin JS se ve el idioma por defecto.
  */
 
@@ -29,7 +29,6 @@ const visibility: Record<Locale, string> = {
   es: "grid [html[data-lang]:not([data-lang=es])_&]:hidden",
   ca: "hidden [html[data-lang=ca]_&]:grid",
   en: "hidden [html[data-lang=en]_&]:grid",
-  fr: "hidden [html[data-lang=fr]_&]:grid",
 };
 
 export const metadata: Metadata = {
@@ -37,7 +36,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   // Next ya añade `noindex` a la página de error: repetirlo duplicaría la etiqueta.
   // Título sin idioma: al hidratar, React repone el del HTML aunque el script
-  // lo cambie, y «404» se entiende en los cuatro.
+  // lo cambie, y «404» se entiende en los tres.
   title: `404 · ${SITE.name}`,
 };
 

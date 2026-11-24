@@ -14,7 +14,7 @@ type LanguageSwitcherProps = {
 
 /**
  * Selector de idioma discreto: el nombre del idioma actual y una flecha a
- * pincel, que despliega una ficha con los cuatro, cada uno escrito en sí
+ * pincel, que despliega una ficha con los tres, cada uno escrito en sí
  * mismo. Con 44 px de alto, cabe junto al botón de menú en móvil.
  */
 export default function LanguageSwitcher({ lang, label }: LanguageSwitcherProps) {
