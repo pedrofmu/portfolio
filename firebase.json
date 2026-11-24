@@ -7,6 +7,21 @@
         "regex": "^/fr(/.*)?$",
         "destination": "/",
         "type": 301
+      },
+      {
+        "source": "/es/ia-sin-humo-biocultura-madrid-2026",
+        "destination": "/ia-sin-humo-biocultura-madrid-2026/",
+        "type": 301
+      },
+      {
+        "source": "/es/ia-sin-humo-biocultura-madrid-2026/:rest*",
+        "destination": "/ia-sin-humo-biocultura-madrid-2026/:rest*",
+        "type": 301
+      },
+      {
+        "regex": "^/biocultura/?$",
+        "destination": "/ia-sin-humo-biocultura-madrid-2026/",
+        "type": 302
       }
     ],
     "headers": [

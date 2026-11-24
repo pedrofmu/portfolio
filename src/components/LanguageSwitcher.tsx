@@ -10,6 +10,8 @@ type LanguageSwitcherProps = {
   lang: Locale;
   /** «Idioma» en el idioma de la página: precede al nombre para el lector de pantalla. */
   label: string;
+  /** La página actual en cada idioma; por defecto, la home de cada uno. */
+  hrefs?: Record<Locale, string>;
 };
 
 /**
@@ -17,7 +19,7 @@ type LanguageSwitcherProps = {
  * pincel, que despliega una ficha con los tres, cada uno escrito en sí
  * mismo. Con 44 px de alto, cabe junto al botón de menú en móvil.
  */
-export default function LanguageSwitcher({ lang, label }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ lang, label, hrefs }: LanguageSwitcherProps) {
   const [open, setOpen] = useState(false);
   const listId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -64,6 +66,7 @@ export default function LanguageSwitcher({ lang, label }: LanguageSwitcherProps)
               <LanguageLink
                 locale={locale}
                 current={locale === lang}
+                href={hrefs?.[locale]}
                 className="flex min-h-11 items-center justify-between gap-3 rounded-[6px] px-3 text-[15px] font-semibold text-charcoal no-underline transition-colors duration-200 hover:bg-green-wash hover:text-brand aria-[current=page]:text-brand"
               >
                 {LOCALE_NAMES[locale]}

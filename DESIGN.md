@@ -123,7 +123,10 @@ Reuse these before inventing new ones.
 - **Ink ridges:** `src/lib/inkRidge.ts` (`ridgePoints` + `toPath`) draws
   deterministic mountain ridges that are safe for SSR. The hero uses four
   animated layers; Contacto uses two static silhouettes. Reuse it for any
-  new landscape motif instead of drawing new mountains by hand.
+  new landscape motif instead of drawing new mountains by hand. Static
+  ridges at the foot of a section use `ridgeFrame` for their `viewBox` and
+  a height of `max(<design height>, <heightVw>vw)`: with a fixed maximum
+  height, `slice` crops the peaks flat on wide screens.
 - **Prints (photos of people):** `rounded-[6px]`, a 6px `#FFFDF8` border as
   the paper margin, a hairline `#D6CFBF` ring, `shadow-soft`, slight tilt.
   No offset block shadows.
@@ -143,6 +146,17 @@ Reuse these before inventing new ones.
   own background colour when a crop would cut its text.
 - **Horizontal strips on mobile:** `useMarquee` for an auto-drifting loop,
   `useCarousel` for stepped carousels with arrows and dots.
+- **Talk pages (`src/components/charla/`):** a quiet static header (wordmark,
+  the talk's name, language switcher; no TopBar), a hub whose one accent is
+  two static mist ridges under the title, and resource pages that are plain
+  paper and ink. Content is data, drawn by `Blocks`: ruled `defs` lists like
+  the slides, a **copy sheet** (a sheet slip with its title, a compact
+  secondary «Copiar» button and the text in the body font, never monospace)
+  for prompts, templates and skills, tables that become labelled stacks on
+  phones, a pale `green-wash` slip for notes, seals for the three closing
+  ideas and tilted prints for the posters. Links inside copy use the
+  `**bold**` / `[text](@resource#anchor)` markup of `Rich`. Checklists and
+  templates print cleanly: header, footer and buttons are `print:hidden`.
 
 ## Motion
 
@@ -213,6 +227,17 @@ Reuse these before inventing new ones.
   and redirects; language pages never redirect. All copy lives in
   `src/i18n/dictionaries/`: change a text in all three, and never hard-code a
   string in a component.
+- **Talk pages are the one exception to the URL rule.** A talk's QR code
+  points at a URL without a language (`/ia-sin-humo-biocultura-madrid-2026/`),
+  which serves Spanish directly, without redirecting; `ca` and `en` live under
+  their prefix (`/ca/ia-sin-humo-…/`), and `/es/ia-sin-humo-…` is a Firebase
+  redirect to the bare URL. Their copy lives apart from the home's, in
+  `src/i18n/charla/` (texts) and `src/content/charla/<lang>/` (templates,
+  the single source for the page and for the .docx that
+  `scripts/charla-downloads.mjs` builds). Recommended skills are public ones,
+  linked to their source, never written or repackaged by us. The talk's own title stays as it
+  was announced in every language; slides and posters stay in the language
+  they were made in and are marked as such.
 - Each language speaks to its own audience:
   - **es:** SMEs across Spain, from Alcoy and remote. Informal *tú*.
   - **ca (valencià, AVL norm: treballe, teua, hui, faena):** Valencian SMEs

@@ -66,7 +66,7 @@ export function localeMetadata(lang: Locale, path = localePath(lang)): Metadata 
   };
 }
 
-/** Solo la home de cada idioma (y `/`) es indexable. */
+/** Indexables: la home de cada idioma (y `/`) y las páginas de la charla. */
 export const INDEXABLE: Metadata["robots"] = {
   index: true,
   follow: true,

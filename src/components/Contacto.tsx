@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import Reveal from "./Reveal";
-import { ridgePoints, toPath, type RidgeShape } from "../lib/inkRidge";
+import { ridgeFrame, ridgePoints, toPath, type RidgeShape } from "../lib/inkRidge";
 import { SITE } from "../lib/site";
 import { LOCALES, LOCALE_NAMES, type Locale } from "../i18n/config";
 import type { Dictionary } from "../i18n";
@@ -40,6 +40,8 @@ const SILHOUETTES = RIDGES.map((ridge) => ({
   d: toPath(ridgePoints(ridge, CANVAS), true, CANVAS),
   opacity: ridge.opacity,
 }));
+/** Altura que crece con el ancho para no recortar las cumbres: ver `ridgeFrame`. */
+const FRAME = ridgeFrame(RIDGES, CANVAS);
 
 type ContactoProps = {
   lang: Locale;
@@ -53,13 +55,16 @@ export default function Contacto({ lang, t, newTab }: ContactoProps) {
     <section
       id="contacto"
       aria-labelledby="contacto-title"
-      className="focus-light relative overflow-hidden bg-brand px-6 pt-[clamp(64px,10vw,112px)] pb-[clamp(96px,13vw,150px)] max-[620px]:px-5 max-[620px]:pt-14 max-[620px]:pb-24"
+      // El pie deja sitio a las crestas, que en pantallas anchas crecen con el ancho.
+      style={{ paddingBottom: `max(clamp(96px, 13vw, 150px), calc(${FRAME.heightVw}vw + 24px))` }}
+      className="focus-light relative overflow-hidden bg-brand px-6 pt-[clamp(64px,10vw,112px)] max-[620px]:px-5 max-[620px]:pt-14"
     >
       <svg
-        viewBox={`0 0 ${CANVAS.width} ${CANVAS.height}`}
+        viewBox={FRAME.viewBox}
         preserveAspectRatio="xMidYMax slice"
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[clamp(72px,9vw,130px)] w-full"
+        style={{ height: `max(clamp(72px, 9vw, 130px), ${FRAME.heightVw}vw)` }}
+        className="pointer-events-none absolute inset-x-0 bottom-0 w-full"
       >
         {SILHOUETTES.map((ridge) => (
           <path key={ridge.d} d={ridge.d} fill="#04231E" fillOpacity={ridge.opacity} />

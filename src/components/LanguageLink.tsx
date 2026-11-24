@@ -21,6 +21,8 @@ type LanguageLinkProps = {
   locale: Locale;
   /** El idioma de la página: enlaza a sí misma y se marca con `aria-current`. */
   current?: boolean;
+  /** La misma página en ese idioma; por defecto, su home. */
+  href?: string;
   className?: string;
   children: ReactNode;
 };
@@ -30,10 +32,16 @@ type LanguageLinkProps = {
  * guarda la elección, que `/` respeta antes que el idioma del navegador, y
  * lleva a la misma sección en el otro idioma.
  */
-export default function LanguageLink({ locale, current, className, children }: LanguageLinkProps) {
+export default function LanguageLink({
+  locale,
+  current,
+  href = localePath(locale),
+  className,
+  children,
+}: LanguageLinkProps) {
   return (
     <a
-      href={localePath(locale)}
+      href={href}
       lang={locale}
       hrefLang={locale}
       // Un traductor automático no debe convertir «Español» en «Spanish».
@@ -46,7 +54,7 @@ export default function LanguageLink({ locale, current, className, children }: L
           // Sin almacenamiento (modo privado, cookies bloqueadas) se navega igual.
         }
         // Se cambia antes de que el navegador siga el enlace, que lee el `href` después.
-        event.currentTarget.href = localePath(locale) + currentAnchor();
+        event.currentTarget.href = href + currentAnchor();
       }}
       className={className}
     >

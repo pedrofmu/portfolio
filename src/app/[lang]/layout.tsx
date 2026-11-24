@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../globals.css";
-import JsonLd from "../../components/JsonLd";
 import MotionProvider from "../../components/MotionProvider";
 import { bricolage, fontVariables, instrument } from "../fonts";
 import { LOCALES, hasLocale } from "../../i18n/config";
@@ -18,8 +17,12 @@ const HERO_FONTS = [
   `700 1em ${instrument.style.fontFamily}`,
 ];
 
-/** Pantalla de carga hasta que el hero está listo: ver `lib/heroWait.ts`. */
-const waitScript = heroWaitScript(HERO_FONTS);
+/**
+ * Pantalla de carga hasta que el hero está listo: ver `lib/heroWait.ts`. Solo
+ * en la home (`/es/`): las demás páginas del idioma (la charla) no tienen hero
+ * y esperarían en vano hasta el tope.
+ */
+const waitScript = `if(/^\\/[^/]+\\/?$/.test(location.pathname))${heroWaitScript(HERO_FONTS)}`;
 
 // Un HTML estático por idioma; cualquier otro segmento es un 404.
 export const dynamicParams = false;
@@ -54,7 +57,6 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
           {t.skipLink}
         </a>
         <MotionProvider>{children}</MotionProvider>
-        <JsonLd lang={lang} t={t} />
       </body>
     </html>
   );

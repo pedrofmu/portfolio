@@ -10,11 +10,13 @@ type FooterProps = {
   language: string;
   /** «(se abre en una pestaña nueva)» para los enlaces externos. */
   newTab: string;
+  /** La página actual en cada idioma; por defecto, la home de cada uno. */
+  hrefs?: Record<Locale, string>;
 };
 
-export default function Footer({ lang, t, language, newTab }: FooterProps) {
+export default function Footer({ lang, t, language, newTab, hrefs }: FooterProps) {
   return (
-    <footer className="border-t border-[#E7E0D2] bg-[#F3EDE1] px-6 pt-[clamp(48px,7vw,72px)] pb-8 max-[620px]:px-5">
+    <footer className="print:hidden border-t border-[#E7E0D2] bg-[#F3EDE1] px-6 pt-[clamp(48px,7vw,72px)] pb-8 max-[620px]:px-5">
       <div className="mx-auto flex max-w-[1080px] flex-col gap-9">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-8">
           <div className="flex flex-col gap-[10px]">
@@ -62,6 +64,7 @@ export default function Footer({ lang, t, language, newTab }: FooterProps) {
                     <LanguageLink
                       locale={locale}
                       current={locale === lang}
+                      href={hrefs?.[locale]}
                       className="inline-flex min-h-11 items-center text-[13.5px] font-semibold text-green underline decoration-transparent underline-offset-4 transition-colors duration-200 hover:text-green-dark hover:decoration-current aria-[current=page]:text-[#5F6E67]"
                     >
                       {LOCALE_NAMES[locale]}

@@ -67,3 +67,22 @@ export function toPath(points: [number, number][], closed: boolean, { width, hei
     .join("");
   return closed ? `${line}L${width + 40} ${height}L-40 ${height}Z` : line;
 }
+
+/**
+ * Encuadre de unas crestas al pie de una sección, con `preserveAspectRatio="xMidYMax slice"`.
+ * `viewBox` empieza justo encima de la cumbre más alta, y `heightVw` es la
+ * altura (en vw) a la que el lienzo cabe entero a lo ancho. Si el SVG es más
+ * bajo que eso, `slice` escala por el ancho y recorta las cumbres; por eso la
+ * altura debe ser `max(<la de diseño>, ${heightVw}vw)`: en pantallas anchas
+ * crece con el ancho y en móvil recorta por los lados, nunca por arriba.
+ */
+export function ridgeFrame(ridges: RidgeShape[], canvas: Canvas, margin = 8) {
+  const top = Math.floor(
+    Math.min(...ridges.flatMap((ridge) => ridgePoints(ridge, canvas).map(([, y]) => y))) - margin,
+  );
+  const height = canvas.height - top;
+  return {
+    viewBox: `0 ${top} ${canvas.width} ${height}`,
+    heightVw: Math.round((height / canvas.width) * 10000) / 100,
+  };
+}

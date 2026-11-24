@@ -11,6 +11,7 @@ import Proceso from "../../components/Proceso";
 import SobreMi from "../../components/SobreMi";
 import Contacto from "../../components/Contacto";
 import Footer from "../../components/Footer";
+import JsonLd from "../../components/JsonLd";
 import { LANGUAGE_ALTERNATES, hasLocale, localePath } from "../../i18n/config";
 import { getDictionary } from "../../i18n";
 import { INDEXABLE } from "../../i18n/metadata";
@@ -55,6 +56,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <Contacto lang={lang} t={t.contacto} newTab={t.newTab} />
       </main>
       <Footer lang={lang} t={t.footer} language={t.nav.language} newTab={t.newTab} />
+      {/* Describe la home (su WebPage): solo aquí, no en las demás páginas del idioma. */}
+      <JsonLd lang={lang} t={t} />
     </>
   );
 }
