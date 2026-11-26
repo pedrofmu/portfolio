@@ -4,22 +4,37 @@ import type { ReactNode } from "react";
 export const containerClass =
   "mx-auto w-[min(100%-48px,1080px)] max-[620px]:w-[min(100%-40px,1080px)]";
 
+/** Fondos de sección de la home: rotan washi → paper → mist tras el hero. */
+export type SectionTone = "paper" | "washi" | "mist";
+
+const TONE_CLASS: Record<SectionTone, string> = {
+  paper: "border-t border-line bg-paper",
+  washi: "border-t border-line bg-washi",
+  mist: "border-t border-line bg-mist",
+};
+
 type SectionProps = {
   id?: string;
+  /** Home: fondo de la sección, con un filo `border-line` arriba. */
+  tone?: SectionTone;
+  /** Páginas de la charla: alterna `paper` y `sheet`. */
   white?: boolean;
   labelledBy?: string;
   children: ReactNode;
 };
 
 /** Matches the original `.section` / `.section-white`. */
-export function Section({ id, white = false, labelledBy, children }: SectionProps) {
+export function Section({ id, tone, white = false, labelledBy, children }: SectionProps) {
+  const surface = tone
+    ? TONE_CLASS[tone]
+    : white
+      ? "border-t border-line bg-[#FFFDF8]"
+      : "bg-paper";
   return (
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={`bg-paper py-[90px] text-ink max-[820px]:py-[76px] max-[620px]:py-14 ${
-        white ? "border-t border-line bg-[#FFFDF8]" : ""
-      }`}
+      className={`py-[90px] text-ink max-[820px]:py-[76px] max-[620px]:py-14 ${surface}`}
     >
       {children}
     </section>

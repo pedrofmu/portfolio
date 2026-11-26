@@ -6,7 +6,7 @@ export default function Proceso({ t }: { t: Dictionary["proceso"] }) {
     <section
       id="proceso"
       aria-labelledby="proceso-title"
-      className="border-t border-line bg-[#FFFDF8] pt-[100px] pb-[112px] text-ink max-[820px]:pt-[76px] max-[820px]:pb-[88px] max-[620px]:py-14"
+      className="border-t border-line bg-paper pt-[100px] pb-[112px] text-ink max-[820px]:pt-[76px] max-[820px]:pb-[88px] max-[620px]:py-14"
     >
       <div
         className={`${containerClass} grid grid-cols-[1fr_1.15fr] items-start gap-x-20 gap-y-12 max-[820px]:grid-cols-1 max-[620px]:gap-y-10`}

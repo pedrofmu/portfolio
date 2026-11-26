@@ -12,7 +12,7 @@ type SobreMiProps = {
 
 export default function SobreMi({ t, newTab }: SobreMiProps) {
   return (
-    <Section id="sobre-mi" labelledBy="sobre-mi-title">
+    <Section id="sobre-mi" tone="mist" labelledBy="sobre-mi-title">
       <Reveal
         className={`${containerClass} grid grid-cols-[minmax(280px,0.8fr)_minmax(320px,1.2fr)] items-center gap-[clamp(42px,7vw,76px)] max-[820px]:grid-cols-1`}
       >

@@ -3,7 +3,7 @@ import { Section, containerClass } from "./ui";
 
 export default function Servicios({ t }: { t: Dictionary["servicios"] }) {
   return (
-    <Section id="servicios" labelledBy="servicios-title">
+    <Section id="servicios" tone="washi" labelledBy="servicios-title">
       <div className={containerClass}>
         <div className="mb-12 grid grid-cols-[1fr_1.15fr] items-start gap-x-20 gap-y-5 max-[820px]:grid-cols-1 max-[620px]:mb-8">
           <h2
@@ -19,7 +19,7 @@ export default function Servicios({ t }: { t: Dictionary["servicios"] }) {
           {t.items.map((service) => (
             <article
               key={service.title}
-              className="-mx-8 px-8 py-10 even:bg-green-wash max-[820px]:-mx-6 max-[820px]:px-6 max-[620px]:-mx-5 max-[620px]:px-5 max-[620px]:py-8"
+              className="-mx-8 px-8 py-10 even:bg-paper max-[820px]:-mx-6 max-[820px]:px-6 max-[620px]:-mx-5 max-[620px]:px-5 max-[620px]:py-8"
             >
               <div className="grid grid-cols-[1fr_1.15fr] items-baseline gap-x-20 gap-y-5 max-[820px]:grid-cols-1 max-[620px]:gap-y-4">
                 <h3 className="max-w-[15ch] font-display text-[clamp(28px,3.2vw,36px)] leading-[1.12] font-semibold tracking-[-0.025em] text-balance">

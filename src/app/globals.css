@@ -6,6 +6,9 @@
   --color-ink-soft: #5c5850;
   --color-muted: #726d62;
   --color-paper: #fbf8f2;
+  /* Fondos de sección: papel washi (cálido) y niebla (verde grisáceo). */
+  --color-washi: #f5f0e6;
+  --color-mist: #eef1ec;
   --color-line: #e4e1d8;
   --color-green: #0f7263;
   --color-green-dark: #0a5548;

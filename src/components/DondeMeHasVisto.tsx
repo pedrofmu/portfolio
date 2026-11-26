@@ -54,7 +54,7 @@ export default function DondeMeHasVisto({ t, newTab }: DondeMeHasVistoProps) {
   } = useCarousel(apariciones.length);
 
   return (
-    <Section id="donde-me-has-visto" white labelledBy="donde-me-has-visto-title">
+    <Section id="donde-me-has-visto" tone="washi" labelledBy="donde-me-has-visto-title">
       <Reveal className={containerClass}>
         <SectionHeading title={t.title} titleId="donde-me-has-visto-title" />
 
@@ -87,7 +87,6 @@ export default function DondeMeHasVisto({ t, newTab }: DondeMeHasVistoProps) {
                   src={aparicion.image}
                   alt={t.items[aparicion.id].alt}
                   fill
-                  quality={90}
                   sizes="(max-width: 620px) 100vw, 520px"
                   style={{ objectPosition: aparicion.imagePosition }}
                   className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.03]"

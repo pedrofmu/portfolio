@@ -263,7 +263,7 @@ export default function Casos({ lang, t, newTab }: CasosProps) {
   };
 
   return (
-    <Section id="casos" white labelledBy="casos-title">
+    <Section id="casos" tone="paper" labelledBy="casos-title">
       <Reveal className={containerClass}>
         <SectionHeading title={t.title} titleId="casos-title" />
 

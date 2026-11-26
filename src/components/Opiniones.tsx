@@ -46,7 +46,7 @@ export default function Opiniones({ t, date, dateLabel }: OpinionesProps) {
   }, [expanded]);
 
   return (
-    <Section id="opiniones" labelledBy="opiniones-title">
+    <Section id="opiniones" tone="mist" labelledBy="opiniones-title">
       <Reveal className={containerClass}>
         <SectionHeading title={t.title} titleId="opiniones-title" />
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5">

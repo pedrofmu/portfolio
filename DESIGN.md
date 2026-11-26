@@ -35,8 +35,10 @@ hard-code a new colour without adding it here first.
 
 | Role | Token / value | Use |
 |---|---|---|
-| Paper | `cream` / `paper` `#FBF8F2` | Page and section background |
-| Sheet | `#FFFDF8` | "White" sections, cards, quote sheets, print borders |
+| Paper | `cream` / `paper` `#FBF8F2` | Page, hero and section background |
+| Washi | `washi` `#F5F0E6` | Section background (warm, slightly deeper paper) |
+| Mist | `mist` `#EEF1EC` | Section background (grey-green, the landscape's mist) |
+| Sheet | `#FFFDF8` | Talk-page "white" sections, cards, quote sheets, print borders |
 | Footer paper | `#F3EDE1` | Footer only |
 | Ink | `charcoal` `#24312C`, headings `#171915` / `ink` `#16150F` | Text |
 | Soft ink | `ink-soft` `#5C5850`, `#4F5852` | Body copy on paper |
@@ -90,8 +92,17 @@ straighten on hover (`hover:[rotate:0deg]`, a lift of `-translate-y-1`).
 Reuse these before inventing new ones.
 
 - **Section shell:** `Section` / `SectionHeading` / `containerClass` in
-  `src/components/ui.tsx`. Alternate `paper` and `white` (= sheet `#FFFDF8`
-  with a top `border-line`).
+  `src/components/ui.tsx`. Each home section sets a `tone` so that two
+  neighbours never share a background and the reader can tell where one
+  ends: `washi`, `paper` and `mist` rotate in that order after the hero
+  (Servicios washi, Casos paper, Opiniones mist, Donde me has visto washi,
+  Cómo trabajo paper, Sobre mí mist), then the green Contacto and the
+  footer paper. Every toned section starts with a top `border-line`
+  hairline. A new section takes the next tone in the rotation. A fill
+  inside a toned section is a lighter paper laid on it (`paper` on `washi`,
+  as in the Servicios rows; `#FFFDF8` sheets on `mist`), never the cool
+  `green-wash` band, which clashes with washi and disappears on mist. Talk pages still
+  alternate `paper` and `white` (= sheet `#FFFDF8`).
 - **Buttons:** primary = `bg-brand text-cream rounded-[13px] px-7 py-[15px]
   font-bold` with a `shadow-[0_12px_30px_rgba(15,114,99,0.2)]` and
   `hover:-translate-y-0.5 hover:bg-brand-dark`. Secondary = `border
@@ -212,6 +223,10 @@ Reuse these before inventing new ones.
 - **Always respect `prefers-reduced-motion`.** The global rule in
   `globals.css` stops CSS animation. JS-driven motion (motion/react,
   `requestAnimationFrame`) must check `useReducedMotion` or `matchMedia`.
+  Don't swap to a different element without `initial` when motion is
+  reduced: the server HTML ships the hidden `initial` style and React
+  doesn't patch it on hydration. Keep the same `m.*` and show it with
+  `animate` and `duration: 0` (see `Reveal`).
 - **Auto-moving content pauses** on hover, touch and focus, and clones are
   `aria-hidden` and `inert`.
 - **Demo videos** play muted and looped, one at a time and only while on
